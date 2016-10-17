@@ -20,7 +20,7 @@ public class Cliente   {
     private Calendar data_nascimento;
     private double salario;
     private double margem;
-    private Emprestimo emprestimo;
+    private Emprestimo emprestimo; 
     
     
     public static void main(String[] args) {
