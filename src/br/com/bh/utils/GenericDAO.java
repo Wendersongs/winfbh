@@ -24,7 +24,7 @@ public class GenericDAO {
 	 * @return Connection
 	 * @throws SQLExceptione
 	 */
-	public Connection getConnection() throws SQLException {
+	public Connection getConnection() throws SQLException { // **** CONECTA NO BANCO 
 
 		Connection conn = null;
 		try {
@@ -183,7 +183,7 @@ public class GenericDAO {
 		
 	}
 
-	public void release(Statement stmt) {
+	public void release(Statement stmt) {      // ******* LIBERA O STATEMENT
 		if (stmt == null) return;
 		try {
 			stmt.close();
@@ -191,7 +191,7 @@ public class GenericDAO {
 		}
 	}
 
-	public void release(Connection conn) {
+	public void release(Connection conn) {  // ******** LIBERA A CONEXÃO COM O BANCO
 
 		if (conn == null) return;
 		try {
@@ -201,7 +201,7 @@ public class GenericDAO {
 
 	}
 
-	public void release(ResultSet rset) {
+	public void release(ResultSet rset) {  /// ********** LIBERA O RESULT SET
 		if (rset == null) return;
 		try {
 			rset.close();
@@ -209,12 +209,12 @@ public class GenericDAO {
 		}
 	}
 
-	public void releaseAll(Connection conn, Statement stmt) {
+	public void releaseAll(Connection conn, Statement stmt) {  ////******* LIBERA CONEXÃO E STATEMENT
 		release(stmt);
 		release(conn);
 	}
 
-	public void releaseAll(Connection conn, Statement stmt, ResultSet rset) {
+	public void releaseAll(Connection conn, Statement stmt, ResultSet rset) {  ////******* LIBERA CONEXÃO, STATEMENT E RESULT SET
 		release(rset);
 		releaseAll(conn, stmt);
 	}

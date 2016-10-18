@@ -101,14 +101,58 @@ public class Cliente   {
         this.contato = contato;
     }
 
+    public Calendar getData_nascimento() {
+        return data_nascimento;
+    }
+
+    public void setData_nascimento(Calendar data_nascimento) {
+        this.data_nascimento = data_nascimento;
+    }
+
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    public double getMargem() {
+        return margem;
+    }
+
+    public void setMargem(double margem) {
+        this.margem = margem;
+    }
+
+    public Emprestimo getEmprestimo() {
+        return emprestimo;
+    }
+
+    public void setEmprestimo(Emprestimo emprestimo) {
+        this.emprestimo = emprestimo;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "id=" + id + ", nome=" + nome + ", rg=" + rg + ", sexo=" + sexo + ", endereco=" + endereco + ", cpf=" + cpf + ", contato=" + contato + ", data_nascimento=" + data_nascimento + ", salario=" + salario + ", margem=" + margem + ", emprestimo=" + emprestimo + '}';
+    }
+
+  
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 97 * hash + Objects.hashCode(this.nome);
-        hash = 97 * hash + Objects.hashCode(this.rg);
-        hash = 97 * hash + Objects.hashCode(this.sexo);
-        hash = 97 * hash + Objects.hashCode(this.cpf);
+        int hash = 7;
+        hash = 11 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 11 * hash + Objects.hashCode(this.nome);
+        hash = 11 * hash + Objects.hashCode(this.rg);
+        hash = 11 * hash + Objects.hashCode(this.sexo);
+        hash = 11 * hash + Objects.hashCode(this.endereco);
+        hash = 11 * hash + Objects.hashCode(this.cpf);
+        hash = 11 * hash + Objects.hashCode(this.contato);
+        hash = 11 * hash + Objects.hashCode(this.data_nascimento);
+        hash = 11 * hash + (int) (Double.doubleToLongBits(this.salario) ^ (Double.doubleToLongBits(this.salario) >>> 32));
+        hash = 11 * hash + (int) (Double.doubleToLongBits(this.margem) ^ (Double.doubleToLongBits(this.margem) >>> 32));
+        hash = 11 * hash + Objects.hashCode(this.emprestimo);
         return hash;
     }
 
@@ -127,6 +171,12 @@ public class Cliente   {
         if (this.id != other.id) {
             return false;
         }
+        if (Double.doubleToLongBits(this.salario) != Double.doubleToLongBits(other.salario)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.margem) != Double.doubleToLongBits(other.margem)) {
+            return false;
+        }
         if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
@@ -139,14 +189,21 @@ public class Cliente   {
         if (this.sexo != other.sexo) {
             return false;
         }
+        if (!Objects.equals(this.endereco, other.endereco)) {
+            return false;
+        }
+        if (!Objects.equals(this.contato, other.contato)) {
+            return false;
+        }
+        if (!Objects.equals(this.data_nascimento, other.data_nascimento)) {
+            return false;
+        }
+        if (!Objects.equals(this.emprestimo, other.emprestimo)) {
+            return false;
+        }
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Cliente{" + "id=" + id + ", nome=" + nome + ", rg=" + rg + ", sexo=" + sexo + ", endereco=" + endereco + ", cpf=" + cpf + ", contato=" + contato + '}';
-    }
-    
-    
+
     
 }
