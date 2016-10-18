@@ -31,7 +31,11 @@ public class ClienteDAO {
           stmt.setString(++index, cliente.getContato().toString());
           stmt.setString(index++, cliente.getCpf());
           stmt.setString(index++, cliente.getData_nascimento().toString());
-          stmt.setString(index++, cliente.getMargem().);
+          stmt.setString(index++, Double.toString(cliente.getMargem()));
+          stmt.setString(index++, cliente.getNome());
+          stmt.setString(index++, cliente.getRg());
+          stmt.setString(index++, cliente.getSexo().toString());
+          stmt.setString(index++, daoHelper.dataAtual());
           
       } catch (Exception e) {
       }

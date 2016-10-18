@@ -27,6 +27,16 @@ public class Cliente   {
         
     }
 
+    public Cliente(String nome, String rg, SexoType sexo, String cpf, double salario, double margem) {
+        this.nome = nome;
+        this.rg = rg;
+        this.sexo = sexo;
+        this.cpf = cpf;
+        this.salario = salario;
+        this.margem = margem;
+        
+    }
+
     public Cliente(long id, String nome, String rg, SexoType sexo, Endereco endereco, String cpf, Contato contato) {
         this.id = id;
         this.nome = nome;

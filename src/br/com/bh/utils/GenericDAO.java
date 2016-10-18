@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 
 public class GenericDAO {
@@ -39,7 +41,11 @@ public class GenericDAO {
 
 	}
 
-	
+	public String dataAtual (){
+            Date data = new Date(System.currentTimeMillis());  
+            SimpleDateFormat formatarDate = new SimpleDateFormat("yyyy-MM-dd"); 
+            return data.toString();
+        }
 	
 	public void beginTransaction() throws SQLException {
 		if (isTransactionStarted()) return; // << 13 -- provide support to transaction propagation
