@@ -19,6 +19,14 @@ public class Endereco {
     public void setId(int id) {
         this.id = id;
     }
+
+    public Endereco(String uf, String cidade, String bairro, String cep, String complemento) {
+        this.uf = uf;
+        this.cidade = cidade;
+        this.bairro = bairro;
+        this.cep = cep;
+        this.complemento = complemento;
+    }
     
     
 

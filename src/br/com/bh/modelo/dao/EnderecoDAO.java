@@ -19,14 +19,14 @@ public class EnderecoDAO {
         daoHelper = new GenericDAO();
     }
 
-    public void insert (Endereco endereco){
+    public void inserir (Endereco endereco){
         int i = 0;
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rset = null;
         try {
             
-            conn = daoHelper.getConnection();
+            conn = daoHelper.getConnectionFromContext();
             pstmt = conn.prepareStatement("INSERT INTO endereco(bairro, cidade, uf, complemento, cep) VALUES (?, ?, ?, ?, ?)"
                                             ,PreparedStatement.RETURN_GENERATED_KEYS);
             pstmt.setString(++i, endereco.getBairro());
@@ -34,9 +34,13 @@ public class EnderecoDAO {
             pstmt.setString(++i, endereco.getUf());
             pstmt.setString(++i, endereco.getComplemento());
             pstmt.setString(++i, endereco.getCep());
+             System.out.println(pstmt);
+            pstmt.executeUpdate();
+            
             rset = pstmt.getGeneratedKeys();
             if (rset.next()){
-                endereco.setId((int) rset.getLong(i));
+                endereco.setId(rset.getInt(i));
+               
             }
             
             

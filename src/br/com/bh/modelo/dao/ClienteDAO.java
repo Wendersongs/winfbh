@@ -23,10 +23,11 @@ public class ClienteDAO {
       
       Connection conn = null;
       PreparedStatement stmt = null;
+      EnderecoDAO enderecoDao = new EnderecoDAO();
       
       try {
-       
-          conn = daoHelper.getConnection(); ////(String nome, String rg, SexoType sexo, String cpf, double salario, double margem)
+          daoHelper.beginTransaction();
+          conn = daoHelper.getConnectionFromContext(); ////(String nome, String rg, SexoType sexo, String cpf, double salario, double margem)
           stmt = conn.prepareStatement("insert into cliente (cpf,nome,rg,sexo) values (?,?,?,?)");
           int index = 0;
           //stmt.setString(++index, cliente.getContato().toString());
@@ -40,6 +41,7 @@ public class ClienteDAO {
         //  stmt.setString(++index, daoHelper.dataAtual());
           System.out.println(stmt.toString());
           stmt.executeUpdate();
+          enderecoDao.inserir(cliente.getEndereco());
           
       } catch (Exception e) {
           throw new CreateDaoException("Não foi possível realizar a transação", e);
