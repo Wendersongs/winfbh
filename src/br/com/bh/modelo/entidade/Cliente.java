@@ -23,9 +23,7 @@ public class Cliente   {
     private Emprestimo emprestimo; 
     
     
-    public static void main(String[] args) {
-        
-    }
+  
 
     public Cliente(String nome, String rg, SexoType sexo, String cpf, double salario, double margem) {
         this.nome = nome;

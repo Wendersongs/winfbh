@@ -36,6 +36,7 @@ public class ClienteDAO {
           stmt.setString(index++, cliente.getRg());
           stmt.setString(index++, cliente.getSexo().toString());
           stmt.setString(index++, daoHelper.dataAtual());
+          System.out.println(daoHelper.dataAtual());
           
       } catch (Exception e) {
       }
