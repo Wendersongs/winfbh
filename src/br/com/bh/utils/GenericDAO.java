@@ -47,7 +47,7 @@ public class GenericDAO {
             return data.toString();
         }
 	
-	public void beginTransaction() throws SQLException {
+	public void beginTransaction() throws SQLException { //INICIA UMA TRANSAÇÃO, ABRE UMA CONEXÃO DO TIPO TRANSACIONAL
 		if (isTransactionStarted()) return; // << 13 -- provide support to transaction propagation
 		Connection conn = getConnection();
 		conn.setAutoCommit(false);

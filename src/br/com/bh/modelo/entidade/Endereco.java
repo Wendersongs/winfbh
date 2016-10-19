@@ -2,6 +2,7 @@
 package br.com.bh.modelo.entidade;
 
 public class Endereco {
+    private int id;
     private String uf;
     private String cidade;
     private String bairro;
@@ -9,6 +10,14 @@ public class Endereco {
     private String complemento;
 
     public Endereco() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     
