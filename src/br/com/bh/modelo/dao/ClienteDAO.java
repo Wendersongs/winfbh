@@ -6,6 +6,7 @@ import br.com.bh.utils.CreateDaoException;
 import br.com.bh.utils.GenericDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class ClienteDAO {
     private GenericDAO daoHelper;
@@ -23,27 +24,28 @@ public class ClienteDAO {
       
       Connection conn = null;
       PreparedStatement stmt = null;
-      EnderecoDAO enderecoDao = new EnderecoDAO();
       
+    
       try {
-          daoHelper.beginTransaction();
-          conn = daoHelper.getConnectionFromContext(); ////(String nome, String rg, SexoType sexo, String cpf, double salario, double margem)
-          stmt = conn.prepareStatement("insert into cliente (cpf,nome,rg,sexo) values (?,?,?,?)");
+          daoHelper.getConnection();
+          conn = daoHelper.getConnection();
+          stmt = conn.prepareStatement("insert into cliente (nome, rg, sexo, endereco, cpf, telefone, celular, salario, margem) values (?,?,?,?,?,?,?,?,?)");
           int index = 0;
-          //stmt.setString(++index, cliente.getContato().toString());
-          stmt.setString(++index, cliente.getCpf());
-        //  stmt.setString(++index, cliente.getData_nascimento().toString());
-      //    stmt.setString(++index, Double.toString(cliente.getMargem()));
           stmt.setString(++index, cliente.getNome());
           stmt.setString(++index, cliente.getRg());
-       //   stmt.setString(++index, Double.toString(cliente.getSalario()));
-          stmt.setString(++index, cliente.getSexo().toString());
-        //  stmt.setString(++index, daoHelper.dataAtual());
-          System.out.println(stmt.toString());
+          stmt.setString(++index, cliente.getSexo());
+          stmt.setString(++index, cliente.getEndereco());
+          stmt.setString(++index, cliente.getCpf());
+          stmt.setString(++index, cliente.getTelefone());
+          stmt.setString(++index, cliente.getCelular());
+          stmt.setDouble(++index, cliente.getSalario());
+          stmt.setDouble(++index, cliente.getMargem());
           stmt.executeUpdate();
-          enderecoDao.inserir(cliente.getEndereco());
+        
+          System.out.println(stmt.toString());
+            
           
-      } catch (Exception e) {
+      } catch (SQLException e) {
           throw new CreateDaoException("Não foi possível realizar a transação", e);
       }
       finally{

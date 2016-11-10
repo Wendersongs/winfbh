@@ -13,45 +13,28 @@ public class Cliente   {
     private long id;
     private String nome;
     private String rg;
-    private SexoType sexo;
-    private Endereco endereco;
+    private String sexo;
+    private String endereco;
     private String cpf;
-    private Contato contato;
+    private String telefone;
+    private String celular;
     private Calendar data_nascimento;
     private double salario;
     private double margem;
-    private Emprestimo emprestimo; 
-    
-    
-  
 
-    public Cliente(String nome, String rg, SexoType sexo, String cpf, double salario, double margem) {
-        this.nome = nome;
-        this.rg = rg;
-        this.sexo = sexo;
-        this.cpf = cpf;
-        this.salario = salario;
-        this.margem = margem;
-        
-    }
-
-    public Cliente(long id, String nome, String rg, SexoType sexo, Endereco endereco, String cpf, Contato contato) {
-        this.id = id;
+    public Cliente(String nome, String rg, String sexo, String endereco, String cpf, String telefone, String celular, double salario, double margem) {
         this.nome = nome;
         this.rg = rg;
         this.sexo = sexo;
         this.endereco = endereco;
         this.cpf = cpf;
-        this.contato = contato;
+        this.telefone = telefone;
+        this.celular = celular;
+        this.salario = salario;
+        this.margem = margem;
     }
-
-    public Cliente(long id, String nome, String rg, SexoType sexo, String cpf) {
-        this.id = id;
-        this.nome = nome;
-        this.rg = rg;
-        this.sexo = sexo;
-        this.cpf = cpf;
-    }
+    
+    
 
     public long getId() {
         return id;
@@ -77,19 +60,19 @@ public class Cliente   {
         this.rg = rg;
     }
 
-    public SexoType getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(SexoType sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
-    public Endereco getEndereco() {
+    public String getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(Endereco endereco) {
+    public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
 
@@ -101,12 +84,20 @@ public class Cliente   {
         this.cpf = cpf;
     }
 
-    public Contato getContato() {
-        return contato;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setContato(Contato contato) {
-        this.contato = contato;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 
     public Calendar getData_nascimento() {
@@ -133,34 +124,20 @@ public class Cliente   {
         this.margem = margem;
     }
 
-    public Emprestimo getEmprestimo() {
-        return emprestimo;
-    }
-
-    public void setEmprestimo(Emprestimo emprestimo) {
-        this.emprestimo = emprestimo;
-    }
-
-    @Override
-    public String toString() {
-        return "Cliente{" + "id=" + id + ", nome=" + nome + ", rg=" + rg + ", sexo=" + sexo + ", endereco=" + endereco + ", cpf=" + cpf + ", contato=" + contato + ", data_nascimento=" + data_nascimento + ", salario=" + salario + ", margem=" + margem + ", emprestimo=" + emprestimo + '}';
-    }
-
-  
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 11 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 11 * hash + Objects.hashCode(this.nome);
-        hash = 11 * hash + Objects.hashCode(this.rg);
-        hash = 11 * hash + Objects.hashCode(this.sexo);
-        hash = 11 * hash + Objects.hashCode(this.endereco);
-        hash = 11 * hash + Objects.hashCode(this.cpf);
-        hash = 11 * hash + Objects.hashCode(this.contato);
-        hash = 11 * hash + Objects.hashCode(this.data_nascimento);
-        hash = 11 * hash + (int) (Double.doubleToLongBits(this.salario) ^ (Double.doubleToLongBits(this.salario) >>> 32));
-        hash = 11 * hash + (int) (Double.doubleToLongBits(this.margem) ^ (Double.doubleToLongBits(this.margem) >>> 32));
-        hash = 11 * hash + Objects.hashCode(this.emprestimo);
+        hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 97 * hash + Objects.hashCode(this.nome);
+        hash = 97 * hash + Objects.hashCode(this.rg);
+        hash = 97 * hash + Objects.hashCode(this.sexo);
+        hash = 97 * hash + Objects.hashCode(this.endereco);
+        hash = 97 * hash + Objects.hashCode(this.cpf);
+        hash = 97 * hash + Objects.hashCode(this.telefone);
+        hash = 97 * hash + Objects.hashCode(this.celular);
+        hash = 97 * hash + Objects.hashCode(this.data_nascimento);
+        hash = 97 * hash + (int) (Double.doubleToLongBits(this.salario) ^ (Double.doubleToLongBits(this.salario) >>> 32));
+        hash = 97 * hash + (int) (Double.doubleToLongBits(this.margem) ^ (Double.doubleToLongBits(this.margem) >>> 32));
         return hash;
     }
 
@@ -191,26 +168,37 @@ public class Cliente   {
         if (!Objects.equals(this.rg, other.rg)) {
             return false;
         }
-        if (!Objects.equals(this.cpf, other.cpf)) {
-            return false;
-        }
-        if (this.sexo != other.sexo) {
+        if (!Objects.equals(this.sexo, other.sexo)) {
             return false;
         }
         if (!Objects.equals(this.endereco, other.endereco)) {
             return false;
         }
-        if (!Objects.equals(this.contato, other.contato)) {
+        if (!Objects.equals(this.cpf, other.cpf)) {
+            return false;
+        }
+        if (!Objects.equals(this.telefone, other.telefone)) {
+            return false;
+        }
+        if (!Objects.equals(this.celular, other.celular)) {
             return false;
         }
         if (!Objects.equals(this.data_nascimento, other.data_nascimento)) {
             return false;
         }
-        if (!Objects.equals(this.emprestimo, other.emprestimo)) {
-            return false;
-        }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "id=" + id + ", nome=" + nome + ", rg=" + rg + ", sexo=" + sexo + ", endereco=" + endereco + ", cpf=" + cpf + ", telefone=" + telefone + ", celular=" + celular + ", data_nascimento=" + data_nascimento + ", salario=" + salario + ", margem=" + margem + '}';
+    }
+    
+   
+    
+  
+
+
 
 
     

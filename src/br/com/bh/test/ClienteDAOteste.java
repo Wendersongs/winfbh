@@ -10,12 +10,12 @@ import br.com.bh.modelo.entidade.SexoType;
 
 public class ClienteDAOteste {
     
+    
+    
     public static void main(String[] args) {
         
-        Cliente cliente = new Cliente ("WENDERSON", "38411", SexoType.M,  "917054", 0, 0);
-        
-        Endereco end = new Endereco("GO", "GOIANIA", "PACOVILLE", "74000", "RUA DAS COUVES");
-        cliente.setEndereco(end);
+        Cliente cliente = new Cliente ("WENDERSON", "38411", "M","Rua das couves","917054","81158111","86665544", 0, 0);
+            
         ClienteDAO dao = new ClienteDAO();
         dao.inserir(cliente);
     }
