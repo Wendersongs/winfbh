@@ -52,10 +52,66 @@ public class ClienteDAO {
       daoHelper.releaseAll(conn, stmt);
       
       }
-      
-      
- 
+    
+    
   
   } 
-    
+     public void atualizar (Cliente cliente) throws SQLException{
+      Connection conn = null;
+      PreparedStatement stmt = null;
+      
+        try {
+          daoHelper.getConnection();
+          conn = daoHelper.getConnection();
+          stmt = conn.prepareStatement("update cliente set nome = ?, rg = ?, sexo = ?, endereco = ?, cpf = ?, telefone = ?, celular = ?, salario = ?, margem = ? where id = ?");
+          int index = 0;
+          stmt.setString(++index, cliente.getNome());
+          stmt.setString(++index, cliente.getRg());
+          stmt.setString(++index, cliente.getSexo());
+          stmt.setString(++index, cliente.getEndereco());
+          stmt.setString(++index, cliente.getCpf());
+          stmt.setString(++index, cliente.getTelefone());
+          stmt.setString(++index, cliente.getCelular());
+          stmt.setDouble(++index, cliente.getSalario());
+          stmt.setDouble(++index, cliente.getMargem());
+          stmt.setLong(++index, cliente.getId());
+          stmt.executeUpdate();
+        
+          System.out.println(stmt.toString());
+            
+          
+      } catch (SQLException e) {
+          throw new CreateDaoException("Não foi possível realizar a transação", e);
+      }
+      finally{
+      daoHelper.releaseAll(conn, stmt);
+      
+      } 
+         
+            
+        
+      }
+       
+     public void deletar (Cliente cliente) throws SQLException{
+      Connection conn = null;
+      PreparedStatement stmt = null;
+      
+        try {
+          daoHelper.getConnection();
+          conn = daoHelper.getConnection();
+          stmt = conn.prepareStatement("delete from cliente where id = ?");
+          int index = 0;
+          stmt.setLong(++index, cliente.getId());
+          stmt.executeUpdate();
+        
+          System.out.println(stmt.toString());
+            
+          
+      } catch (SQLException e) {
+          throw new CreateDaoException("Não foi possível realizar a transação", e);
+      }
+      finally{
+      daoHelper.releaseAll(conn, stmt);
+        }
+     }
 }

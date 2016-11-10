@@ -33,6 +33,23 @@ public class Cliente   {
         this.salario = salario;
         this.margem = margem;
     }
+
+    public Cliente(long id) {
+        this.id = id;
+    }
+
+    public Cliente(long id, String nome, String rg, String sexo, String endereco, String cpf, String telefone, String celular, double salario, double margem) {
+        this.id = id;
+        this.nome = nome;
+        this.rg = rg;
+        this.sexo = sexo;
+        this.endereco = endereco;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.celular = celular;
+        this.salario = salario;
+        this.margem = margem;
+    }
     
     
 
