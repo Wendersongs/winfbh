@@ -5,7 +5,13 @@
  */
 package br.com.bh.view;
 
+
 import javax.swing.JFrame;
+import br.com.bh.controller.UsuarioController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,8 +46,6 @@ public class frmLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Usuário:");
-
-        txtSenha.setText("jPasswordField1");
 
         jLabel2.setText("Senha:");
 
@@ -108,9 +112,23 @@ public class frmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JFrame principal = new JFramePrincipal();
-        principal.setVisible(true);
-        dispose();
+        UsuarioController uc = new UsuarioController();
+        String senha = new String(txtSenha.getPassword());
+        try {
+            if (uc.validaUsuario(txtUsuario.getText(), senha )){
+                JFrame principal = new JFramePrincipal();
+                principal.setVisible(true);
+                dispose();  
+            }
+            else{
+            
+            JOptionPane.showMessageDialog(null, "Dados incorretos");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

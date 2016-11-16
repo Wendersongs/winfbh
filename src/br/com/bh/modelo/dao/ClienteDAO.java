@@ -95,7 +95,7 @@ public class ClienteDAO {
             
             stmt.executeUpdate();
 
-            System.out.println(stmt.toString());
+           
 
         } catch (SQLException e) {
             throw new CreateDaoException("Não foi possível realizar a transação", e);
@@ -168,11 +168,11 @@ public class ClienteDAO {
                 
                 cliente.setSalario(rset.getDouble("salario"));
                 
-                Calendar c = Calendar.getInstance(); 
-                
-                c.setTime(new Date(rset.getDate("data").getTime()));
-                
-                cliente.setData_nascimento(c);
+//                Calendar c = Calendar.getInstance(); 
+//                
+//                c.setTime(new Date(rset.getDate("data").getTime()));
+//                
+//                cliente.setData_nascimento(c);
                 
                 clientes.add(cliente);
             }

@@ -23,12 +23,13 @@ public class UsuarioDAO {
         
         conn = daoHelper.getConnection();
         PreparedStatement ps = null;
-        ps = conn.prepareStatement("SELECT * FROM Usuario WHERE login=? AND senha=?");
+        ps = conn.prepareStatement("SELECT * FROM Usuario WHERE usuario=? AND senha=?");
         
         
         ps.setObject(1, login);
         ps.setObject(2, senha);
         ResultSet rs = ps.executeQuery();
+        System.out.println(ps.toString());
         if (rs.next()) {
             usuario = new Usuario();
             usuario.setLogin(rs.getString("usuario"));

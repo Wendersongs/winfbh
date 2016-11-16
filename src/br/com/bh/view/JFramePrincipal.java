@@ -1,7 +1,9 @@
 
 package br.com.bh.view;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 
 public class JFramePrincipal extends javax.swing.JFrame {
@@ -9,6 +11,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
    
     public JFramePrincipal() {
         initComponents();
+       // JDialog login = new FrmLogon();
+       // login.setModal(true);
+       // login.setVisible(true);
     }
 
     
@@ -18,6 +23,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -29,6 +37,14 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -48,7 +64,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         pack();
@@ -65,6 +81,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new JFramePrincipal().setVisible(true);
+                
             }
         });
     }
@@ -72,5 +89,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }
