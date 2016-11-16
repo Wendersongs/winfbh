@@ -22,6 +22,9 @@ public class Cliente   {
     private double salario;
     private double margem;
 
+    public Cliente() {
+    }
+
     public Cliente(String nome, String rg, String sexo, String endereco, String cpf, String telefone, String celular, double salario, double margem) {
         this.nome = nome;
         this.rg = rg;
