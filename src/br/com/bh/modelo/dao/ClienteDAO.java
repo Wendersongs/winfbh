@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -49,6 +50,7 @@ public class ClienteDAO {
             
             stmt.setDouble(++index, cliente.getMargem());
             
+                    
             stmt.executeUpdate();
 
            
@@ -166,8 +168,11 @@ public class ClienteDAO {
                 
                 cliente.setSalario(rset.getDouble("salario"));
                 
-                         
+                Calendar c = Calendar.getInstance(); 
                 
+                c.setTime(new Date(rset.getDate("data").getTime()));
+                
+                cliente.setData_nascimento(c);
                 
                 clientes.add(cliente);
             }

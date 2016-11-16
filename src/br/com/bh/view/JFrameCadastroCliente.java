@@ -7,6 +7,8 @@ package br.com.bh.view;
 
 import br.com.bh.modelo.dao.ClienteDAO;
 import br.com.bh.modelo.entidade.Cliente;
+import br.com.bh.utils.ValidaCPF;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -53,6 +55,22 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txtCpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCpfFocusLost(evt);
+            }
+        });
+        txtCpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCpfActionPerformed(evt);
+            }
+        });
+        txtCpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCpfKeyTyped(evt);
+            }
+        });
 
         txtSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
 
@@ -191,6 +209,13 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+ // Validar Campos
+        if (txtNome.getText().length() == 0  ||  txtCpf.getText().isEmpty() || txtRg.getText().isEmpty()){
+        JOptionPane.showMessageDialog(null, "Existem campos requeridos que estão vazios");
+        }
+        
+        else {
+        
         Cliente cliente = new Cliente();
         cliente.setNome(txtNome.getText());
         cliente.setRg(txtRg.getText());
@@ -204,8 +229,31 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         ClienteDAO dao = new ClienteDAO();
         dao.inserir(cliente);
         JFrameCliente.atualizaTabela();
-        
+        }   
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
+       if (ValidaCPF.isCPF(txtCpf.getText())){
+           txtCpf.setText(ValidaCPF.imprimeCPF(txtCpf.getText()));
+           
+          
+    }
+       else {
+           JOptionPane.showMessageDialog(null, "O Cpf passado está inválido, digite novamente");
+           //txtCpf.requestFocus();
+       }
+    }//GEN-LAST:event_txtCpfFocusLost
+
+    private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCpfActionPerformed
+
+    private void txtCpfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyTyped
+        String caracteres="0987654321";
+        if(!caracteres.contains(evt.getKeyChar()+"")){
+        evt.consume();
+}        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCpfKeyTyped
 
     /**
      * @param args the command line arguments
