@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 public class JFrameCliente extends javax.swing.JFrame {
@@ -91,7 +92,7 @@ public static void atualizaTabela(){
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Cadastro de Clientes");
+        jLabel1.setText("Clientes");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,7 +111,7 @@ public static void atualizaTabela(){
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnRemover))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(327, 327, 327)
+                        .addGap(363, 363, 363)
                         .addComponent(jLabel1)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
@@ -132,7 +133,9 @@ public static void atualizaTabela(){
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        // TODO add your handling code here:
+        JFrame clientes = new JFrameCadastroCliente();
+        
+        clientes.setVisible(true);       
     }//GEN-LAST:event_btnNovoActionPerformed
 
  

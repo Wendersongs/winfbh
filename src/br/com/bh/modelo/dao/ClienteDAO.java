@@ -51,7 +51,7 @@ public class ClienteDAO {
             
             stmt.executeUpdate();
 
-            System.out.println(stmt.toString());
+           
 
         } catch (SQLException e) {
             throw new CreateDaoException("Não foi possível realizar a transação", e);
