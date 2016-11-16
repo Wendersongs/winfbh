@@ -5,6 +5,8 @@
  */
 package br.com.bh.view;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author wenderson_s
@@ -35,6 +37,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jButton3.setText("Calcular Empréstimo");
 
         jButton2.setText("Clientes");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -59,6 +66,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JFrame clientes = new JFrameCliente();
+        clientes.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
