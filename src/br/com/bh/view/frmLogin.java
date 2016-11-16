@@ -123,6 +123,9 @@ public class frmLogin extends javax.swing.JFrame {
             else{
             
             JOptionPane.showMessageDialog(null, "Dados incorretos");
+            txtUsuario.setText(null);
+            txtSenha.setText(null);
+            txtUsuario.requestFocus();
             }
         } catch (SQLException ex) {
             Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
