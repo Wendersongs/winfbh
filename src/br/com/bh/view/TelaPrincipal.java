@@ -8,6 +8,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
+        setLocationRelativeTo( null );
     }
     
     
@@ -120,7 +121,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroActionPerformed
-        Cadastro x = new Cadastro();
+        JFrameCliente x = new JFrameCliente();
         x.setVisible(true);
         dispose();
         
