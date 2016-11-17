@@ -2,7 +2,15 @@ package br.com.bh.utils;
 
 import java.awt.event.KeyEvent;
 import javax.swing.JTextField;
+// Código original do campo > jTextFieldRG = new javax.swing.JTextField();
+// Código modificado do campo
 
+//jTextFieldRG = new JtextFieldSomenteNumeros();
+//Código modificado do campo para militar o tamanho do texto
+
+//jTextFieldRG = new JtextFieldSomenteNumeros(50);
+//
+//
 public final class JtextFieldSomenteNumeros extends JTextField {
 private int maximoCaracteres=-1;// definição de -1 
 // como  valor normal de um textfield sem limite de caracters

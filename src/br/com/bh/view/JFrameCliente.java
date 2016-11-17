@@ -14,6 +14,8 @@ public class JFrameCliente extends javax.swing.JFrame {
 
     public JFrameCliente() {
         initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo( null );
         atualizaTabela();
     }
 public static void atualizaTabela(){
@@ -55,8 +57,6 @@ public static void atualizaTabela(){
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnNovo.setText("Novo");
         btnNovo.setActionCommand("");

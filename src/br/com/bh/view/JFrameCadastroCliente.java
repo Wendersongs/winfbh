@@ -8,6 +8,7 @@ package br.com.bh.view;
 import br.com.bh.modelo.dao.ClienteDAO;
 import br.com.bh.modelo.entidade.Cliente;
 import br.com.bh.utils.ValidaCPF;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +22,8 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
      */
     public JFrameCadastroCliente() {
         initComponents();
+        setLocationRelativeTo( null );
+        
     }
 
     /**
@@ -53,8 +56,6 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         txtCpf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -210,11 +211,55 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
  // Validar Campos
-        if (txtNome.getText().length() == 0  ||  txtCpf.getText().isEmpty() || txtRg.getText().isEmpty()){
-        JOptionPane.showMessageDialog(null, "Existem campos requeridos que estão vazios");
+        if (txtNome.getText().length() == 0) {
+        JOptionPane.showMessageDialog(null, "O campo Nome está vazio");  
+        txtNome.requestFocus();
+        return;
+        }  
+        if (txtCpf.getText().isEmpty() ) {
+        
+        JOptionPane.showMessageDialog(null, "O campo CPF está vazio");  
+        txtCpf.requestFocus();
+        return;
+        
+        
         }
         
-        else {
+        if (txtRg.getText().isEmpty() ) {
+        
+        JOptionPane.showMessageDialog(null, "O campo RG está vazio");  
+        txtRg.requestFocus();
+        return;
+        
+        
+        }
+        
+         if (txtSalario.getText().isEmpty() ) {
+        
+        JOptionPane.showMessageDialog(null, "O campo Salário está vazio");  
+        txtSalario.requestFocus();
+        return;
+        
+        
+        }
+        
+         if (txtEndereco.getText().isEmpty() ) {
+        
+        JOptionPane.showMessageDialog(null, "O campo Endereço está vazio");  
+        txtEndereco.requestFocus();
+        return;
+        
+        
+        }
+       if (txtTelefone.getText().isEmpty() ) {
+        
+        JOptionPane.showMessageDialog(null, "O campo Telefone está vazio");  
+        txtTelefone.requestFocus();
+        return;
+        
+        
+        }
+        
         
         Cliente cliente = new Cliente();
         cliente.setNome(txtNome.getText());
@@ -229,7 +274,8 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         ClienteDAO dao = new ClienteDAO();
         dao.inserir(cliente);
         JFrameCliente.atualizaTabela();
-        }   
+        
+         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
