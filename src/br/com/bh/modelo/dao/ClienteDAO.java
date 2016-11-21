@@ -2,6 +2,7 @@ package br.com.bh.modelo.dao;
 
 import br.com.bh.modelo.entidade.Cliente;
 import br.com.bh.utils.CreateDaoException;
+import br.com.bh.utils.Data;
 import br.com.bh.utils.GenericDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,7 +32,7 @@ public class ClienteDAO {
         try {
             daoHelper.getConnection();
             conn = daoHelper.getConnection();
-            stmt = conn.prepareStatement("insert into cliente (nome, rg, sexo, endereco, cpf, telefone, celular, salario, margem,email,ocupacao,cep,informacoes_adicionais,data_nasc) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            stmt = conn.prepareStatement("insert into cliente (nome, rg, sexo, endereco, cpf, telefone, celular, salario, margem,email,ocupacao,cep,informacoes_adicionais,data_nasc, data_cadastro) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             int index = 0;
             stmt.setString(++index, cliente.getNome());
             
@@ -60,6 +61,8 @@ public class ClienteDAO {
             stmt.setString(++index, cliente.getInformacoes());
             
             stmt.setDate(++index, new java.sql.Date(cliente.getData_nascimento().getTimeInMillis()));
+            
+            stmt.setDate(++index, new java.sql.Date (Data.getPegaDataAtual().getTimeInMillis()));
            
             
             

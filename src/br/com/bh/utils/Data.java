@@ -46,7 +46,7 @@ public class Data {
         	public static Calendar converteCalendar(String sData){
                 Calendar data = new GregorianCalendar();
 		//data = null;
-		SimpleDateFormat sd = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			data.setTime(sd.parse(sData));
 		} catch (ParseException e) {
