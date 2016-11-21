@@ -81,7 +81,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtOcupa = new javax.swing.JTextArea();
         txtInfo = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtCep = new javax.swing.JFormattedTextField();
@@ -146,9 +146,9 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
 
         jLabel12.setText("Email");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtOcupa.setColumns(20);
+        txtOcupa.setRows(5);
+        jScrollPane1.setViewportView(txtOcupa);
 
         txtInfo.setText("Informações Adicionais");
 
@@ -373,7 +373,9 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         cliente.setCelular(txtCel.getText());
         cliente.setSalario(Double.parseDouble(txtSalario.getText()));
         cliente.setMargem(Double.parseDouble(txtMargem.getText()));
-        
+        cliente.setCep(txtCep.getText());
+        cliente.setEmail(txtEmail.getText());
+        cliente.setOcupacao(txtOcupa.getText());
         ClienteDAO dao = new ClienteDAO();
         dao.inserir(cliente);
         JFrameCliente.atualizaTabela();
@@ -472,7 +474,6 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JFormattedTextField txtCel;
     private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JTextField txtCpf;
@@ -482,6 +483,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel txtInfo;
     private javax.swing.JTextField txtMargem;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JTextArea txtOcupa;
     private javax.swing.JTextField txtRg;
     private javax.swing.JTextField txtSalario;
     private javax.swing.JComboBox<String> txtSexo;

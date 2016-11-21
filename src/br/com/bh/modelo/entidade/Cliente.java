@@ -303,6 +303,7 @@ public class Cliente   {
         return "Cliente{" + "id=" + id + ", nome=" + nome + ", rg=" + rg + ", sexo=" + sexo + ", endereco=" + endereco + ", cpf=" + cpf + ", telefone=" + telefone + ", celular=" + celular + ", data_nascimento=" + data_nascimento + ", salario=" + salario + ", margem=" + margem + ", email=" + email + ", cep=" + cep + ", ocupacao=" + ocupacao + ", informacoes=" + informacoes + '}';
     }
 
+  
    
    
     
