@@ -16,6 +16,7 @@ import java.util.Locale;
 public class ClienteDAO {
 
     private GenericDAO daoHelper;
+    Calendar c = Calendar.getInstance();
 
     public ClienteDAO() {
 
@@ -30,7 +31,7 @@ public class ClienteDAO {
         try {
             daoHelper.getConnection();
             conn = daoHelper.getConnection();
-            stmt = conn.prepareStatement("insert into cliente (nome, rg, sexo, endereco, cpf, telefone, celular, salario, margem) values (?,?,?,?,?,?,?,?,?)");
+            stmt = conn.prepareStatement("insert into cliente (nome, rg, sexo, endereco, cpf, telefone, celular, salario, margem,email,ocupacao,cep,informacoes_adicionais,data_nasc) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             int index = 0;
             stmt.setString(++index, cliente.getNome());
             
@@ -49,6 +50,17 @@ public class ClienteDAO {
             stmt.setDouble(++index, cliente.getSalario());
             
             stmt.setDouble(++index, cliente.getMargem());
+            
+            stmt.setString(++index, cliente.getEmail());
+            
+            stmt.setString(++index, cliente.getOcupacao());
+            
+            stmt.setString(++index, cliente.getCep());
+                        
+            stmt.setString(++index, cliente.getInformacoes());
+            
+            stmt.setDate(++index, new java.sql.Date(cliente.getData_nascimento().getTimeInMillis()));
+            
             
                     
             stmt.executeUpdate();
@@ -117,7 +129,7 @@ public class ClienteDAO {
             int index = 0;
             stmt.setLong(++index, cliente.getId());
             stmt.executeUpdate();
-            System.out.println(stmt.toString());
+            
 
         } catch (SQLException e) {
             throw new CreateDaoException("Não foi possível realizar a transação", e);
