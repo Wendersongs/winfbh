@@ -45,7 +45,7 @@ public class Data {
         
         	public static Calendar converteCalendar(String sData){
                 Calendar data = new GregorianCalendar();
-		data = null;
+		//data = null;
 		SimpleDateFormat sd = new SimpleDateFormat("yyyy/MM/dd");
 		try {
 			data.setTime(sd.parse(sData));
@@ -54,5 +54,10 @@ public class Data {
 		}
 		return data;
 	}
-                
+      	public  static Calendar getPegaDataAtual(){
+		Calendar calendar = new GregorianCalendar();
+		Date trialTime = new Date();
+		calendar.setTime(trialTime);
+                return  calendar;
+	}          
 }

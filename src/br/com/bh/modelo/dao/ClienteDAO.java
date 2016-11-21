@@ -60,6 +60,7 @@ public class ClienteDAO {
             stmt.setString(++index, cliente.getInformacoes());
             
             stmt.setDate(++index, new java.sql.Date(cliente.getData_nascimento().getTimeInMillis()));
+           
             
             
                     
