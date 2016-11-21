@@ -92,8 +92,6 @@ public class Cliente   {
         this.salario = salario;
         this.margem = margem;
     }
-    
-    
 
     public long getId() {
         return id;
@@ -182,6 +180,42 @@ public class Cliente   {
     public void setMargem(double margem) {
         this.margem = margem;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getOcupacao() {
+        return ocupacao;
+    }
+
+    public void setOcupacao(String ocupacao) {
+        this.ocupacao = ocupacao;
+    }
+
+    public String getInformacoes() {
+        return informacoes;
+    }
+
+    public void setInformacoes(String informacoes) {
+        this.informacoes = informacoes;
+    }
+    
+    
+
+
 
     @Override
     public int hashCode() {
