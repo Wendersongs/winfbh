@@ -370,7 +370,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         cliente.setCpf(txtCpf.getText());
         cliente.setEndereco(txtEndereco.getText());
         cliente.setTelefone(txtTel.getText());
-        cliente.setCelular(txtCelular.getText());
+        cliente.setCelular(txtCel.getText());
         cliente.setSalario(Double.parseDouble(txtSalario.getText()));
         cliente.setMargem(Double.parseDouble(txtMargem.getText()));
         ClienteDAO dao = new ClienteDAO();
