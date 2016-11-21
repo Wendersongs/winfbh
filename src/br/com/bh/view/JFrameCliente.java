@@ -8,10 +8,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class JFrameCliente extends javax.swing.JFrame {
-
+DefaultTableModel dm;
     public JFrameCliente() {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -57,6 +60,7 @@ public static void atualizaTabela(){
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        filterTxt = new javax.swing.JTextField();
 
         btnNovo.setText("Novo");
         btnNovo.setActionCommand("");
@@ -67,6 +71,11 @@ public static void atualizaTabela(){
         });
 
         btnRemover.setText("Remover");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setText("Alterar");
 
@@ -94,6 +103,17 @@ public static void atualizaTabela(){
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Clientes");
 
+        filterTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterTxtActionPerformed(evt);
+            }
+        });
+        filterTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                filterTxtKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,7 +129,8 @@ public static void atualizaTabela(){
                                 .addGap(18, 18, 18)
                                 .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnRemover))))
+                                .addComponent(btnRemover))
+                            .addComponent(filterTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(363, 363, 363)
                         .addComponent(jLabel1)))
@@ -124,8 +145,10 @@ public static void atualizaTabela(){
                     .addComponent(btnNovo)
                     .addComponent(btnRemover)
                     .addComponent(btnAlterar))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(filterTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -137,6 +160,54 @@ public static void atualizaTabela(){
         
         clientes.setVisible(true);       
     }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+            int linhaSelecionada = jTable1.getSelectedRow();
+            ClienteDAO dao = new ClienteDAO();
+    if (linhaSelecionada >= 0){
+        int resposta = JOptionPane.showConfirmDialog(this, "Deseja excluir o cliente selecionado?");
+        if (resposta == JOptionPane.YES_OPTION){
+            Cliente cliente = new Cliente();
+            cliente.setId((long) jTable1.getValueAt(linhaSelecionada, 0));
+            cliente.setNome((String) jTable1.getValueAt(linhaSelecionada, 1));
+            try {
+                dao.deletar(cliente);
+//            BancoDados.removeAposento(aposento);
+            } catch (SQLException ex) {
+                Logger.getLogger(JFrameCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+ 
+            atualizaTabela();
+        }
+    }
+    else{
+        JOptionPane.showMessageDialog(this, "É necessário selecionar um Cliente", "Cliente", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    
+    
+    
+    }//GEN-LAST:event_btnRemoverActionPerformed
+     // Filtro da Tabela   
+    private void filter (String query)
+    {
+        TableRowSorter<DefaultTableModel> tr= new TableRowSorter<>(dm);
+        jTable1.setRowSorter(tr);
+        if (query.length() == 0) {  
+          tr.setRowFilter(null);
+        }
+        else{
+        tr.setRowFilter(RowFilter.regexFilter(query));
+        }
+    }
+    private void filterTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterTxtActionPerformed
+        
+    }//GEN-LAST:event_filterTxtActionPerformed
+
+    private void filterTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filterTxtKeyReleased
+        String query = filterTxt.getText().toLowerCase();
+        filter (query);
+    }//GEN-LAST:event_filterTxtKeyReleased
 
  
     public static void main(String args[]) {
@@ -152,6 +223,7 @@ public static void atualizaTabela(){
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnRemover;
+    private javax.swing.JTextField filterTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private static javax.swing.JTable jTable1;

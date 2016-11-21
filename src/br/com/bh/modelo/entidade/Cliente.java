@@ -21,6 +21,45 @@ public class Cliente   {
     private Calendar data_nascimento;
     private double salario;
     private double margem;
+    private String email;
+    private String cep;
+    private String ocupacao;
+    private String informacoes;
+
+    public Cliente(long id, String nome, String rg, String sexo, String endereco, String cpf, String telefone, String celular, Calendar data_nascimento, double salario, double margem, String email, String cep, String ocupacao, String informacoes) {
+        this.id = id;
+        this.nome = nome;
+        this.rg = rg;
+        this.sexo = sexo;
+        this.endereco = endereco;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.celular = celular;
+        this.data_nascimento = data_nascimento;
+        this.salario = salario;
+        this.margem = margem;
+        this.email = email;
+        this.cep = cep;
+        this.ocupacao = ocupacao;
+        this.informacoes = informacoes;
+    }
+
+    public Cliente(String nome, String rg, String sexo, String endereco, String cpf, String telefone, String celular, Calendar data_nascimento, double salario, double margem, String email, String cep, String ocupacao, String informacoes) {
+        this.nome = nome;
+        this.rg = rg;
+        this.sexo = sexo;
+        this.endereco = endereco;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.celular = celular;
+        this.data_nascimento = data_nascimento;
+        this.salario = salario;
+        this.margem = margem;
+        this.email = email;
+        this.cep = cep;
+        this.ocupacao = ocupacao;
+        this.informacoes = informacoes;
+    }
 
     public Cliente() {
     }
@@ -147,17 +186,21 @@ public class Cliente   {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 97 * hash + Objects.hashCode(this.nome);
-        hash = 97 * hash + Objects.hashCode(this.rg);
-        hash = 97 * hash + Objects.hashCode(this.sexo);
-        hash = 97 * hash + Objects.hashCode(this.endereco);
-        hash = 97 * hash + Objects.hashCode(this.cpf);
-        hash = 97 * hash + Objects.hashCode(this.telefone);
-        hash = 97 * hash + Objects.hashCode(this.celular);
-        hash = 97 * hash + Objects.hashCode(this.data_nascimento);
-        hash = 97 * hash + (int) (Double.doubleToLongBits(this.salario) ^ (Double.doubleToLongBits(this.salario) >>> 32));
-        hash = 97 * hash + (int) (Double.doubleToLongBits(this.margem) ^ (Double.doubleToLongBits(this.margem) >>> 32));
+        hash = 11 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 11 * hash + Objects.hashCode(this.nome);
+        hash = 11 * hash + Objects.hashCode(this.rg);
+        hash = 11 * hash + Objects.hashCode(this.sexo);
+        hash = 11 * hash + Objects.hashCode(this.endereco);
+        hash = 11 * hash + Objects.hashCode(this.cpf);
+        hash = 11 * hash + Objects.hashCode(this.telefone);
+        hash = 11 * hash + Objects.hashCode(this.celular);
+        hash = 11 * hash + Objects.hashCode(this.data_nascimento);
+        hash = 11 * hash + (int) (Double.doubleToLongBits(this.salario) ^ (Double.doubleToLongBits(this.salario) >>> 32));
+        hash = 11 * hash + (int) (Double.doubleToLongBits(this.margem) ^ (Double.doubleToLongBits(this.margem) >>> 32));
+        hash = 11 * hash + Objects.hashCode(this.email);
+        hash = 11 * hash + Objects.hashCode(this.cep);
+        hash = 11 * hash + Objects.hashCode(this.ocupacao);
+        hash = 11 * hash + Objects.hashCode(this.informacoes);
         return hash;
     }
 
@@ -203,6 +246,18 @@ public class Cliente   {
         if (!Objects.equals(this.celular, other.celular)) {
             return false;
         }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.cep, other.cep)) {
+            return false;
+        }
+        if (!Objects.equals(this.ocupacao, other.ocupacao)) {
+            return false;
+        }
+        if (!Objects.equals(this.informacoes, other.informacoes)) {
+            return false;
+        }
         if (!Objects.equals(this.data_nascimento, other.data_nascimento)) {
             return false;
         }
@@ -211,9 +266,10 @@ public class Cliente   {
 
     @Override
     public String toString() {
-        return "Cliente{" + "id=" + id + ", nome=" + nome + ", rg=" + rg + ", sexo=" + sexo + ", endereco=" + endereco + ", cpf=" + cpf + ", telefone=" + telefone + ", celular=" + celular + ", data_nascimento=" + data_nascimento + ", salario=" + salario + ", margem=" + margem + '}';
+        return "Cliente{" + "id=" + id + ", nome=" + nome + ", rg=" + rg + ", sexo=" + sexo + ", endereco=" + endereco + ", cpf=" + cpf + ", telefone=" + telefone + ", celular=" + celular + ", data_nascimento=" + data_nascimento + ", salario=" + salario + ", margem=" + margem + ", email=" + email + ", cep=" + cep + ", ocupacao=" + ocupacao + ", informacoes=" + informacoes + '}';
     }
-    
+
+   
    
     
   
