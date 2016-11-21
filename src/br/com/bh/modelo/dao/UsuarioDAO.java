@@ -29,7 +29,7 @@ public class UsuarioDAO {
         ps.setObject(1, login);
         ps.setObject(2, senha);
         ResultSet rs = ps.executeQuery();
-        System.out.println(ps.toString());
+        
         if (rs.next()) {
             usuario = new Usuario();
             usuario.setLogin(rs.getString("usuario"));
