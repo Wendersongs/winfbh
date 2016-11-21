@@ -7,6 +7,7 @@ package br.com.bh.view;
 
 import br.com.bh.modelo.dao.ClienteDAO;
 import br.com.bh.modelo.entidade.Cliente;
+import br.com.bh.utils.Data;
 import br.com.bh.utils.Mascara;
 import br.com.bh.utils.ValidaCPF;
 import java.text.ParseException;
@@ -401,8 +402,9 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         cliente.setMargem(Double.parseDouble(txtMargem.getText()));
         cliente.setCep(txtCep.getText());
         cliente.setEmail(txtEmail.getText());
-        cliente.setOcupacao(txtInfo.getText());
+        cliente.setInformacoes(txtInfo.getText());
         cliente.setOcupacao(txtOcupa.getText());
+        cliente.setData_nascimento(Data.converteCalendar(txtData.getText()) );
         ClienteDAO dao = new ClienteDAO();
         dao.inserir(cliente);
         JFrameCliente.atualizaTabela();
