@@ -5,6 +5,7 @@
  */
 package br.com.bh.view;
 
+import br.com.bh.controller.EmprestimoController;
 import br.com.bh.modelo.dao.ClienteDAO;
 import br.com.bh.modelo.entidade.Cliente;
 import br.com.bh.utils.Data;
@@ -124,6 +125,12 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         jLabel6.setText("Celular");
 
         jLabel7.setText("Endereço");
+
+        txtSalario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSalarioFocusLost(evt);
+            }
+        });
 
         jLabel8.setText("Salário");
 
@@ -450,6 +457,12 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     private void txtDataFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDataFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataFocusLost
+
+    private void txtSalarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalarioFocusLost
+            EmprestimoController e = new EmprestimoController();
+            txtMargem.setText(String.valueOf(e.calculaMargem(Double.parseDouble(txtSalario.getText()))));
+            txtMargem.setEnabled(false);
+    }//GEN-LAST:event_txtSalarioFocusLost
 
     /**
      * @param args the command line arguments
