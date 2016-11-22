@@ -13,7 +13,20 @@ public class EmprestimoController {
         return margem;
     
     }
+    public double calculaJuros (double capital,double taxa){
+        
+        
+        
+        return 0;
+        
+    }
+    public double calculaPrestacaoPrice(double valorPresente,double taxa, double periodo){
+        
+        
+        
+        
+        return 0;
     
-    
+    }
     
 }

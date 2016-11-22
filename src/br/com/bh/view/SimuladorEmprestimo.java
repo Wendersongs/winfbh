@@ -606,6 +606,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                     txtMargem.setEnabled(false);
                     btnCalcular.setEnabled(true);
                     
+                    
             
                 
             
