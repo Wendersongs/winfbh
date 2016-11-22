@@ -52,7 +52,7 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel2.setText("Senha:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel3.setText("W-INF Sistema Bancário");
+        jLabel3.setText("W-IFN Sistema Bancário");
 
         jButton1.setText("OK");
         jButton1.setPreferredSize(new java.awt.Dimension(77, 23));
