@@ -15,11 +15,18 @@ public class EmprestimoController {
         return margem;
     
     }
-    public double calculaTotalPrice (double capital,double taxa, int periodo){
-        
-        
-        
+    public double calculaJuro( double valor, int taxa){
         return 0;
+    
+    
+    }
+    
+    public double calculaTotalPrice (double parcela, int periodo){
+        
+        
+        
+        
+        return parcela*periodo;
         
     }
     public double calculaPrestacaoPrice(double entrada, double valorPresente,double taxa, int periodo){
@@ -30,6 +37,13 @@ public class EmprestimoController {
        return parcela;
     
     }
+    
+    public double calculaSaldoDevedor(double valorAtual, double amortiza){
+        return valorAtual-amortiza;
+       
+    }
+    
+    
     
     public String formataNumero (double d){
         
