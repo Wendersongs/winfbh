@@ -73,7 +73,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         priceTable = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txtTotal = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -301,18 +301,18 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 375, Short.MAX_VALUE)
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jCheckBox2)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -327,7 +327,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
                 .addContainerGap())
         );
@@ -518,34 +518,41 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         double juro =0;
         double prestacao=0;
         int parcelas = Integer.parseInt(txtParcelas.getText());
-        int taxa = Integer.parseUnsignedInt(txtTaxa.getText());
+        double taxa = Double.parseDouble(txtTaxa.getText());
         int j = parcelas;
-        for (int linha = 0; linha < j; linha++)
+        double total = 0;
+        for (int linha = 0; linha <= j; linha++)
                 {
                     if  (linha == 0) {
                     tTabela.addRow(new Object[]{1});
                     priceTable.setValueAt(linha, linha, 0);
-                    priceTable.setValueAt(valorFinanciamento, linha, 1);
-                    priceTable.setValueAt(juro, linha, 2);
-                    priceTable.setValueAt(amortiza, linha, 3);
-                    priceTable.setValueAt(prestacao, linha, 4);
-                    priceTable.setValueAt(saldoAtual, linha, 5);
+                    priceTable.setValueAt(e.formataNumero(valorFinanciamento), linha, 1);
+                    priceTable.setValueAt((juro), linha, 2);
+                    priceTable.setValueAt((amortiza), linha, 3);
+                    priceTable.setValueAt((prestacao), linha, 4);
+                    priceTable.setValueAt(e.formataNumero(saldoAtual), linha, 5);
+                    
                     linha++;                   
                     }                   
                     tTabela.addRow(new Object[]{1});
                     prestacao=e.calculaPrestacaoPrice(saldoAtual, taxa, parcelas);
+                    total=total+prestacao;
                     juro=e.calculaJuro(saldoAtual, taxa);
-                    amortiza=e.calculaAmortiza(amortiza, juro);
-                    priceTable.setValueAt(saldoAtual, linha, 1);
-                    priceTable.setValueAt(juro, linha, 2);
-                    priceTable.setValueAt(amortiza, linha, 3);
-                    priceTable.setValueAt(prestacao, linha, 4);
-                    priceTable.setValueAt(saldoAtual, linha, 5);
+                    amortiza=e.calculaAmortiza(prestacao, juro);
                     saldoAtual=e.calculaSaldo(saldoAtual, amortiza);
+                    parcelas=parcelas-1;
+                    priceTable.setValueAt(linha, linha, 0);
+                   // priceTable.setValueAt(saldoAtual, linha, 1);
+                    priceTable.setValueAt(e.formataNumero(juro), linha, 2);
+                    priceTable.setValueAt(e.formataNumero(amortiza), linha, 3);
+                    priceTable.setValueAt(e.formataNumero(prestacao), linha, 4);
+                    priceTable.setValueAt(e.formataNumero(saldoAtual), linha, 5);
+                    
                     
                     
             
                 }
+        txtTotal.setText(e.formataNumero(total));
         txtPresta.setText(e.formataNumero(e.calculaPrestacaoPrice(valorFinanciamento, taxa, parcelas))); 
     }//GEN-LAST:event_btnCalcularActionPerformed
 
@@ -615,7 +622,6 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private static javax.swing.JTable priceTable;
     private javax.swing.JButton sair;
     private javax.swing.JFormattedTextField txtCpf;
@@ -626,6 +632,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     private javax.swing.JTextField txtParcelas;
     private javax.swing.JTextField txtPresta;
     private javax.swing.JTextField txtTaxa;
+    private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtValorFinan;
     private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
