@@ -15,7 +15,7 @@ public class EmprestimoController {
         return margem;
     
     }
-    public double calculaJuro( double valor, int taxa){
+    public double calculaJuro( double valor, double taxa){
         taxa = taxa/100;
         
         
