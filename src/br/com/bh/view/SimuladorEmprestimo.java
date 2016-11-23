@@ -77,7 +77,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        sacTable = new javax.swing.JTable();
         jLabel14 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -272,17 +272,17 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         priceTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         priceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Período", "Saldo Inicial", "Juros", "Amortização", "Parcela", "Saldo Final"
+                "Período", "Juros", "Amortização", "Parcela", "Saldo Devedor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -334,27 +334,27 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("SAC"));
 
-        jTable3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        sacTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        sacTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Período", "Saldo Inicial", "Juros", "Amortização", "Parcela", "Saldo Final"
+                "Período", "Juros", "Amortização", "Parcela", "Saldo Devedor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(sacTable);
 
         jLabel14.setFont(new java.awt.Font("Lucida Fax", 1, 13)); // NOI18N
         jLabel14.setText("Total");
@@ -507,18 +507,23 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
-        EmprestimoController e = new EmprestimoController();
+      
+        double valorFinanciamento = Double.parseDouble(txtValorFinan.getText());
+        int parcelas = Integer.parseInt(txtParcelas.getText());
+        double taxa = Double.parseDouble(txtTaxa.getText());
+        preenchePrice(valorFinanciamento, parcelas, taxa);
+        preencheSac(valorFinanciamento, parcelas, taxa);
+
+    }//GEN-LAST:event_btnCalcularActionPerformed
+
+ private void preenchePrice(double valorFinanciamento,int parcelas,double taxa){
+ EmprestimoController e = new EmprestimoController();
         DefaultTableModel tTabela = (DefaultTableModel) priceTable.getModel();
         tTabela.setNumRows(0);
-        double entrada = Double.parseDouble(txtEntrada.getText());
-        double valorFinanciamento = Double.parseDouble(txtValorFinan.getText());
-        valorFinanciamento=valorFinanciamento-entrada;
         double saldoAtual = valorFinanciamento;
         double amortiza =0;
         double juro =0;
         double prestacao=0;
-        int parcelas = Integer.parseInt(txtParcelas.getText());
-        double taxa = Double.parseDouble(txtTaxa.getText());
         int j = parcelas;
         double total = 0;
         for (int linha = 0; linha <= j; linha++)
@@ -526,11 +531,10 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                     if  (linha == 0) {
                     tTabela.addRow(new Object[]{1});
                     priceTable.setValueAt(linha, linha, 0);
-                    priceTable.setValueAt(e.formataNumero(valorFinanciamento), linha, 1);
-                    priceTable.setValueAt((juro), linha, 2);
-                    priceTable.setValueAt((amortiza), linha, 3);
-                    priceTable.setValueAt((prestacao), linha, 4);
-                    priceTable.setValueAt(e.formataNumero(saldoAtual), linha, 5);
+                    priceTable.setValueAt((juro), linha, 1);
+                    priceTable.setValueAt((amortiza), linha, 2);
+                    priceTable.setValueAt((prestacao), linha, 3);
+                    priceTable.setValueAt(e.formataNumero(saldoAtual), linha, 4);
                     
                     linha++;                   
                     }                   
@@ -542,11 +546,10 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                     saldoAtual=e.calculaSaldo(saldoAtual, amortiza);
                     parcelas=parcelas-1;
                     priceTable.setValueAt(linha, linha, 0);
-                   // priceTable.setValueAt(saldoAtual, linha, 1);
-                    priceTable.setValueAt(e.formataNumero(juro), linha, 2);
-                    priceTable.setValueAt(e.formataNumero(amortiza), linha, 3);
-                    priceTable.setValueAt(e.formataNumero(prestacao), linha, 4);
-                    priceTable.setValueAt(e.formataNumero(saldoAtual), linha, 5);
+                    priceTable.setValueAt(e.formataNumero(juro), linha, 1);
+                    priceTable.setValueAt(e.formataNumero(amortiza), linha, 2);
+                    priceTable.setValueAt(e.formataNumero(prestacao), linha, 3);
+                    priceTable.setValueAt(e.formataNumero(saldoAtual), linha, 4);
                     
                     
                     
@@ -554,8 +557,54 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                 }
         txtTotal.setText(e.formataNumero(total));
         txtPresta.setText(e.formataNumero(e.calculaPrestacaoPrice(valorFinanciamento, taxa, parcelas))); 
-    }//GEN-LAST:event_btnCalcularActionPerformed
 
+
+}   
+    
+    private void preencheSac(double valorFinanciamento,int parcelas,double taxa){
+ EmprestimoController e = new EmprestimoController();
+        DefaultTableModel tTabela = (DefaultTableModel) sacTable.getModel();
+        tTabela.setNumRows(0);
+        double saldoAtual = valorFinanciamento;
+        double amortiza =0;
+        double juro =0;
+        double prestacao=0;
+        int j = parcelas;
+        double total = 0;
+        for (int linha = 0; linha <= j; linha++)
+                {
+                    if  (linha == 0) {
+                    tTabela.addRow(new Object[]{1});
+                    sacTable.setValueAt(linha, linha, 0);
+                    sacTable.setValueAt((juro), linha, 1);
+                    sacTable.setValueAt((amortiza), linha, 2);
+                    sacTable.setValueAt((prestacao), linha, 3);
+                    sacTable.setValueAt(e.formataNumero(saldoAtual), linha, 4);
+                    
+                    linha++;                   
+                    }                   
+                    tTabela.addRow(new Object[]{1});
+                    prestacao=e.calculaPrestacaoPrice(saldoAtual, taxa, parcelas);
+                    total=total+prestacao;
+                    juro=e.calculaJuro(saldoAtual, taxa);
+                    amortiza=e.calculaAmortiza(prestacao, juro);
+                    saldoAtual=e.calculaSaldo(saldoAtual, amortiza);
+                    parcelas=parcelas-1;
+                    sacTable.setValueAt(linha, linha, 0);
+                    sacTable.setValueAt(e.formataNumero(juro), linha, 1);
+                    sacTable.setValueAt(e.formataNumero(amortiza), linha, 2);
+                    sacTable.setValueAt(e.formataNumero(prestacao), linha, 3);
+                    sacTable.setValueAt(e.formataNumero(saldoAtual), linha, 4);
+                    
+                    
+                    
+            
+                }
+        txtTotal.setText(e.formataNumero(total));
+        txtPresta.setText(e.formataNumero(e.calculaPrestacaoPrice(valorFinanciamento, taxa, parcelas))); 
+
+
+}
     /**
      * @param args the command line arguments
      */
@@ -620,9 +669,9 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField7;
     private static javax.swing.JTable priceTable;
+    private javax.swing.JTable sacTable;
     private javax.swing.JButton sair;
     private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JFormattedTextField txtData;
