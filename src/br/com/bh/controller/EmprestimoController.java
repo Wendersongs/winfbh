@@ -16,7 +16,10 @@ public class EmprestimoController {
     
     }
     public double calculaJuro( double valor, int taxa){
-        return 0;
+        taxa = taxa/100;
+        
+        
+        return valor*taxa;
     
     
     }
@@ -43,8 +46,17 @@ public class EmprestimoController {
        
     }
     
-    
-    
+    public double calculaAmortiza(double parcela,double juros){
+        
+        
+        
+        return parcela-juros;
+       
+    }
+    public double calculaSaldo(double saldoAtual, double amortiza){
+        return saldoAtual-amortiza;
+        
+    }
     public String formataNumero (double d){
         
     DecimalFormat df = new DecimalFormat("#.00");

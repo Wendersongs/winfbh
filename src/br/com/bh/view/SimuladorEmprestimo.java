@@ -70,7 +70,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jCheckBox2 = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        priceTable = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
@@ -269,8 +269,8 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("PRICE"));
 
-        jTable2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        priceTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        priceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -289,7 +289,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(priceTable);
 
         jLabel16.setFont(new java.awt.Font("Lucida Fax", 1, 13)); // NOI18N
         jLabel16.setText("R$");
@@ -508,13 +508,67 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
         EmprestimoController e = new EmprestimoController();
+        DefaultTableModel tTabela = (DefaultTableModel) priceTable.getModel();
+        tTabela.setNumRows(0);
         double entrada = Double.parseDouble(txtEntrada.getText());
         double valorFinanciamento = Double.parseDouble(txtValorFinan.getText());
+        double saldoAtual = valorFinanciamento;
+        double amortiza =0;
+        double juro =0;
+        double prestacao=0;
         int parcelas = Integer.parseInt(txtParcelas.getText());
-        double taxa = Double.parseDouble(txtTaxa.getText());
-       txtPresta.setText(e.formataNumero(e.calculaPrestacaoPrice(entrada,valorFinanciamento, taxa, parcelas))); 
+        int taxa = Integer.parseUnsignedInt(txtTaxa.getText());
+        int j = parcelas;
+        for (int linha = 0; linha < j; linha++)
+                {
+                                       
+                    tTabela.addRow(new Object[]{1});
+                    priceTable.setValueAt(linha, linha, 0);
+                    priceTable.setValueAt(saldoAtual, linha, 1);
+                    priceTable.setValueAt(juro, linha, 2);
+                    juro=e.calculaJuro(saldoAtual, taxa);
+                    amortiza=e.calculaAmortiza(amortiza, e.calculaJuro(saldoAtual, taxa));
+                    priceTable.setValueAt(amortiza, linha, 3);
+                    priceTable.setValueAt(prestacao, linha, 4);
+                    prestacao=e.calculaPrestacaoPrice(entrada,saldoAtual, taxa, parcelas);
+                    entrada=0;
+                    priceTable.setValueAt(saldoAtual, linha, 5);
+                    saldoAtual=e.calculaSaldo(saldoAtual, amortiza);
+                    
+                    
+            
+                }
+        txtPresta.setText(e.formataNumero(e.calculaPrestacaoPrice(entrada,valorFinanciamento, taxa, parcelas))); 
     }//GEN-LAST:event_btnCalcularActionPerformed
+public static void atualizaTabela(){
+        DefaultTableModel tTabela = (DefaultTableModel) priceTable.getModel();
+        tTabela.setNumRows(0);
+        ClienteDAO dao = new ClienteDAO();
+        try {
+            List<Cliente> clientes = dao.listaTodosClientes();
+            for (int linha = 0; linha < clientes.size(); linha++)
+                {
+                    Cliente cliente = clientes.get(linha);
+                    
+                    tTabela.addRow(new Object[]{1});
+                    priceTable.setValueAt(cliente.getId(), linha, 0);
+                    priceTable.setValueAt(cliente.getNome(), linha, 1);
+                    priceTable.setValueAt(cliente.getRg(), linha, 2);
+                    priceTable.setValueAt(cliente.getSexo(), linha, 3);
+                    priceTable.setValueAt(cliente.getTelefone(), linha, 4);
+                    priceTable.setValueAt(cliente.getSalario(), linha, 5);
+                    priceTable.setValueAt(cliente.getMargem(), linha, 6);
+                    
+            
+                }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
 
+
+}
     /**
      * @param args the command line arguments
      */
@@ -579,10 +633,10 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private static javax.swing.JTable priceTable;
     private javax.swing.JButton sair;
     private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JFormattedTextField txtData;
