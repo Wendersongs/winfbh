@@ -518,7 +518,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
  private void preenchePrice(double valorFinanciamento,int parcelas,double taxa){
  EmprestimoController e = new EmprestimoController();
-        DefaultTableModel tTabela = (DefaultTableModel) priceTable.getModel();
+        DefaultTableModel tTabela = (DefaultTableModel) sacTable.getModel();
         tTabela.setNumRows(0);
         double saldoAtual = valorFinanciamento;
         double amortiza =saldoAtual/parcelas;
@@ -530,11 +530,11 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                 {
                     if  (linha == 0) {
                     tTabela.addRow(new Object[]{1});
-                    priceTable.setValueAt(linha, linha, 0);
-                    priceTable.setValueAt((juro), linha, 1);
-                    priceTable.setValueAt(0.0, linha, 2);
-                    priceTable.setValueAt((prestacao), linha, 3);
-                    priceTable.setValueAt(e.formataNumero(saldoAtual), linha, 4);
+                    sacTable.setValueAt(linha, linha, 0);
+                    sacTable.setValueAt((juro), linha, 1);
+                    sacTable.setValueAt(0.0, linha, 2);
+                    sacTable.setValueAt((prestacao), linha, 3);
+                    sacTable.setValueAt(e.formataNumero(saldoAtual), linha, 4);
                     
                     linha++;                   
                     }                   
@@ -543,17 +543,17 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                     prestacao=amortiza+juro;
                     saldoAtual=saldoAtual-amortiza;
                     parcelas=parcelas-1;
-                    priceTable.setValueAt(linha, linha, 0);
-                    priceTable.setValueAt(e.formataNumero(juro), linha, 1);
-                    priceTable.setValueAt(e.formataNumero(amortiza), linha, 2);
-                    priceTable.setValueAt(e.formataNumero(prestacao), linha, 3);
-                    priceTable.setValueAt(e.formataNumero(saldoAtual), linha, 4);
+                    sacTable.setValueAt(linha, linha, 0);
+                    sacTable.setValueAt(e.formataNumero(juro), linha, 1);
+                    sacTable.setValueAt(e.formataNumero(amortiza), linha, 2);
+                    sacTable.setValueAt(e.formataNumero(prestacao), linha, 3);
+                    sacTable.setValueAt(e.formataNumero(saldoAtual), linha, 4);
                     
                     total=total+prestacao;
                     
             
                 }
-        txtTotal.setText(e.formataNumero(total));
+        txtTotalSac.setText(e.formataNumero(total));
         
 
 
@@ -561,7 +561,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     
     private void preencheSac(double valorFinanciamento,int parcelas,double taxa){
  EmprestimoController e = new EmprestimoController();
-        DefaultTableModel tTabela = (DefaultTableModel) sacTable.getModel();
+        DefaultTableModel tTabela = (DefaultTableModel) priceTable.getModel();
         tTabela.setNumRows(0);
         double saldoAtual = valorFinanciamento;
         double amortiza =0;
@@ -573,11 +573,11 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                 {
                     if  (linha == 0) {
                     tTabela.addRow(new Object[]{1});
-                    sacTable.setValueAt(linha, linha, 0);
-                    sacTable.setValueAt((juro), linha, 1);
-                    sacTable.setValueAt((amortiza), linha, 2);
-                    sacTable.setValueAt((prestacao), linha, 3);
-                    sacTable.setValueAt(e.formataNumero(saldoAtual), linha, 4);
+                    priceTable.setValueAt(linha, linha, 0);
+                    priceTable.setValueAt((juro), linha, 1);
+                    priceTable.setValueAt((amortiza), linha, 2);
+                    priceTable.setValueAt((prestacao), linha, 3);
+                    priceTable.setValueAt(e.formataNumero(saldoAtual), linha, 4);
                     
                     linha++;                   
                     }                   
@@ -588,17 +588,17 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                     amortiza=e.calculaAmortiza(prestacao, juro);
                     saldoAtual=e.calculaSaldo(saldoAtual, amortiza);
                     parcelas=parcelas-1;
-                    sacTable.setValueAt(linha, linha, 0);
-                    sacTable.setValueAt(e.formataNumero(juro), linha, 1);
-                    sacTable.setValueAt(e.formataNumero(amortiza), linha, 2);
-                    sacTable.setValueAt(e.formataNumero(prestacao), linha, 3);
-                    sacTable.setValueAt(e.formataNumero(saldoAtual), linha, 4);
+                    priceTable.setValueAt(linha, linha, 0);
+                    priceTable.setValueAt(e.formataNumero(juro), linha, 1);
+                    priceTable.setValueAt(e.formataNumero(amortiza), linha, 2);
+                    priceTable.setValueAt(e.formataNumero(prestacao), linha, 3);
+                    priceTable.setValueAt(e.formataNumero(saldoAtual), linha, 4);
                     
                     
                     
             
                 }
-        txtTotalSac.setText(e.formataNumero(total));
+        txtTotal.setText(e.formataNumero(total));
         
 
 
