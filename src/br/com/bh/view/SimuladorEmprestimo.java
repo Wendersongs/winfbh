@@ -512,6 +512,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         tTabela.setNumRows(0);
         double entrada = Double.parseDouble(txtEntrada.getText());
         double valorFinanciamento = Double.parseDouble(txtValorFinan.getText());
+        valorFinanciamento=valorFinanciamento-entrada;
         double saldoAtual = valorFinanciamento;
         double amortiza =0;
         double juro =0;
@@ -521,54 +522,33 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         int j = parcelas;
         for (int linha = 0; linha < j; linha++)
                 {
-                                       
+                    if  (linha == 0) {
                     tTabela.addRow(new Object[]{1});
                     priceTable.setValueAt(linha, linha, 0);
-                    priceTable.setValueAt(saldoAtual, linha, 1);
+                    priceTable.setValueAt(valorFinanciamento, linha, 1);
                     priceTable.setValueAt(juro, linha, 2);
-                    juro=e.calculaJuro(saldoAtual, taxa);
-                    amortiza=e.calculaAmortiza(amortiza, e.calculaJuro(saldoAtual, taxa));
                     priceTable.setValueAt(amortiza, linha, 3);
                     priceTable.setValueAt(prestacao, linha, 4);
-                    prestacao=e.calculaPrestacaoPrice(entrada,saldoAtual, taxa, parcelas);
-                    entrada=0;
+                    priceTable.setValueAt(saldoAtual, linha, 5);
+                    linha++;                   
+                    }                   
+                    tTabela.addRow(new Object[]{1});
+                    prestacao=e.calculaPrestacaoPrice(saldoAtual, taxa, parcelas);
+                    juro=e.calculaJuro(saldoAtual, taxa);
+                    amortiza=e.calculaAmortiza(amortiza, juro);
+                    priceTable.setValueAt(saldoAtual, linha, 1);
+                    priceTable.setValueAt(juro, linha, 2);
+                    priceTable.setValueAt(amortiza, linha, 3);
+                    priceTable.setValueAt(prestacao, linha, 4);
                     priceTable.setValueAt(saldoAtual, linha, 5);
                     saldoAtual=e.calculaSaldo(saldoAtual, amortiza);
                     
                     
             
                 }
-        txtPresta.setText(e.formataNumero(e.calculaPrestacaoPrice(entrada,valorFinanciamento, taxa, parcelas))); 
+        txtPresta.setText(e.formataNumero(e.calculaPrestacaoPrice(valorFinanciamento, taxa, parcelas))); 
     }//GEN-LAST:event_btnCalcularActionPerformed
-public static void atualizaTabela(){
-        DefaultTableModel tTabela = (DefaultTableModel) priceTable.getModel();
-        tTabela.setNumRows(0);
-        ClienteDAO dao = new ClienteDAO();
-        try {
-            List<Cliente> clientes = dao.listaTodosClientes();
-            for (int linha = 0; linha < clientes.size(); linha++)
-                {
-                    Cliente cliente = clientes.get(linha);
-                    
-                    tTabela.addRow(new Object[]{1});
-                    priceTable.setValueAt(cliente.getId(), linha, 0);
-                    priceTable.setValueAt(cliente.getNome(), linha, 1);
-                    priceTable.setValueAt(cliente.getRg(), linha, 2);
-                    priceTable.setValueAt(cliente.getSexo(), linha, 3);
-                    priceTable.setValueAt(cliente.getTelefone(), linha, 4);
-                    priceTable.setValueAt(cliente.getSalario(), linha, 5);
-                    priceTable.setValueAt(cliente.getMargem(), linha, 6);
-                    
-            
-                }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(JFrameCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
- 
 
-
-}
     /**
      * @param args the command line arguments
      */

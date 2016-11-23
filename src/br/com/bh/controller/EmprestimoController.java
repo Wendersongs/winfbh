@@ -32,9 +32,8 @@ public class EmprestimoController {
         return parcela*periodo;
         
     }
-    public double calculaPrestacaoPrice(double entrada, double valorPresente,double taxa, int periodo){
+    public double calculaPrestacaoPrice( double valorPresente,double taxa, int periodo){
         double parcela=0;
-       valorPresente=valorPresente-entrada; 
        taxa=taxa/100;
        parcela=valorPresente*((Math.pow((1+taxa), periodo)*taxa)/((Math.pow((1+taxa),periodo))-1));
        return parcela;
