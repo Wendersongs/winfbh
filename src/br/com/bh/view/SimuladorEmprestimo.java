@@ -548,9 +548,27 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         EmprestimoController e = new EmprestimoController();
-        double prestacao1 = Double.parseDouble(e.substituiCaractere((priceTable.getValueAt(1, 3).toString()), ",", "."));
+        double prestacao1 = 0;
+        if (chkPrice.isSelected()) {
+            prestacao1 = Double.parseDouble(e.substituiCaractere((priceTable.getValueAt(1, 3).toString()), ",", "."));
+        } else {
+            if (chkSac.isSelected()) {
+                prestacao1 = Double.parseDouble(e.substituiCaractere((sacTable.getValueAt(1, 3).toString()), ",", "."));
+
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Uma das tabelas (Price ou SAC) deverá ser selecionada");
+                return;
+            }
+
+        }
+
         if (prestacao1 > Double.parseDouble(txtMargem.getText())) {
-            JOptionPane.showMessageDialog(null, "A margem é insuficiente para o empréstimo solicitado.  Você pode tentar \n aumentar as prestações ou diminuir o valor total do emprestimo");
+            JOptionPane.showMessageDialog(null, "A margem é insuficiente para o empréstimo solicitado.  Você pode tentar \n aumentar as prestações ou diminuir o valor total do empréstimo");
+            return;
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Empréstimo contratado com sucesso");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -560,7 +578,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         } else {
             chkSac.setEnabled(true);
         }
-        
+
     }//GEN-LAST:event_chkPriceActionPerformed
 
     private void chkSacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSacActionPerformed
