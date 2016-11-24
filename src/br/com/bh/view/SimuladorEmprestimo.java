@@ -51,7 +51,6 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         txtTaxa = new javax.swing.JTextField();
         txtValorFinan = new javax.swing.JTextField();
@@ -59,8 +58,6 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         txtParcelas = new javax.swing.JTextField();
         txtMargem = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        txtEntrada = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtData = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -106,8 +103,6 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
         jLabel8.setText("Margem Consignada");
 
-        jLabel10.setText("Entrada");
-
         txtValorFinan.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtValorFinanFocusLost(evt);
@@ -129,15 +124,6 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel12.setText("R$");
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jLabel13.setText("R$");
-
-        txtEntrada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEntradaActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Data");
 
@@ -203,12 +189,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel13)
-                                .addGap(6, 6, 6)
-                                .addComponent(txtEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(293, 293, 293)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtTaxa, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -254,9 +235,6 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                     .addComponent(txtMargem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13)
                     .addComponent(jLabel6)
                     .addComponent(txtTaxa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
@@ -485,10 +463,6 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtValorFinanActionPerformed
 
-    private void txtEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEntradaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEntradaActionPerformed
-
     private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
        System.exit(0);
     }//GEN-LAST:event_sairActionPerformed
@@ -680,10 +654,8 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -706,7 +678,6 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     private javax.swing.JButton sair;
     private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JFormattedTextField txtData;
-    private javax.swing.JTextField txtEntrada;
     private javax.swing.JTextField txtMargem;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtParcelas;
