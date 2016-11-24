@@ -106,6 +106,11 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
         jLabel10.setText("Entrada");
 
+        txtValorFinan.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtValorFinanFocusLost(evt);
+            }
+        });
         txtValorFinan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtValorFinanActionPerformed(evt);
@@ -508,13 +513,18 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
       
-        double valorFinanciamento = Double.parseDouble(txtValorFinan.getText());
+        double valorFinanciamento = Double.parseDouble(txtValorFinan.getText().replaceAll(",", "."));
         int parcelas = Integer.parseInt(txtParcelas.getText());
         double taxa = Double.parseDouble(txtTaxa.getText());
         preenchePrice(valorFinanciamento, parcelas, taxa);
         preencheSac(valorFinanciamento, parcelas, taxa);
 
     }//GEN-LAST:event_btnCalcularActionPerformed
+
+    private void txtValorFinanFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValorFinanFocusLost
+       EmprestimoController e = new EmprestimoController();
+        txtValorFinan.setText(e.formataNumero(Double.parseDouble(txtValorFinan.getText())));
+    }//GEN-LAST:event_txtValorFinanFocusLost
 
  private void preenchePrice(double valorFinanciamento,int parcelas,double taxa){
  EmprestimoController e = new EmprestimoController();
