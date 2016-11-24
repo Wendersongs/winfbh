@@ -100,6 +100,12 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
         jLabel8.setText("Margem Consignada");
 
+        txtTaxa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTaxaKeyTyped(evt);
+            }
+        });
+
         txtValorFinan.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtValorFinanFocusLost(evt);
@@ -108,6 +114,11 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         txtValorFinan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtValorFinanActionPerformed(evt);
+            }
+        });
+        txtValorFinan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorFinanKeyTyped(evt);
             }
         });
 
@@ -121,6 +132,12 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel12.setText("R$");
+
+        txtParcelas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtParcelasKeyTyped(evt);
+            }
+        });
 
         jLabel9.setText("Tipo de Empréstimo");
 
@@ -492,6 +509,27 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
        EmprestimoController e = new EmprestimoController();
         txtValorFinan.setText(e.formataNumero(Double.parseDouble(txtValorFinan.getText())));
     }//GEN-LAST:event_txtValorFinanFocusLost
+
+    private void txtValorFinanKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorFinanKeyTyped
+       String caracteres="0987654321.";
+        if(!caracteres.contains(evt.getKeyChar()+"")){
+        evt.consume();
+} 
+    }//GEN-LAST:event_txtValorFinanKeyTyped
+
+    private void txtParcelasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtParcelasKeyTyped
+        String caracteres="0987654321";
+        if(!caracteres.contains(evt.getKeyChar()+"")){
+        evt.consume();
+} 
+    }//GEN-LAST:event_txtParcelasKeyTyped
+
+    private void txtTaxaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTaxaKeyTyped
+       String caracteres="0987654321.";
+        if(!caracteres.contains(evt.getKeyChar()+"")){
+        evt.consume();
+} 
+    }//GEN-LAST:event_txtTaxaKeyTyped
 
  private void preenchePrice(double valorFinanciamento,int parcelas,double taxa){
  EmprestimoController e = new EmprestimoController();
