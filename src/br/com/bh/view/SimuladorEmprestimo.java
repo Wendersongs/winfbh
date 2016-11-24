@@ -8,6 +8,7 @@ package br.com.bh.view;
 import br.com.bh.controller.EmprestimoController;
 import br.com.bh.modelo.dao.ClienteDAO;
 import br.com.bh.modelo.entidade.Cliente;
+import br.com.bh.utils.Mascara;
 import br.com.bh.utils.ValidaCPF;
 import java.sql.SQLException;
 import java.util.List;
@@ -27,6 +28,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
      */
     public SimuladorEmprestimo() {
         initComponents();
+        Mascara mask = new Mascara();
     }
 
     /**
@@ -512,7 +514,29 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
-      
+        // valida componentes
+        
+        if (txtValorFinan.getText().isEmpty() ) {
+        
+        JOptionPane.showMessageDialog(null, "O valor do financiamento deve ser preenchido");  
+        txtValorFinan.requestFocus();
+        return;
+        }
+        
+         if (txtTaxa.getText().isEmpty() ) {
+        
+        JOptionPane.showMessageDialog(null, "A taxa de juros deve ser informada");  
+        txtTaxa.requestFocus();
+        return;
+        }
+         
+            if (txtParcelas.getText().isEmpty() ) {
+        
+        JOptionPane.showMessageDialog(null, "O número de parcelas deve ser informado");  
+        txtParcelas.requestFocus();
+        return;
+        }
+        
         double valorFinanciamento = Double.parseDouble(txtValorFinan.getText().replaceAll(",", "."));
         int parcelas = Integer.parseInt(txtParcelas.getText());
         double taxa = Double.parseDouble(txtTaxa.getText());
