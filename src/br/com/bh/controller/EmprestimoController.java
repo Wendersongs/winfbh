@@ -61,5 +61,12 @@ public class EmprestimoController {
     DecimalFormat df = new DecimalFormat("#.00");
     return df.format(d);
     }
+    
+    public String substituiCaractere(String valor,String caractereAntigo, String caractereNovo){
+        valor=valor.replaceAll(caractereAntigo, caractereNovo);
+        
+        return valor;
+    
+    }
 
 }
