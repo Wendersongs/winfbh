@@ -648,13 +648,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Empréstimo contratado com sucesso");
         }
 
-        if (prestacao1 > Double.parseDouble(txtMargem.getText())) {
-            JOptionPane.showMessageDialog(null, "A margem é insuficiente para o empréstimo solicitado.  Você pode tentar \n aumentar as prestações ou diminuir o valor total do empréstimo");
-            return;
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Empréstimo contratado com sucesso");
-        }
+        
                                            
 
     }//GEN-LAST:event_jButton3ActionPerformed
