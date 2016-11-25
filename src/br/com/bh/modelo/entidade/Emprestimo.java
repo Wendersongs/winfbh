@@ -14,5 +14,7 @@ public class Emprestimo {
     private Cliente cliente;
     private double valor;
     private Calendar data_atual; 
+    private double taxa;
+    private int prestacoes;
     
 }
