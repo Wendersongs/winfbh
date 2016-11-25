@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Objects;
 
-public class Emprestimo {
+public class Financiamento {
     
     private int id;
     private Cliente cliente;
@@ -18,7 +18,7 @@ public class Emprestimo {
     private double taxa;
     private Parcela parcela;
 
-    public Emprestimo(int id, Cliente cliente, double valor, Calendar dataContrata, double taxa, Parcela parcela) {
+    public Financiamento(int id, Cliente cliente, double valor, Calendar dataContrata, double taxa, Parcela parcela) {
         this.id = id;
         this.cliente = cliente;
         this.valor = valor;
@@ -27,11 +27,11 @@ public class Emprestimo {
         this.parcela = parcela;
     }
 
-    public Emprestimo(int id) {
+    public Financiamento(int id) {
         this.id = id;
     }
 
-    public Emprestimo(Cliente cliente, double valor, Calendar dataContrata, double taxa, Parcela parcela) {
+    public Financiamento(Cliente cliente, double valor, Calendar dataContrata, double taxa, Parcela parcela) {
         this.cliente = cliente;
         this.valor = valor;
         this.dataContrata = dataContrata;
@@ -39,7 +39,7 @@ public class Emprestimo {
         this.parcela = parcela;
     }
 
-    public Emprestimo(int id, Cliente cliente, double valor, Calendar dataContrata, double taxa) {
+    public Financiamento(int id, Cliente cliente, double valor, Calendar dataContrata, double taxa) {
         this.id = id;
         this.cliente = cliente;
         this.valor = valor;
@@ -120,7 +120,7 @@ public class Emprestimo {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Emprestimo other = (Emprestimo) obj;
+        final Financiamento other = (Financiamento) obj;
         if (this.id != other.id) {
             return false;
         }
