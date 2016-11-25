@@ -15,6 +15,6 @@ public class Emprestimo {
     private double valor;
     private Calendar data_atual; 
     private double taxa;
-    private int prestacoes;
+    private Parcela parcela;
     
 }
