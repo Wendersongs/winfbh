@@ -5,7 +5,7 @@
  */
 package br.com.bh.view;
 
-import br.com.bh.controller.EmprestimoController;
+import br.com.bh.controller.FinanciamentoController;
 import br.com.bh.modelo.dao.ClienteDAO;
 import br.com.bh.modelo.entidade.Cliente;
 import br.com.bh.utils.Data;
@@ -541,7 +541,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDataFocusLost
 
     private void txtSalarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalarioFocusLost
-            EmprestimoController e = new EmprestimoController();
+            FinanciamentoController e = new FinanciamentoController();
             txtMargem.setText(String.valueOf(e.calculaMargem(Double.parseDouble(txtSalario.getText()))));
             txtMargem.setEnabled(false);
     }//GEN-LAST:event_txtSalarioFocusLost

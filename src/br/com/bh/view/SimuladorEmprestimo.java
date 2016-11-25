@@ -5,7 +5,7 @@
  */
 package br.com.bh.view;
 
-import br.com.bh.controller.EmprestimoController;
+import br.com.bh.controller.FinanciamentoController;
 import br.com.bh.modelo.dao.ClienteDAO;
 import br.com.bh.modelo.entidade.Cliente;
 import br.com.bh.utils.Mascara;
@@ -598,7 +598,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCalcularActionPerformed
 
     private void txtValorFinanFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValorFinanFocusLost
-        EmprestimoController e = new EmprestimoController();
+        FinanciamentoController e = new FinanciamentoController();
         txtValorFinan.setText(e.formataNumero(Double.parseDouble(txtValorFinan.getText())));
     }//GEN-LAST:event_txtValorFinanFocusLost
 
@@ -624,7 +624,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTaxaKeyTyped
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        EmprestimoController e = new EmprestimoController();
+        FinanciamentoController e = new FinanciamentoController();
         double prestacao1 = 0;
         if (chkPrice.isSelected()) {
             prestacao1 = Double.parseDouble(e.substituiCaractere((priceTable.getValueAt(1, 3).toString()), ",", "."));
@@ -679,7 +679,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     }//GEN-LAST:event_textPesquisar3ActionPerformed
 
     private void preenchePrice(double valorFinanciamento, int parcelas, double taxa) {
-        EmprestimoController e = new EmprestimoController();
+        FinanciamentoController e = new FinanciamentoController();
         DefaultTableModel tTabela = (DefaultTableModel) sacTable.getModel();
         tTabela.setNumRows(0);
         double saldoAtual = valorFinanciamento;
@@ -721,7 +721,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     }
 
     private void preencheSac(double valorFinanciamento, int parcelas, double taxa) {
-        EmprestimoController e = new EmprestimoController();
+        FinanciamentoController e = new FinanciamentoController();
         DefaultTableModel tTabela = (DefaultTableModel) priceTable.getModel();
         tTabela.setNumRows(0);
         double saldoAtual = valorFinanciamento;

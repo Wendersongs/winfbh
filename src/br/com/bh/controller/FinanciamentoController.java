@@ -4,7 +4,7 @@ package br.com.bh.controller;
 import java.text.DecimalFormat;
 
 
-public class EmprestimoController {
+public class FinanciamentoController {
     
     
     public double calculaMargem(double salario){
