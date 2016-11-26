@@ -15,39 +15,32 @@ public class Financiamento {
     private Cliente cliente;
     private double valor;
     private Calendar dataContrata; 
+    private int qtdParcelas;
     private double taxa;
-    private Parcela parcela;
+    private String tipo;
 
-    public Financiamento(int id, Cliente cliente, double valor, Calendar dataContrata, double taxa, Parcela parcela) {
+    public Financiamento(int id, Cliente cliente, double valor, Calendar dataContrata, int qtdParcelas, double taxa, String tipo) {
         this.id = id;
         this.cliente = cliente;
         this.valor = valor;
         this.dataContrata = dataContrata;
+        this.qtdParcelas = qtdParcelas;
         this.taxa = taxa;
-        this.parcela = parcela;
+        this.tipo = tipo;
+    }
+
+    public Financiamento(Cliente cliente, double valor, Calendar dataContrata, int qtdParcelas, double taxa, String tipo) {
+        this.cliente = cliente;
+        this.valor = valor;
+        this.dataContrata = dataContrata;
+        this.qtdParcelas = qtdParcelas;
+        this.taxa = taxa;
+        this.tipo = tipo;
     }
 
     public Financiamento(int id) {
         this.id = id;
     }
-
-    public Financiamento(Cliente cliente, double valor, Calendar dataContrata, double taxa, Parcela parcela) {
-        this.cliente = cliente;
-        this.valor = valor;
-        this.dataContrata = dataContrata;
-        this.taxa = taxa;
-        this.parcela = parcela;
-    }
-
-    public Financiamento(int id, Cliente cliente, double valor, Calendar dataContrata, double taxa) {
-        this.id = id;
-        this.cliente = cliente;
-        this.valor = valor;
-        this.dataContrata = dataContrata;
-        this.taxa = taxa;
-    }
-    
-    
 
     public int getId() {
         return id;
@@ -73,12 +66,20 @@ public class Financiamento {
         this.valor = valor;
     }
 
-    public Calendar getData_atual() {
+    public Calendar getDataContrata() {
         return dataContrata;
     }
 
-    public void setData_atual(Calendar dataContrata) {
+    public void setDataContrata(Calendar dataContrata) {
         this.dataContrata = dataContrata;
+    }
+
+    public int getQtdParcelas() {
+        return qtdParcelas;
+    }
+
+    public void setQtdParcelas(int qtdParcelas) {
+        this.qtdParcelas = qtdParcelas;
     }
 
     public double getTaxa() {
@@ -89,23 +90,24 @@ public class Financiamento {
         this.taxa = taxa;
     }
 
-    public Parcela getParcela() {
-        return parcela;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setParcela(Parcela parcela) {
-        this.parcela = parcela;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + this.id;
-        hash = 29 * hash + Objects.hashCode(this.cliente);
-        hash = 29 * hash + (int) (Double.doubleToLongBits(this.valor) ^ (Double.doubleToLongBits(this.valor) >>> 32));
-        hash = 29 * hash + Objects.hashCode(this.dataContrata);
-        hash = 29 * hash + (int) (Double.doubleToLongBits(this.taxa) ^ (Double.doubleToLongBits(this.taxa) >>> 32));
-        hash = 29 * hash + Objects.hashCode(this.parcela);
+        int hash = 7;
+        hash = 71 * hash + this.id;
+        hash = 71 * hash + Objects.hashCode(this.cliente);
+        hash = 71 * hash + (int) (Double.doubleToLongBits(this.valor) ^ (Double.doubleToLongBits(this.valor) >>> 32));
+        hash = 71 * hash + Objects.hashCode(this.dataContrata);
+        hash = 71 * hash + this.qtdParcelas;
+        hash = 71 * hash + (int) (Double.doubleToLongBits(this.taxa) ^ (Double.doubleToLongBits(this.taxa) >>> 32));
+        hash = 71 * hash + Objects.hashCode(this.tipo);
         return hash;
     }
 
@@ -127,7 +129,13 @@ public class Financiamento {
         if (Double.doubleToLongBits(this.valor) != Double.doubleToLongBits(other.valor)) {
             return false;
         }
+        if (this.qtdParcelas != other.qtdParcelas) {
+            return false;
+        }
         if (Double.doubleToLongBits(this.taxa) != Double.doubleToLongBits(other.taxa)) {
+            return false;
+        }
+        if (!Objects.equals(this.tipo, other.tipo)) {
             return false;
         }
         if (!Objects.equals(this.cliente, other.cliente)) {
@@ -136,15 +144,13 @@ public class Financiamento {
         if (!Objects.equals(this.dataContrata, other.dataContrata)) {
             return false;
         }
-        if (!Objects.equals(this.parcela, other.parcela)) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Emprestimo{" + "id=" + id + ", cliente=" + cliente + ", valor=" + valor + ", dataContrata=" + dataContrata + ", taxa=" + taxa + ", parcela=" + parcela + '}';
+        return "Financiamento{" + "id=" + id + ", cliente=" + cliente + ", valor=" + valor + ", dataContrata=" + dataContrata + ", qtdParcelas=" + qtdParcelas + ", taxa=" + taxa + ", tipo=" + tipo + '}';
     }
+
     
 }
