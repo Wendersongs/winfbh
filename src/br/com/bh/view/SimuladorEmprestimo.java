@@ -8,6 +8,7 @@ package br.com.bh.view;
 import br.com.bh.controller.FinanciamentoController;
 import br.com.bh.modelo.dao.ClienteDAO;
 import br.com.bh.modelo.entidade.Cliente;
+import br.com.bh.modelo.entidade.Financiamento;
 import br.com.bh.utils.Mascara;
 import br.com.bh.utils.ValidaCPF;
 import java.sql.SQLException;
@@ -625,6 +626,8 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         FinanciamentoController e = new FinanciamentoController();
+        Financiamento financiamento = new Financiamento();
+        
         double prestacao1 = 0;
         if (chkPrice.isSelected()) {
             prestacao1 = Double.parseDouble(e.substituiCaractere((priceTable.getValueAt(1, 3).toString()), ",", "."));
@@ -645,6 +648,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             return;
         }
         else{
+            
             JOptionPane.showMessageDialog(null, "Empréstimo contratado com sucesso");
         }
 

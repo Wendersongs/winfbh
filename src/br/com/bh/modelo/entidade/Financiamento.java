@@ -29,6 +29,9 @@ public class Financiamento {
         this.tipo = tipo;
     }
 
+    public Financiamento() {
+    }
+
     public Financiamento(Cliente cliente, double valor, Calendar dataContrata, int qtdParcelas, double taxa, String tipo) {
         this.cliente = cliente;
         this.valor = valor;
