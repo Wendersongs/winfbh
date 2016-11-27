@@ -7,6 +7,7 @@ package br.com.bh.view;
 
 import br.com.bh.controller.FinanciamentoController;
 import br.com.bh.modelo.dao.ClienteDAO;
+import br.com.bh.modelo.dao.FinanciamentoDao;
 import br.com.bh.modelo.entidade.Cliente;
 import br.com.bh.modelo.entidade.Financiamento;
 import br.com.bh.utils.Mascara;
@@ -62,6 +63,8 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         textPesquisar3 = new javax.swing.JFormattedTextField();
+        txtCodigo = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         chkPrice = new javax.swing.JCheckBox();
@@ -92,7 +95,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados Pessoais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Fax", 0, 13))); // NOI18N
         jPanel1.setToolTipText("");
 
-        jLabel1.setText("Contratante");
+        jLabel1.setText("Código");
 
         jLabel2.setText("CPF");
 
@@ -130,6 +133,11 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
         txtCpf.setToolTipText("");
         txtCpf.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtCpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCpfFocusLost(evt);
+            }
+        });
         txtCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCpfActionPerformed(evt);
@@ -179,13 +187,15 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setText("Contratante");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(55, 55, 55)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
@@ -196,15 +206,20 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(txtValorFinan, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton2))
-                        .addComponent(jLabel2)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2))
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(txtParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -224,11 +239,11 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(textPesquisar3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
+                        .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(77, Short.MAX_VALUE))
+                            .addComponent(jLabel10)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnCalcular))
@@ -238,12 +253,14 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -627,16 +644,18 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         FinanciamentoController e = new FinanciamentoController();
         Financiamento financiamento = new Financiamento();
-        
+        Cliente c = new Cliente();
+        String tipo = "";
+
         double prestacao1 = 0;
         if (chkPrice.isSelected()) {
             prestacao1 = Double.parseDouble(e.substituiCaractere((priceTable.getValueAt(1, 3).toString()), ",", "."));
+            tipo = "PRICE";
         } else {
             if (chkSac.isSelected()) {
                 prestacao1 = Double.parseDouble(e.substituiCaractere((sacTable.getValueAt(1, 3).toString()), ",", "."));
-
-            }
-            else {
+                tipo = "SAC";
+            } else {
                 JOptionPane.showMessageDialog(null, "Uma das tabelas (Price ou SAC) deverá ser selecionada");
                 return;
             }
@@ -646,14 +665,18 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         if (prestacao1 > Double.parseDouble(txtMargem.getText())) {
             JOptionPane.showMessageDialog(null, "A margem é insuficiente para o empréstimo solicitado.  Você pode tentar \n aumentar as prestações ou diminuir o valor total do empréstimo");
             return;
-        }
-        else{
-            
+        } else {
+            c.setId(Integer.parseInt(txtCodigo.getText()));
+            financiamento.setCliente(c);
+            financiamento.setQtdParcelas(Integer.parseInt(txtParcelas.getText()));
+            financiamento.setTaxa(Double.parseDouble(txtTaxa.getText()));
+            financiamento.setTipo(tipo);
+            financiamento.setValor(Double.parseDouble((txtValorFinan.getText().replaceAll(",", "."))));
+            FinanciamentoDao dao = new FinanciamentoDao();
+            dao.inserir(financiamento);
             JOptionPane.showMessageDialog(null, "Empréstimo contratado com sucesso");
         }
 
-        
-                                           
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -682,6 +705,18 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textPesquisar3ActionPerformed
 
+    private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
+//         if (ValidaCPF.isCPF(txtCpf.getText())) {
+//            txtCpf.setText(ValidaCPF.imprimeCPF(txtCpf.getText()));
+//            preencheCliente(txtCpf.getText());
+//
+//        } else {
+//            JOptionPane.showMessageDialog(null, "O Cpf passado está inválido, digite novamente");
+//            txtCpf.requestFocus();
+//            txtCpf.setText("");
+//        }
+    }//GEN-LAST:event_txtCpfFocusLost
+
     private void preenchePrice(double valorFinanciamento, int parcelas, double taxa) {
         FinanciamentoController e = new FinanciamentoController();
         DefaultTableModel tTabela = (DefaultTableModel) sacTable.getModel();
@@ -692,7 +727,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         double prestacao = 0;
         int j = parcelas;
         double total = 0;
-        double totalJuros =0;
+        double totalJuros = 0;
         for (int linha = 0; linha <= j; linha++) {
             if (linha == 0) {
                 tTabela.addRow(new Object[]{1});
@@ -716,7 +751,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             sacTable.setValueAt(e.formataNumero(saldoAtual), linha, 4);
 
             total = total + prestacao;
-            totalJuros=totalJuros+juro;
+            totalJuros = totalJuros + juro;
 
         }
         txtTotalSac.setText(e.formataNumero(total));
@@ -750,7 +785,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             prestacao = e.calculaPrestacaoPrice(saldoAtual, taxa, parcelas);
             total = total + prestacao;
             juro = e.calculaJuro(saldoAtual, taxa);
-            totalJuros=totalJuros+juro;
+            totalJuros = totalJuros + juro;
             amortiza = e.calculaAmortiza(prestacao, juro);
             saldoAtual = e.calculaSaldo(saldoAtual, amortiza);
             parcelas = parcelas - 1;
@@ -809,6 +844,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
@@ -836,6 +872,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     private javax.swing.JTable sacTable;
     private javax.swing.JButton sair;
     private javax.swing.JFormattedTextField textPesquisar3;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JTextField txtMargem;
     private javax.swing.JTextField txtNome;
@@ -866,6 +903,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             cliente = clientes.get(0);
             txtNome.setText(cliente.getNome());
             txtMargem.setText(String.valueOf(cliente.getMargem()));
+            txtCodigo.setText(String.valueOf(cliente.getId()));
             txtCpf.setEditable(false);
             txtCpf.setEnabled(false);
             txtNome.setEnabled(false);
