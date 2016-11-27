@@ -13,6 +13,10 @@ import br.com.bh.modelo.entidade.Financiamento;
 import br.com.bh.utils.Mascara;
 import br.com.bh.utils.ValidaCPF;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -309,17 +313,17 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         priceTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         priceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Período", "Juros", "Amortização", "Parcela", "Saldo Devedor"
+                "Período", "Juros", "Amortização", "Parcela", "Vencimento", "Saldo Devedor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -399,17 +403,17 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         sacTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         sacTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Período", "Juros", "Amortização", "Parcela", "Saldo Devedor"
+                "Período", "Juros", "Amortização", "Parcela", "Vencimento", "Saldo Devedor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -721,6 +725,9 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         FinanciamentoController e = new FinanciamentoController();
         DefaultTableModel tTabela = (DefaultTableModel) sacTable.getModel();
         tTabela.setNumRows(0);
+        Date d = new Date();
+        Calendar c = new GregorianCalendar();
+        c.setTime(d);
         double saldoAtual = valorFinanciamento;
         double amortiza = saldoAtual / parcelas;
         double juro = 0;
@@ -735,7 +742,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                 sacTable.setValueAt((juro), linha, 1);
                 sacTable.setValueAt(0.0, linha, 2);
                 sacTable.setValueAt((prestacao), linha, 3);
-                sacTable.setValueAt(e.formataNumero(saldoAtual), linha, 4);
+                sacTable.setValueAt(e.formataNumero(saldoAtual), linha, 5);
 
                 linha++;
             }
@@ -748,10 +755,12 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             sacTable.setValueAt(e.formataNumero(juro), linha, 1);
             sacTable.setValueAt(e.formataNumero(amortiza), linha, 2);
             sacTable.setValueAt(e.formataNumero(prestacao), linha, 3);
-            sacTable.setValueAt(e.formataNumero(saldoAtual), linha, 4);
+            sacTable.setValueAt((new SimpleDateFormat("dd/MM/yyyy").format(c.getTime())), linha, 4);
+            sacTable.setValueAt(e.formataNumero(saldoAtual), linha, 5);
 
             total = total + prestacao;
             totalJuros = totalJuros + juro;
+            c.set(Calendar.MONTH, c.get(Calendar.MONTH) + 1);
 
         }
         txtTotalSac.setText(e.formataNumero(total));
