@@ -735,7 +735,9 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         int j = parcelas;
         double total = 0;
         double totalJuros = 0;
+        
         for (int linha = 0; linha <= j; linha++) {
+            c.set(Calendar.MONTH, c.get(Calendar.MONTH) + 1);
             if (linha == 0) {
                 tTabela.addRow(new Object[]{1});
                 sacTable.setValueAt(linha, linha, 0);
@@ -760,7 +762,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
             total = total + prestacao;
             totalJuros = totalJuros + juro;
-            c.set(Calendar.MONTH, c.get(Calendar.MONTH) + 1);
+            
 
         }
         txtTotalSac.setText(e.formataNumero(total));
@@ -772,6 +774,8 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         FinanciamentoController e = new FinanciamentoController();
         DefaultTableModel tTabela = (DefaultTableModel) priceTable.getModel();
         tTabela.setNumRows(0);
+        Date d = new Date();
+        Calendar c = new GregorianCalendar();
         double saldoAtual = valorFinanciamento;
         double amortiza = 0;
         double juro = 0;
@@ -779,7 +783,9 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         int j = parcelas;
         double total = 0;
         double totalJuros = 0;
+       
         for (int linha = 0; linha <= j; linha++) {
+             c.set(Calendar.MONTH, c.get(Calendar.MONTH) + 1);
             if (linha == 0) {
                 tTabela.addRow(new Object[]{1});
                 priceTable.setValueAt(linha, linha, 0);
@@ -802,7 +808,8 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             priceTable.setValueAt(e.formataNumero(juro), linha, 1);
             priceTable.setValueAt(e.formataNumero(amortiza), linha, 2);
             priceTable.setValueAt(e.formataNumero(prestacao), linha, 3);
-            priceTable.setValueAt(e.formataNumero(saldoAtual), linha, 4);
+            priceTable.setValueAt((new SimpleDateFormat("dd/MM/yyyy").format(c.getTime())), linha, 4);
+            priceTable.setValueAt(e.formataNumero(saldoAtual), linha, 5);
 
         }
         txtTotal.setText(e.formataNumero(total));
