@@ -480,6 +480,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/concluir.png"))); // NOI18N
         jButton3.setText("CONTRATAR");
+        jButton3.setEnabled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -558,11 +559,15 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     }//GEN-LAST:event_sairActionPerformed
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
+            voltar();
+    }//GEN-LAST:event_voltarActionPerformed
+
+    public void voltar() {
         TelaPrincipal x = new TelaPrincipal();
         x.setVisible(true);
         dispose();
-    }//GEN-LAST:event_voltarActionPerformed
-
+    }
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (ValidaCPF.isCPF(txtCpf.getText())) {
             txtCpf.setText(ValidaCPF.imprimeCPF(txtCpf.getText()));
@@ -672,6 +677,8 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             FinanciamentoDao dao = new FinanciamentoDao();
             dao.inserir(financiamento);
             JOptionPane.showMessageDialog(null, "Empréstimo contratado com sucesso");
+            voltar();
+            
         }
 
 
