@@ -130,8 +130,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_CadastroActionPerformed
 
     private void SimularEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SimularEmprestimoActionPerformed
-       SimuladorEmprestimo x = new SimuladorEmprestimo();
-        x.setVisible(true);
+       SimuladorEmprestimo s = new SimuladorEmprestimo();
+        s.setVisible(true);
+        s.setLocationRelativeTo(null);
         dispose();  
     }//GEN-LAST:event_SimularEmprestimoActionPerformed
 

@@ -35,6 +35,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     public SimuladorEmprestimo() {
         initComponents();
         Mascara mask = new Mascara();
+        
     }
 
     /**
