@@ -570,6 +570,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             Calendar c = new GregorianCalendar();
             c.setTime(d);
             txtData.setText(new SimpleDateFormat("dd/MM/yyyy").format(c.getTime()));
+            
 
         } else {
             JOptionPane.showMessageDialog(null, "O Cpf passado está inválido, digite novamente");
