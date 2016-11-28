@@ -141,6 +141,61 @@ public class ClienteDAO {
             daoHelper.releaseAll(conn, stmt);
         }
     }
+    
+        public Cliente buscaCliente(Cliente cliente) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try {
+            daoHelper.getConnection();
+            conn = daoHelper.getConnection();
+            stmt = conn.prepareStatement("select * from cliente where id = ?");
+            int index = 0;
+            stmt.setLong(++index, cliente.getId());
+            ResultSet rset = stmt.executeQuery();
+                       
+            while (rset.next()) {
+                
+                cliente = new Cliente();
+                
+                cliente.setId(rset.getInt("id"));
+                
+                cliente.setNome(rset.getString("nome"));
+                
+                cliente.setRg(rset.getString("rg"));
+                
+                cliente.setSexo(rset.getString("sexo"));
+                
+                cliente.setEndereco(rset.getString("endereco"));
+                
+                cliente.setCpf(rset.getString("cpf"));
+                
+                cliente.setTelefone(rset.getString("telefone"));
+                
+                cliente.setCelular(rset.getString("celular"));
+                
+                cliente.setMargem(rset.getDouble("margem"));
+                
+                cliente.setSalario(rset.getDouble("salario"));
+                
+//                Calendar c = Calendar.getInstance(); 
+//                
+//                c.setTime(new Date(rset.getDate("data").getTime()));
+//                
+//                cliente.setData_nascimento(c);
+                
+                
+            }
+            
+            
+
+        } catch (SQLException e) {
+            throw new CreateDaoException("Não foi possível realizar a transação", e);
+        } finally {
+            daoHelper.releaseAll(conn, stmt);
+        }
+        return cliente;
+    }
 
     public List<Cliente> listaTodosClientes() throws SQLException {
 
@@ -219,6 +274,70 @@ public class ClienteDAO {
 
             ResultSet rset = stmt.executeQuery();
 
+            Cliente cliente;
+            
+            while (rset.next()) {
+                
+                cliente = new Cliente();
+                
+                cliente.setId(rset.getInt("id"));
+                
+                cliente.setNome(rset.getString("nome"));
+                
+                cliente.setRg(rset.getString("rg"));
+                
+                cliente.setSexo(rset.getString("sexo"));
+                
+                cliente.setEndereco(rset.getString("endereco"));
+                
+                cliente.setCpf(rset.getString("cpf"));
+                
+                cliente.setTelefone(rset.getString("telefone"));
+                
+                cliente.setCelular(rset.getString("celular"));
+                
+                cliente.setMargem(rset.getDouble("margem"));
+                
+                cliente.setSalario(rset.getDouble("salario"));
+                
+                cliente.setOcupacao(rset.getString("ocupacao"));
+                
+//                Calendar c = Calendar.getInstance(); 
+//                
+//                c.setTime(new Date(rset.getDate("data").getTime()));
+//                
+//                cliente.setData_nascimento(c);
+                
+                clientes.add(cliente);
+            }
+
+        } catch (SQLException e) {
+            
+            e.printStackTrace();
+        }
+        
+        return clientes;
+    }
+     
+      public List<Cliente> listaClienteFiltradoNome(String nome) throws SQLException {
+
+        Connection conn = null;
+
+        PreparedStatement stmt = null;
+
+        final List<Cliente> clientes = new ArrayList<Cliente>();
+
+        try {
+
+            conn = daoHelper.getConnection();
+
+            stmt = conn.prepareStatement("select * from cliente where nome like ?");
+            
+            int index = 0;
+            stmt.setString(++index,'%' + nome + '%');
+                
+            ResultSet rset = stmt.executeQuery();
+            
             Cliente cliente;
             
             while (rset.next()) {

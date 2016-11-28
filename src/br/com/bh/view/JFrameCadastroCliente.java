@@ -11,7 +11,10 @@ import br.com.bh.modelo.entidade.Cliente;
 import br.com.bh.utils.Data;
 import br.com.bh.utils.Mascara;
 import br.com.bh.utils.ValidaCPF;
+import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -55,7 +58,11 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
        }  
     }
 
- 
+    public JFrameCadastroCliente(Cliente cliente){
+        initComponents();
+        setLocationRelativeTo( null );
+    
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -500,7 +507,16 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         
          
     }//GEN-LAST:event_jButton1ActionPerformed
+    public void preencheformulario(Cliente cliente){
+        ClienteDAO c = new ClienteDAO();
+        
+        try {
+            cliente = c.buscaCliente(cliente);
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+    }
     private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
        if (ValidaCPF.isCPF(txtCpf.getText())){
            txtCpf.setText(ValidaCPF.imprimeCPF(txtCpf.getText()));
