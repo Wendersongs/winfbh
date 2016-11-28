@@ -66,9 +66,9 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         btnCalcular = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        textPesquisar3 = new javax.swing.JFormattedTextField();
         txtCodigo = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        txtData = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         chkPrice = new javax.swing.JCheckBox();
@@ -178,19 +178,6 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
         jLabel3.setText("Data");
 
-        textPesquisar3.setEditable(false);
-        try {
-            textPesquisar3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        textPesquisar3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        textPesquisar3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textPesquisar3ActionPerformed(evt);
-            }
-        });
-
         jLabel10.setText("Contratante");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -241,7 +228,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                         .addGap(56, 56, 56)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(textPesquisar3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,7 +280,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbTipoEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textPesquisar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(btnCalcular)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -579,6 +566,10 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         if (ValidaCPF.isCPF(txtCpf.getText())) {
             txtCpf.setText(ValidaCPF.imprimeCPF(txtCpf.getText()));
             preencheCliente(txtCpf.getText());
+            Date d = new Date();
+            Calendar c = new GregorianCalendar();
+            c.setTime(d);
+            txtData.setText(new SimpleDateFormat("dd/MM/yyyy").format(c.getTime()));
 
         } else {
             JOptionPane.showMessageDialog(null, "O Cpf passado está inválido, digite novamente");
@@ -704,10 +695,6 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             chkPrice.setEnabled(true);
         }
     }//GEN-LAST:event_chkSacActionPerformed
-
-    private void textPesquisar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPesquisar3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textPesquisar3ActionPerformed
 
     private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
 //         if (ValidaCPF.isCPF(txtCpf.getText())) {
@@ -887,9 +874,9 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     private static javax.swing.JTable priceTable;
     private javax.swing.JTable sacTable;
     private javax.swing.JButton sair;
-    private javax.swing.JFormattedTextField textPesquisar3;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JFormattedTextField txtCpf;
+    private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtMargem;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtParcelas;
