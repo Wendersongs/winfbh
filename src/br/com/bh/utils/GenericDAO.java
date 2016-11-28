@@ -28,7 +28,7 @@ public class GenericDAO {
 		Connection conn = null;
 		try {
 			Class.forName("org.postgresql.Driver");
-			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/winf","postgres","PostGres");
+			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/winf","postgres","123456");
 		} catch (ClassNotFoundException e) {
 			//TODO refatorar para dar suporte a resourcebundle.
 			throw new ConnectionFailureDaoException( "Não foi possível realizar a conexao", e  );
