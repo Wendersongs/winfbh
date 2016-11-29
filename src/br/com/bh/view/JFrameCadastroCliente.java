@@ -31,6 +31,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     public JFrameCadastroCliente() {
         initComponents();
         setLocationRelativeTo( null );
+        btnSalvar.setVisible(false);
        Mascara mask = new Mascara();
        try {
        mask.maskData(txtData);
@@ -63,6 +64,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo( null );
         preencheformulario(cliente);
+        
     
     }
     @SuppressWarnings("unchecked")
@@ -105,6 +107,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtInfo = new javax.swing.JTextArea();
         jButton3 = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         jLabel10.setText("Cadastro de Clientes");
@@ -383,6 +386,14 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
             }
         });
 
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/concluir.png"))); // NOI18N
+        btnSalvar.setText("SALVAR");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -404,6 +415,8 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnSalvar)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
@@ -423,7 +436,8 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(btnSalvar))
                 .addGap(30, 30, 30))
         );
 
@@ -558,13 +572,15 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
      txtCel.setText(cliente.getCelular());
      txtCep.setText(cliente.getCep());
      txtCpf.setText(cliente.getCpf());
-//     txtData.setText(new SimpleDateFormat("dd/MM/yyyy").format(cliente.getData_nascimento().getTime()));
-//     txtEmail.setText(cliente.getEmail());
+     txtData.setText(new SimpleDateFormat("dd/MM/yyyy").format(cliente.getData_nascimento().getTime()));
+     txtEmail.setText(cliente.getEmail());
      txtEndereco.setText(cliente.getEndereco());
+     txtSalario.setText(String.valueOf(cliente.getSalario()));
      txtInfo.setText(cliente.getInformacoes());
      txtMargem.setText(String.valueOf(cliente.getMargem()));
      txtRg.setText(cliente.getRg());
      jComboBox1.setSelectedItem(cliente.getOcupacao().toString());
+     btnSalvar.setVisible(true);
      
         
        
@@ -625,6 +641,10 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -661,6 +681,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

@@ -177,13 +177,21 @@ public class ClienteDAO {
                 cliente.setMargem(rset.getDouble("margem"));
                 
                 cliente.setSalario(rset.getDouble("salario"));
+               
+                Calendar c = Calendar.getInstance(); 
                 
-//                Calendar c = Calendar.getInstance(); 
-//                
-//                c.setTime(new Date(rset.getDate("data").getTime()));
-//                
-//                cliente.setData_nascimento(c);
+                c.setTime(new Date(rset.getDate("data_nasc").getTime()));
                 
+                cliente.setData_nascimento(c);
+                
+                cliente.setEmail(rset.getString("email"));
+                
+                cliente.setOcupacao(rset.getString("ocupacao"));
+                
+                cliente.setInformacoes(rset.getString("informacoes_adicionais"));
+                
+                cliente.setCep(rset.getString("cep"));
+
                 
             }
             
