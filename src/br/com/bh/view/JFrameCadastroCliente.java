@@ -108,9 +108,12 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         txtInfo = new javax.swing.JTextArea();
         jButton3 = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
+        txtCodigo = new javax.swing.JTextField();
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Cadastro de Clientes");
+        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/concluir.png"))); // NOI18N
         jButton1.setText("CADASTRAR");
@@ -399,19 +402,17 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(310, 310, 310)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton3)
                         .addGap(48, 48, 48))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -428,7 +429,8 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -536,35 +538,6 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
     
-//        Cliente cliente = new Cliente();
-//        cliente.setNome(txtNome.getText());
-//        cliente.setRg(txtRg.getText());
-//        cliente.setSexo(txtSexo.getSelectedItem().toString());
-//        cliente.setCpf(txtCpf.getText());
-//        cliente.setEndereco(txtEndereco.getText());
-//        cliente.setTelefone(txtTel.getText());
-//        cliente.setCelular(txtCel.getText());
-//        cliente.setSalario(Double.parseDouble(txtSalario.getText()));
-//        cliente.setMargem(Double.parseDouble(txtMargem.getText()));
-//        cliente.setCep(txtCep.getText());
-//        cliente.setEmail(txtEmail.getText());
-//        cliente.setInformacoes(txtInfo.getText());
-        
-        //FIZ UMA ALTERAÇÃO NESTE CAMPO COLOQUEI UM COMBOBOX 
-        
-        //cliente.setOcupacao(txtOcupa.getText());
-        
-//        
-//        cliente.setData_nascimento(Data.converteCalendar(txtData.getText()) );
-//        ClienteDAO dao = new ClienteDAO();
-//    
-//    
-//    
-//    
-//    
-    
-    
-    
     
     
     public void preencheformulario(Cliente cliente){
@@ -642,7 +615,91 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
+         // Validar Campos
+        if (txtNome.getText().length() == 0) {
+        JOptionPane.showMessageDialog(null, "O campo Nome está vazio");  
+        txtNome.requestFocus();
+        return;
+        }  
+        if (txtCpf.getText().isEmpty() ) {
+        
+        JOptionPane.showMessageDialog(null, "O campo CPF está vazio");  
+        txtCpf.requestFocus();
+        return;
+        
+        
+        }
+        
+        if (txtRg.getText().isEmpty() ) {
+        
+        JOptionPane.showMessageDialog(null, "O campo RG está vazio");  
+        txtRg.requestFocus();
+        return;
+        
+        
+        }
+        
+         if (txtSalario.getText().isEmpty() ) {
+        
+        JOptionPane.showMessageDialog(null, "O campo Salário está vazio");  
+        txtSalario.requestFocus();
+        return;
+        
+        
+        }
+        
+         if (txtEndereco.getText().isEmpty() ) {
+        
+        JOptionPane.showMessageDialog(null, "O campo Endereço está vazio");  
+        txtEndereco.requestFocus();
+        return;
+        
+        
+        }
+       if (txtTel.getText().isEmpty() ) {
+        
+        JOptionPane.showMessageDialog(null, "O campo Telefone está vazio");  
+        txtTel.requestFocus();
+        return;
+        
+        
+        }
+        
+        
+        Cliente cliente = new Cliente();
+        cliente.setNome(txtNome.getText());
+        cliente.setRg(txtRg.getText());
+        cliente.setSexo(txtSexo.getSelectedItem().toString());
+        cliente.setCpf(txtCpf.getText());
+        cliente.setEndereco(txtEndereco.getText());
+        cliente.setTelefone(txtTel.getText());
+        cliente.setCelular(txtCel.getText());
+        cliente.setSalario(Double.parseDouble(txtSalario.getText()));
+        cliente.setMargem(Double.parseDouble(txtMargem.getText()));
+        cliente.setCep(txtCep.getText());
+        cliente.setEmail(txtEmail.getText());
+        cliente.setInformacoes(txtInfo.getText());
+        cliente.setOcupacao(jComboBox1.getSelectedItem().toString());
+        //FIZ UMA ALTERAÇÃO NESTE CAMPO COLOQUEI UM COMBOBOX 
+        
+        //cliente.setOcupacao(txtOcupa.getText());
+        
+        
+        cliente.setData_nascimento(Data.converteCalendar(txtData.getText()) );
+        ClienteDAO dao = new ClienteDAO();
+        dao.inserir(cliente);
+        JFrameCliente.atualizaTabela();
+        
+         
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
@@ -707,6 +764,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel lblOcupa;
     private javax.swing.JFormattedTextField txtCel;
     private javax.swing.JFormattedTextField txtCep;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCpf;
     private javax.swing.JFormattedTextField txtData;
     private javax.swing.JTextField txtEmail;
