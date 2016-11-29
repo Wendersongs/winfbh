@@ -64,6 +64,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo( null );
         preencheformulario(cliente);
+        btnCadastrar.setVisible(false);
         
     
     }
@@ -72,7 +73,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel10 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnCadastrar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         txtNome = new javax.swing.JTextField();
@@ -115,11 +116,11 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         jLabel10.setText("Cadastro de Clientes");
         jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/concluir.png"))); // NOI18N
-        jButton1.setText("CADASTRAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/concluir.png"))); // NOI18N
+        btnCadastrar.setText("CADASTRAR");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCadastrarActionPerformed(evt);
             }
         });
 
@@ -418,7 +419,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnSalvar)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnCadastrar)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addGap(34, 34, 34))
@@ -437,7 +438,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnCadastrar)
                     .addComponent(jButton2)
                     .addComponent(btnSalvar))
                 .addGap(30, 30, 30))
@@ -447,7 +448,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
  // Validar Campos
         if (txtNome.getText().length() == 0) {
         JOptionPane.showMessageDialog(null, "O campo Nome está vazio");  
@@ -536,11 +537,12 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCadastrarActionPerformed
     
     
     
     public void preencheformulario(Cliente cliente){
+     txtCodigo.setText(String.valueOf(cliente.getId()));
      txtNome.setText(cliente.getNome());
      txtCel.setText(cliente.getCelular());
      txtCep.setText(cliente.getCep());
@@ -667,6 +669,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         
         
         Cliente cliente = new Cliente();
+        cliente.setId(Long.parseLong(txtCodigo.getText()));
         cliente.setNome(txtNome.getText());
         cliente.setRg(txtRg.getText());
         cliente.setSexo(txtSexo.getSelectedItem().toString());
@@ -687,7 +690,11 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         
         cliente.setData_nascimento(Data.converteCalendar(txtData.getText()) );
         ClienteDAO dao = new ClienteDAO();
-        dao.inserir(cliente);
+        try {
+            dao.atualizar(cliente);
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
         JFrameCliente.atualizaTabela();
         
          
@@ -738,8 +745,8 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
