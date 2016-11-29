@@ -495,8 +495,8 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         cliente.setMargem(Double.parseDouble(txtMargem.getText()));
         cliente.setCep(txtCep.getText());
         cliente.setEmail(txtEmail.getText());
-        cliente.setInformacoes(txtInfo.getText());
-        cliente.setOcupacao(jComboBox1.getSelectedItem().toString());
+  //      cliente.setInformacoes(txtInfo.getText());
+  //      cliente.setOcupacao(jComboBox1.getSelectedItem().toString());
         //FIZ UMA ALTERAÇÃO NESTE CAMPO COLOQUEI UM COMBOBOX 
         
         //cliente.setOcupacao(txtOcupa.getText());
@@ -558,13 +558,13 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
      txtCel.setText(cliente.getCelular());
      txtCep.setText(cliente.getCep());
      txtCpf.setText(cliente.getCpf());
-     txtData.setText(new SimpleDateFormat("dd/MM/yyyy").format(cliente.getData_nascimento().getTime()));
-     txtEmail.setText(cliente.getEmail());
+//     txtData.setText(new SimpleDateFormat("dd/MM/yyyy").format(cliente.getData_nascimento().getTime()));
+//     txtEmail.setText(cliente.getEmail());
      txtEndereco.setText(cliente.getEndereco());
      txtInfo.setText(cliente.getInformacoes());
      txtMargem.setText(String.valueOf(cliente.getMargem()));
      txtRg.setText(cliente.getRg());
-     jComboBox1.setSelectedItem(ABORT);
+     jComboBox1.setSelectedItem(cliente.getOcupacao().toString());
      
         
        
