@@ -303,6 +303,8 @@ public static void atualizaTabelaNome(String nome){
             cliente.setNome((String) jTable1.getValueAt(linhaSelecionada, 1));
             try {
                cliente = dao.buscaCliente(cliente);
+               JFrame clientes = new JFrameCadastroCliente(cliente);
+               clientes.setVisible(true); 
 
             } catch (SQLException ex) {
                 Logger.getLogger(JFrameCliente.class.getName()).log(Level.SEVERE, null, ex);

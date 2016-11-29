@@ -13,6 +13,7 @@ import br.com.bh.utils.Mascara;
 import br.com.bh.utils.ValidaCPF;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -61,6 +62,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     public JFrameCadastroCliente(Cliente cliente){
         initComponents();
         setLocationRelativeTo( null );
+        preencheformulario(cliente);
     
     }
     @SuppressWarnings("unchecked")
@@ -494,7 +496,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         cliente.setCep(txtCep.getText());
         cliente.setEmail(txtEmail.getText());
         cliente.setInformacoes(txtInfo.getText());
-        
+        cliente.setOcupacao(jComboBox1.getSelectedItem().toString());
         //FIZ UMA ALTERAÇÃO NESTE CAMPO COLOQUEI UM COMBOBOX 
         
         //cliente.setOcupacao(txtOcupa.getText());
@@ -506,15 +508,66 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         JFrameCliente.atualizaTabela();
         
          
-    }//GEN-LAST:event_jButton1ActionPerformed
-    public void preencheformulario(Cliente cliente){
-        ClienteDAO c = new ClienteDAO();
         
-        try {
-            cliente = c.buscaCliente(cliente);
-        } catch (SQLException ex) {
-            Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+//        Cliente cliente = new Cliente();
+//        cliente.setNome(txtNome.getText());
+//        cliente.setRg(txtRg.getText());
+//        cliente.setSexo(txtSexo.getSelectedItem().toString());
+//        cliente.setCpf(txtCpf.getText());
+//        cliente.setEndereco(txtEndereco.getText());
+//        cliente.setTelefone(txtTel.getText());
+//        cliente.setCelular(txtCel.getText());
+//        cliente.setSalario(Double.parseDouble(txtSalario.getText()));
+//        cliente.setMargem(Double.parseDouble(txtMargem.getText()));
+//        cliente.setCep(txtCep.getText());
+//        cliente.setEmail(txtEmail.getText());
+//        cliente.setInformacoes(txtInfo.getText());
+        
+        //FIZ UMA ALTERAÇÃO NESTE CAMPO COLOQUEI UM COMBOBOX 
+        
+        //cliente.setOcupacao(txtOcupa.getText());
+        
+//        
+//        cliente.setData_nascimento(Data.converteCalendar(txtData.getText()) );
+//        ClienteDAO dao = new ClienteDAO();
+//    
+//    
+//    
+//    
+//    
+    
+    
+    
+    
+    
+    public void preencheformulario(Cliente cliente){
+     txtNome.setText(cliente.getNome());
+     txtCel.setText(cliente.getCelular());
+     txtCep.setText(cliente.getCep());
+     txtCpf.setText(cliente.getCpf());
+     txtData.setText(new SimpleDateFormat("dd/MM/yyyy").format(cliente.getData_nascimento().getTime()));
+     txtEmail.setText(cliente.getEmail());
+     txtEndereco.setText(cliente.getEndereco());
+     txtInfo.setText(cliente.getInformacoes());
+     txtMargem.setText(String.valueOf(cliente.getMargem()));
+     txtRg.setText(cliente.getRg());
+     jComboBox1.setSelectedItem(ABORT);
+     
+        
+       
 
     }
     private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
