@@ -588,10 +588,6 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void txtCepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCepFocusLost
-      
-    }//GEN-LAST:event_txtCepFocusLost
-
     private void txtTelFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelFocusLost
@@ -708,6 +704,10 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void txtCepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCepFocusLost
+
+    }//GEN-LAST:event_txtCepFocusLost
 
     /**
      * @param args the command line arguments
