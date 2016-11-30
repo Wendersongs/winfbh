@@ -32,7 +32,23 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo( null );
         btnSalvar.setVisible(false);
-       Mascara mask = new Mascara();
+        mascara();
+    }
+
+    public JFrameCadastroCliente(Cliente cliente){
+        initComponents();
+        setLocationRelativeTo( null );
+        mascara();
+        preencheformulario(cliente);
+        btnCadastrar.setVisible(false);
+        
+        
+    
+    }
+    
+    
+    public void  mascara(){
+         Mascara mask = new Mascara();
        try {
        mask.maskData(txtData);
        } catch (ParseException ex){
@@ -58,14 +74,6 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
        JOptionPane.showMessageDialog(JFrameCadastroCliente.this, "Celular Inválido", "Erro", JOptionPane.ERROR_MESSAGE);
        
        }  
-    }
-
-    public JFrameCadastroCliente(Cliente cliente){
-        initComponents();
-        setLocationRelativeTo( null );
-        preencheformulario(cliente);
-        btnCadastrar.setVisible(false);
-        
     
     }
     @SuppressWarnings("unchecked")
@@ -224,10 +232,10 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
                                         .addGap(61, 61, 61)
                                         .addComponent(lblOcupa))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(44, 44, 44)
+                                        .addComponent(txtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(34, 34, 34)
                                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,6 +406,9 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
             }
         });
 
+        txtCodigo.setEditable(false);
+        txtCodigo.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -545,6 +556,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
      txtCodigo.setText(String.valueOf(cliente.getId()));
      txtNome.setText(cliente.getNome());
      txtCel.setText(cliente.getCelular());
+     txtTel.setText(cliente.getTelefone());
      txtCep.setText(cliente.getCep());
      txtCpf.setText(cliente.getCpf());
      txtData.setText(new SimpleDateFormat("dd/MM/yyyy").format(cliente.getData_nascimento().getTime()));
