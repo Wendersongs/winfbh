@@ -523,8 +523,8 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         cliente.setMargem(Double.parseDouble(txtMargem.getText()));
         cliente.setCep(txtCep.getText());
         cliente.setEmail(txtEmail.getText());
-  //      cliente.setInformacoes(txtInfo.getText());
-  //      cliente.setOcupacao(jComboBox1.getSelectedItem().toString());
+        cliente.setInformacoes(txtInfo.getText());
+        cliente.setOcupacao(jComboBox1.getSelectedItem().toString());
         //FIZ UMA ALTERAÇÃO NESTE CAMPO COLOQUEI UM COMBOBOX 
         
         //cliente.setOcupacao(txtOcupa.getText());
@@ -693,15 +693,21 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         cliente.setOcupacao(jComboBox1.getSelectedItem().toString());
         //FIZ UMA ALTERAÇÃO NESTE CAMPO COLOQUEI UM COMBOBOX 
         
-        //cliente.setOcupacao(txtOcupa.getText());
+        
         
         
         cliente.setData_nascimento(Data.converteCalendar(txtData.getText()) );
         ClienteDAO dao = new ClienteDAO();
         try {
             dao.atualizar(cliente);
+            JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso"); 
+            
+            dispose();
+            
         } catch (SQLException ex) {
             Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Não foi possível alterar o cliente","ERRO",JOptionPane.ERROR_MESSAGE); 
+            dispose();
         }
         JFrameCliente.atualizaTabela();
         
