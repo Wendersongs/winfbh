@@ -104,7 +104,6 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         txtMargem = new javax.swing.JTextField();
         txtSalario = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -196,6 +195,10 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
 
         jLabel9.setText("Margem");
 
+        txtMargem.setEditable(false);
+        txtMargem.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtMargem.setEnabled(false);
+
         txtSalario.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtSalarioFocusLost(evt);
@@ -203,9 +206,6 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         });
 
         jLabel8.setText("Salário");
-
-        jLabel14.setFont(new java.awt.Font("Lucida Fax", 1, 12)); // NOI18N
-        jLabel14.setText("R$");
 
         jLabel15.setText("Telefone");
 
@@ -235,9 +235,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
                                         .addComponent(txtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(34, 34, 34)
                                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -306,9 +304,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel14))
+                            .addComponent(txtSalario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel9)
@@ -610,6 +606,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
 
     private void txtSalarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalarioFocusLost
             FinanciamentoController e = new FinanciamentoController();
+            txtSalario.setText(mask.dobleToMoney(mask.moneyToDouble(txtSalario.getText())));
             txtMargem.setText(NumberFormat.getCurrencyInstance().format(e.calculaMargem(mask.moneyToDouble(txtSalario.getText()))));
             txtMargem.setEnabled(false);
     }//GEN-LAST:event_txtSalarioFocusLost
@@ -773,7 +770,6 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;

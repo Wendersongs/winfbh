@@ -51,6 +51,11 @@ public class Mascara {
            return Double.parseDouble(s);
 
 }
-         
+       public String dobleToMoney (Double d){
+           
+           
+        return NumberFormat.getCurrencyInstance().format(d);
+       
+       }  
          
 }
