@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.text.NumberFormat;
 
 /**
  *
@@ -562,9 +563,9 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
      txtData.setText(new SimpleDateFormat("dd/MM/yyyy").format(cliente.getData_nascimento().getTime()));
      txtEmail.setText(cliente.getEmail());
      txtEndereco.setText(cliente.getEndereco());
-     txtSalario.setText(String.valueOf(cliente.getSalario()));
+     txtSalario.setText(NumberFormat.getCurrencyInstance().format(cliente.getSalario()));
      txtInfo.setText(cliente.getInformacoes());
-     txtMargem.setText(String.valueOf(cliente.getMargem()));
+     txtMargem.setText(NumberFormat.getCurrencyInstance().format(cliente.getMargem()));
      txtRg.setText(cliente.getRg());
      jComboBox1.setSelectedItem(cliente.getOcupacao().toString());
      btnSalvar.setVisible(true);
