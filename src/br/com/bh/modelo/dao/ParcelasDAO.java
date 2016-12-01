@@ -31,12 +31,11 @@ public class ParcelasDAO {
             conn = daoHelper.getConnection();
             stmt = conn.prepareStatement("INSERT INTO parcela(numero_parcela, valor_parcela, data_parcela, id_financiamento) VALUES (?, ?, ?, ?);");
             int index = 0;
-            stmt.setLong(++index, parcela.getCliente().getId());
+            stmt.setLong(++index, parcela.getNumeroParcela());
             stmt.setDouble(++index, parcela.getValor());
-            stmt.setInt(++index, parcela.getQtdParcelas());
-            stmt.setDouble(++index, parcela.getTaxa());
-            stmt.setString(++index, parcela.getTipo());
-            stmt.setDate(++index, new java.sql.Date (Data.getPegaDataAtual().getTimeInMillis()));
+            stmt.setDate(++index, new java.sql.Date (parcela.getData().getTime()));
+            stmt.setInt(++index, parcela.getFinanciamento().getId());
+           
                               
             stmt.executeUpdate();
 
