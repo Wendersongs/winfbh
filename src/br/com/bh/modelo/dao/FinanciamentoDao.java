@@ -42,10 +42,10 @@ public class FinanciamentoDao {
                               
             stmt.executeUpdate();
             rset = stmt.getGeneratedKeys();
-            if (rset.next()){
-                financiamento.setId(rset.getInt(i));
+            rset.next();
+           financiamento.setId(rset.getInt(1));
 
-            } 
+             
 
         } catch (SQLException e) {
             throw new CreateDaoException("Não foi possível realizar a transação", e);

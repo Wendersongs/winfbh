@@ -8,12 +8,16 @@ package br.com.bh.view;
 import br.com.bh.controller.FinanciamentoController;
 import br.com.bh.modelo.dao.ClienteDAO;
 import br.com.bh.modelo.dao.FinanciamentoDao;
+import br.com.bh.modelo.dao.ParcelasDAO;
 import br.com.bh.modelo.entidade.Cliente;
 import br.com.bh.modelo.entidade.Financiamento;
+import br.com.bh.modelo.entidade.Parcela;
+import br.com.bh.utils.Data;
 import br.com.bh.utils.Mascara;
 import br.com.bh.utils.ValidaCPF;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -22,6 +26,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import sun.java2d.loops.MaskBlit;
 
 /**
  *
@@ -29,12 +34,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SimuladorEmprestimo extends javax.swing.JFrame {
 
-    /**
-     * Creates new form SimuladorEmprestimo
-     */
+   Mascara mask = new Mascara();
     public SimuladorEmprestimo() {
         initComponents();
-        Mascara mask = new Mascara();
+        
         
     }
 
@@ -655,6 +658,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         FinanciamentoController e = new FinanciamentoController();
         Financiamento financiamento = new Financiamento();
         Cliente c = new Cliente();
+        List<Parcela> parcelas = new ArrayList<Parcela>();
         String tipo = "";
 
         double prestacao1 = 0;
@@ -683,7 +687,24 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             financiamento.setTipo(tipo);
             financiamento.setValor(Double.parseDouble((txtValorFinan.getText().replaceAll(",", "."))));
             FinanciamentoDao dao = new FinanciamentoDao();
-            dao.inserir(financiamento);
+            ParcelasDAO pdao = new ParcelasDAO();
+            financiamento=dao.inserir(financiamento);
+           
+            for (int linha = 0; linha < sacTable.getModel().getRowCount(); linha++)
+                
+            {
+              Parcela parcela = new Parcela();
+              parcela.setFinanciamento(financiamento);
+              parcela.setNumeroParcela((int) sacTable.getValueAt(linha, 0));
+              parcela.setValor( mask.moneyToDouble(sacTable.getValueAt(linha, 3).toString()));
+                try {
+                    parcela.setData(Data.formataDataSql(sacTable.getValueAt(linha, 4).toString()) );
+                } catch (Exception ex) {
+                    Logger.getLogger(SimuladorEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+              parcelas.add(parcela);
+            }
+            pdao.inserir((ArrayList<Parcela>) parcelas);
             JOptionPane.showMessageDialog(null, "Empréstimo contratado com sucesso");
             voltar();
             
