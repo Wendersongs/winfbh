@@ -43,13 +43,12 @@ public class Mascara {
 }
          public Double moneyToDouble(String numero){
             String s = numero.replace("R$", "");
-            s = s.replaceAll("$", "");
-            s = s.replaceAll(".", "");
-            s = s.replaceAll(",", ".");
+            s = s.replace(".", "");
+            s = s.replace(",", ".");
       //      double d = Double.parseDouble(numero.replaceAll("R$", "").replaceAll(",", "."));
              
              
-           return null;
+           return Double.parseDouble(s);
 
 }
          
