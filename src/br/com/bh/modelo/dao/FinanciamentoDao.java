@@ -7,6 +7,7 @@ import br.com.bh.utils.Data;
 import br.com.bh.utils.GenericDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 
@@ -21,14 +22,16 @@ public class FinanciamentoDao {
          daoHelper = new GenericDAO();
     }
         public void inserir(Financiamento financiamento) throws CreateDaoException {
-
+        int i = 0;
         Connection conn = null;
         PreparedStatement stmt = null;
+        ResultSet rset = null; 
+       
 
         try {
             daoHelper.getConnection();
             conn = daoHelper.getConnection();
-            stmt = conn.prepareStatement("INSERT INTO financiamento(cliente_id, valor, parcelas, taxa, tipo,data) VALUES (?, ?, ?, ?, ?, ?)");
+            stmt = conn.prepareStatement("INSERT INTO financiamento(cliente_id, valor, parcelas, taxa, tipo,data) VALUES (?, ?, ?, ?, ?, ?)",PreparedStatement.RETURN_GENERATED_KEYS);
             int index = 0;
             stmt.setLong(++index, financiamento.getCliente().getId());
             stmt.setDouble(++index, financiamento.getValor());
@@ -38,8 +41,11 @@ public class FinanciamentoDao {
             stmt.setDate(++index, new java.sql.Date (Data.getPegaDataAtual().getTimeInMillis()));
                               
             stmt.executeUpdate();
+            rset = stmt.getGeneratedKeys();
+            if (rset.next()){
+                financiamento.setId(rset.getInt(i));
 
-           
+            } 
 
         } catch (SQLException e) {
             throw new CreateDaoException("Não foi possível realizar a transação", e);

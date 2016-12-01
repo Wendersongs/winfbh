@@ -114,6 +114,8 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
         jLabel8.setText("Margem Consignada");
 
+        txtNome.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
         txtTaxa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtTaxaKeyTyped(evt);
@@ -137,6 +139,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         });
 
         txtCpf.setToolTipText("");
+        txtCpf.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtCpf.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtCpf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -158,6 +161,8 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             }
         });
 
+        txtMargem.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
         jLabel9.setText("Tipo de Empréstimo");
 
         cbTipoEmprestimo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Antecipado", "Postecipado" }));
@@ -178,6 +183,8 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         });
 
         jLabel3.setText("Data");
+
+        txtCodigo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         jLabel10.setText("Contratante");
 
