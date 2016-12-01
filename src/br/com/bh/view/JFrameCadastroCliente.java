@@ -26,14 +26,13 @@ import java.text.NumberFormat;
  */
 public class JFrameCadastroCliente extends javax.swing.JFrame {
 
-    /**
-     * Creates new form JFrameCadastroCliente
-     */
+   Mascara mask = new Mascara();
     public JFrameCadastroCliente() {
         initComponents();
         setLocationRelativeTo( null );
         btnSalvar.setVisible(false);
         mascara();
+        
     }
 
     public JFrameCadastroCliente(Cliente cliente){
@@ -611,7 +610,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
 
     private void txtSalarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalarioFocusLost
             FinanciamentoController e = new FinanciamentoController();
-            txtMargem.setText(String.valueOf(e.calculaMargem(Double.parseDouble(txtSalario.getText()))));
+            txtMargem.setText(NumberFormat.getCurrencyInstance().format(e.calculaMargem(mask.moneyToDouble(txtSalario.getText()))));
             txtMargem.setEnabled(false);
     }//GEN-LAST:event_txtSalarioFocusLost
 
@@ -686,8 +685,8 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         cliente.setEndereco(txtEndereco.getText());
         cliente.setTelefone(txtTel.getText());
         cliente.setCelular(txtCel.getText());
-        cliente.setSalario(Double.parseDouble(txtSalario.getText()));
-        cliente.setMargem(Double.parseDouble(txtMargem.getText()));
+        cliente.setSalario(mask.moneyToDouble(txtSalario.getText()));
+        cliente.setMargem(mask.moneyToDouble(txtMargem.getText()));
         cliente.setCep(txtCep.getText());
         cliente.setEmail(txtEmail.getText());
         cliente.setInformacoes(txtInfo.getText());
