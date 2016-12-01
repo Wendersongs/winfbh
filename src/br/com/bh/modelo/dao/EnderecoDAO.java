@@ -34,7 +34,6 @@ public class EnderecoDAO {
             pstmt.setString(++i, endereco.getUf());
             pstmt.setString(++i, endereco.getComplemento());
             pstmt.setString(++i, endereco.getCep());
-             System.out.println(pstmt);
             pstmt.executeUpdate();
             
             rset = pstmt.getGeneratedKeys();

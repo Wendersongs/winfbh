@@ -21,7 +21,7 @@ public class FinanciamentoDao {
         
          daoHelper = new GenericDAO();
     }
-        public void inserir(Financiamento financiamento) throws CreateDaoException {
+        public Financiamento inserir(Financiamento financiamento) throws CreateDaoException {
         int i = 0;
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -53,6 +53,7 @@ public class FinanciamentoDao {
             daoHelper.releaseAll(conn, stmt);
 
         }
+        return financiamento;
 
     }
     
