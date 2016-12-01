@@ -6,35 +6,33 @@ import java.util.Objects;
 
 
 public class Parcela {
-    private int id;
+    private long id;
     private int numeroParcela;
     private double valor;
     private Date data;
+    private Financiamento financiamento;
 
-    public Parcela(int id, int numeroParcela, double valor, Date data) {
-        this.id = id;
-        this.numeroParcela = numeroParcela;
-        this.valor = valor;
-        this.data = data;
+    public Parcela() {
     }
 
-    public Parcela(int id) {
+    public Parcela(long id) {
         this.id = id;
     }
 
-    public Parcela(int numeroParcela, double valor, Date data) {
+    public Parcela(int numeroParcela, double valor, Date data, Financiamento financiamento) {
         this.numeroParcela = numeroParcela;
         this.valor = valor;
         this.data = data;
+        this.financiamento = financiamento;
     }
+    
+    
 
-    
-    
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -62,13 +60,22 @@ public class Parcela {
         this.data = data;
     }
 
+    public Financiamento getFinanciamento() {
+        return financiamento;
+    }
+
+    public void setFinanciamento(Financiamento financiamento) {
+        this.financiamento = financiamento;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 61 * hash + this.id;
-        hash = 61 * hash + this.numeroParcela;
-        hash = 61 * hash + (int) (Double.doubleToLongBits(this.valor) ^ (Double.doubleToLongBits(this.valor) >>> 32));
-        hash = 61 * hash + Objects.hashCode(this.data);
+        hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 53 * hash + this.numeroParcela;
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.valor) ^ (Double.doubleToLongBits(this.valor) >>> 32));
+        hash = 53 * hash + Objects.hashCode(this.data);
+        hash = 53 * hash + Objects.hashCode(this.financiamento);
         return hash;
     }
 
@@ -96,14 +103,16 @@ public class Parcela {
         if (!Objects.equals(this.data, other.data)) {
             return false;
         }
+        if (!Objects.equals(this.financiamento, other.financiamento)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Parcela{" + "id=" + id + ", numeroParcela=" + numeroParcela + ", valor=" + valor + ", data=" + data + '}';
+        return "Parcela{" + "id=" + id + ", numeroParcela=" + numeroParcela + ", valor=" + valor + ", data=" + data + ", financiamento=" + financiamento + '}';
     }
-    
-    
-    
+
+   
 }
