@@ -42,7 +42,7 @@ public class Mascara {
         return mask;   
 }
          public Double moneyToDouble(String numero){
-            String s = numero.replace("R\\$", "");
+            String s = numero.replace("R$", "");
             s = s.replaceAll("$", "");
             s = s.replaceAll(".", "");
             s = s.replaceAll(",", ".");
@@ -53,6 +53,5 @@ public class Mascara {
 
 }
          
-        
-    }
+         
 }
