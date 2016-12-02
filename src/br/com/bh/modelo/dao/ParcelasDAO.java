@@ -6,6 +6,7 @@ import br.com.bh.utils.CreateDaoException;
 import br.com.bh.utils.Data;
 import br.com.bh.utils.GenericDAO;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,13 +31,13 @@ public class ParcelasDAO {
         try {
             daoHelper.getConnection();
             conn = daoHelper.getConnection();
-            for (int linha = 0; linha < parcelas.size(); linha++) {
+            for (int linha = 1 ; linha < parcelas.size(); linha++) {
                 Parcela parcela = parcelas.get(linha);
                 stmt = conn.prepareStatement("INSERT INTO parcela(numero_parcela, valor_parcela, data_parcela, id_financiamento) VALUES (?, ?, ?, ?);");
                 int index = 0;
                 stmt.setLong(++index, parcela.getNumeroParcela());
                 stmt.setDouble(++index, parcela.getValor());
-                stmt.setDate(++index, new java.sql.Date(parcela.getData().getTime()));
+                stmt.setDate(++index, (Date) parcela.getData());
                 stmt.setInt(++index, parcela.getFinanciamento().getId());
                 stmt.executeUpdate();
 
