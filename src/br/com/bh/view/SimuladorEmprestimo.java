@@ -690,7 +690,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             ParcelasDAO pdao = new ParcelasDAO();
             financiamento=dao.inserir(financiamento);
            
-            for (int linha = 1; linha < sacTable.getModel().getRowCount(); linha++)
+            for (int linha = 0; linha < sacTable.getModel().getRowCount(); linha++)
                 
             {
               Parcela parcela = new Parcela();
