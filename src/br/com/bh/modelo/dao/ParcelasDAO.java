@@ -33,7 +33,7 @@ public class ParcelasDAO {
         try {
             daoHelper.getConnection();
             conn = daoHelper.getConnection();
-            for (int linha = 1 ; linha < parcelas.size()-1; linha++) {
+            for (int linha = 0 ; linha < (parcelas.size()); linha++) {
                 Parcela parcela = parcelas.get(linha);
                 stmt = conn.prepareStatement("INSERT INTO parcela(numero_parcela, valor_parcela, data_parcela, id_financiamento) VALUES (?, ?, ?, ?);");
                 int index = 0;
