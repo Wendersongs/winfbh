@@ -1,3 +1,6 @@
+----------------------------------------------- cliente --------------------------------------------------
+
+
 -- Table: cliente
 
 -- DROP TABLE cliente;
@@ -28,8 +31,79 @@ WITH (
 ALTER TABLE cliente
   OWNER TO postgres;
 
-
+-------------------------------------------------------- select que soma os empréstimos para o mês ----------------------------------------------
 
 select  c.id,sum(p.valor_parcela),extract(month FROM p.data_parcela)as mes from cliente c inner join financiamento f on f.cliente_id = c.id
 inner join parcela p on p.id_financiamento = f.id  where c.id = 1 
 group by c.id,mes
+
+-------------------------------------------------------- USUÁRIO ---------------------------------------------------------------------------------
+
+-- Table: usuario
+
+-- DROP TABLE usuario;
+
+CREATE TABLE usuario
+(
+  id serial NOT NULL,
+  usuario character varying,
+  senha character varying,
+  CONSTRAINT pk_usuario PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE usuario
+  OWNER TO postgres;
+
+
+
+-------------------------------------------------------- FINANCIAMENTO ------------------------------------------------------------------------------
+-- Table: financiamento
+
+-- DROP TABLE financiamento;
+
+CREATE TABLE financiamento
+(
+  id integer NOT NULL DEFAULT nextval('financiamento_id_seq'::regclass),
+  cliente_id integer,
+  valor numeric,
+  parcelas integer,
+  taxa numeric,
+  tipo character varying,
+  data timestamp with time zone,
+  CONSTRAINT pk_finan PRIMARY KEY (id),
+  CONSTRAINT fk_cliente FOREIGN KEY (cliente_id)
+      REFERENCES cliente (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE financiamento
+  OWNER TO postgres;
+
+
+---------------------------------------------------------- PARCELAS ---------------------------------------------------------------------------------------
+
+-- Table: parcela
+
+-- DROP TABLE parcela;
+
+CREATE TABLE parcela
+(
+  id serial NOT NULL,
+  numero_parcela integer,
+  valor_parcela numeric,
+  data_parcela date,
+  id_financiamento integer,
+  CONSTRAINT pk_parcelas PRIMARY KEY (id),
+  CONSTRAINT fk_parcela_finan FOREIGN KEY (id_financiamento)
+      REFERENCES financiamento (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE parcela
+  OWNER TO postgres;
