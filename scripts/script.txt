@@ -27,3 +27,9 @@ WITH (
 );
 ALTER TABLE cliente
   OWNER TO postgres;
+
+
+
+select  c.id,sum(p.valor_parcela),extract(month FROM p.data_parcela)as mes from cliente c inner join financiamento f on f.cliente_id = c.id
+inner join parcela p on p.id_financiamento = f.id  where c.id = 1 
+group by c.id,mes
