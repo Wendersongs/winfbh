@@ -165,6 +165,12 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
 
         jLabel12.setText("Email");
 
+        txtEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtEmailFocusLost(evt);
+            }
+        });
+
         jLabel5.setText("Sexo");
 
         txtSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
@@ -718,6 +724,13 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     private void txtCepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCepFocusLost
 
     }//GEN-LAST:event_txtCepFocusLost
+
+    private void txtEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtEmailFocusLost
+           if  (!Mascara.isEmailValid(txtEmail.getText())){
+           JOptionPane.showMessageDialog(null, "Email inválido! ");
+           
+           }
+    }//GEN-LAST:event_txtEmailFocusLost
 
     /**
      * @param args the command line arguments
