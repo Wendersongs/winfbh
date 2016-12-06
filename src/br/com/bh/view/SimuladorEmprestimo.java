@@ -34,11 +34,11 @@ import sun.java2d.loops.MaskBlit;
  */
 public class SimuladorEmprestimo extends javax.swing.JFrame {
 
-   Mascara mask = new Mascara();
+    Mascara mask = new Mascara();
+
     public SimuladorEmprestimo() {
         initComponents();
-        
-        
+
     }
 
     /**
@@ -569,7 +569,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     }//GEN-LAST:event_sairActionPerformed
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
-            voltar();
+        voltar();
     }//GEN-LAST:event_voltarActionPerformed
 
     public void voltar() {
@@ -577,7 +577,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         x.setVisible(true);
         dispose();
     }
-    
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (ValidaCPF.isCPF(txtCpf.getText())) {
             txtCpf.setText(ValidaCPF.imprimeCPF(txtCpf.getText()));
@@ -586,7 +586,6 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             Calendar c = new GregorianCalendar();
             c.setTime(d);
             txtData.setText(new SimpleDateFormat("dd/MM/yyyy").format(c.getTime()));
-            
 
         } else {
             JOptionPane.showMessageDialog(null, "O Cpf passado está inválido, digite novamente");
@@ -688,26 +687,38 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             financiamento.setValor(Double.parseDouble((txtValorFinan.getText().replaceAll(",", "."))));
             FinanciamentoDao dao = new FinanciamentoDao();
             ParcelasDAO pdao = new ParcelasDAO();
-            financiamento=dao.inserir(financiamento);
-           
-            for (int linha = 0; linha < sacTable.getModel().getRowCount(); linha++)
-                
-            {
-              Parcela parcela = new Parcela();
-              parcela.setFinanciamento(financiamento);
-              parcela.setNumeroParcela((int) sacTable.getValueAt(linha, 0));
-              parcela.setValor( mask.moneyToDouble(sacTable.getValueAt(linha, 3).toString()));
-                try {
-                    parcela.setData(Data.formataDataSql(sacTable.getValueAt(linha, 4).toString()) );
-                } catch (Exception ex) {
-                    Logger.getLogger(SimuladorEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
+            financiamento = dao.inserir(financiamento);
+            if (chkPrice.isSelected()) {
+                for (int linha = 1; linha < priceTable.getModel().getRowCount(); linha++) {
+                    Parcela parcela = new Parcela();
+                    parcela.setFinanciamento(financiamento);
+                    parcela.setNumeroParcela((int) priceTable.getValueAt(linha, 0));
+                    parcela.setValor(mask.moneyToDouble(priceTable.getValueAt(linha, 3).toString()));
+                    try {
+                        parcela.setData(Data.formataDataSql(priceTable.getValueAt(linha, 4).toString()));
+                    } catch (Exception ex) {
+                        Logger.getLogger(SimuladorEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    parcelas.add(parcela);
                 }
-              parcelas.add(parcela);
+            } else {
+                for (int linha = 1; linha < sacTable.getModel().getRowCount(); linha++) {
+                    Parcela parcela = new Parcela();
+                    parcela.setFinanciamento(financiamento);
+                    parcela.setNumeroParcela((int) sacTable.getValueAt(linha, 0));
+                    parcela.setValor(mask.moneyToDouble(sacTable.getValueAt(linha, 3).toString()));
+                    try {
+                        parcela.setData(Data.formataDataSql(sacTable.getValueAt(linha, 4).toString()));
+                    } catch (Exception ex) {
+                        Logger.getLogger(SimuladorEmprestimo.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    parcelas.add(parcela);
+                }
             }
             pdao.inserir((ArrayList<Parcela>) parcelas);
             JOptionPane.showMessageDialog(null, "Empréstimo contratado com sucesso");
             voltar();
-            
+
         }
 
 
@@ -760,7 +771,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         int j = parcelas;
         double total = 0;
         double totalJuros = 0;
-        
+
         for (int linha = 0; linha <= j; linha++) {
             c.set(Calendar.MONTH, c.get(Calendar.MONTH) + 1);
             if (linha == 0) {
@@ -787,7 +798,6 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
             total = total + prestacao;
             totalJuros = totalJuros + juro;
-            
 
         }
         txtTotalSac.setText(e.formataNumero(total));
@@ -808,9 +818,9 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         int j = parcelas;
         double total = 0;
         double totalJuros = 0;
-       
+
         for (int linha = 0; linha <= j; linha++) {
-             c.set(Calendar.MONTH, c.get(Calendar.MONTH) + 1);
+            c.set(Calendar.MONTH, c.get(Calendar.MONTH) + 1);
             if (linha == 0) {
                 tTabela.addRow(new Object[]{1});
                 priceTable.setValueAt(linha, linha, 0);
