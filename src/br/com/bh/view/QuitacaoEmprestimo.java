@@ -48,8 +48,6 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
         jLabel3.setText("Nome");
 
-        jTextField1.setEditable(false);
-
         jLabel4.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
         jLabel4.setText("CPF");
 
