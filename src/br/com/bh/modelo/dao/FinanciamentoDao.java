@@ -10,8 +10,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 public class FinanciamentoDao {
@@ -118,5 +120,71 @@ public class FinanciamentoDao {
         }
         return cliente;
     }
-    
+       public List<Cliente> listaCliente(Long idCliente) throws SQLException {
+
+        Connection conn = null;
+
+        PreparedStatement stmt = null;
+
+        final List<Financiamento> financiamentos = new ArrayList<Financiamento>();
+
+        try {
+
+            conn = daoHelper.getConnection();
+
+            stmt = conn.prepareStatement("select f.id, f.cliente_id, f.valor, f.parcelas, f.taxa, f.tipo, f.data, c.nome, c.cpf, c.salario, c.ocupacao, c.email  from financiamento f inner join cliente c on c.id = f.cliente_id  where c.id = ?");
+
+            int index = 0;
+            stmt.setLong(++index, idCliente);
+
+            ResultSet rset = stmt.executeQuery();
+
+            Cliente cliente;
+
+            while (rset.next()) {
+
+               Financiamento financiamento = new Financiamento();
+               
+               financiamento.setId(rset.getInt("id"));
+
+                cliente.setId(rset.getInt("id"));
+
+                cliente.setNome(rset.getString("nome"));
+
+                cliente.setRg(rset.getString("rg"));
+
+                cliente.setSexo(rset.getString("sexo"));
+
+                cliente.setEndereco(rset.getString("endereco"));
+
+                cliente.setCpf(rset.getString("cpf"));
+
+                cliente.setTelefone(rset.getString("telefone"));
+
+                cliente.setCelular(rset.getString("celular"));
+
+                cliente.setMargem(rset.getDouble("margem"));
+
+                cliente.setSalario(rset.getDouble("salario"));
+
+                cliente.setOcupacao(rset.getString("ocupacao"));
+                
+
+          
+
+//                Calendar c = Calendar.getInstance(); 
+//                
+//                c.setTime(new Date(rset.getDate("data").getTime()));
+//                
+//                cliente.setData_nascimento(c);
+                financiamentos.add(financiamento);
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+
+        return financiamentos;
+    } 
 }
