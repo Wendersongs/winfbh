@@ -193,6 +193,40 @@ public class ClienteDAO {
         }
         return cliente;
     }
+public Double buscaDividas(int idCliente) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        Double dividas = 0.0;
+
+        try {
+            daoHelper.getConnection();
+            conn = daoHelper.getConnection();
+            stmt = conn.prepareStatement("select  c.id,sum(p.valor_parcela),extract(month FROM p.data_parcela)as mes, extract (year FROM p.data_parcela)as ano from cliente c \n" +
+                                         "inner join financiamento f on f.cliente_id = c.id\n" +
+                                         "inner join parcela p on p.id_financiamento = f.id  where c.id = 1 and extract(month FROM p.data_parcela) = (Select Extract('Month' From Now())) and \n" +
+                                         "extract (year FROM p.data_parcela)= (Select Extract('Year' From Now()))\n" +
+                                         "group by c.id,mes,ano\n" +
+                                         "order by mes id = ?");
+            int index = 0;
+            stmt.setLong(++index, idCliente);
+            ResultSet rset = stmt.executeQuery();
+            
+            
+            if (!rset.next()){
+            return dividas;
+            }
+            else{
+            dividas = rset.getDouble("margem");
+            }
+
+        } catch (SQLException e) {
+            throw new CreateDaoException("Não foi possível realizar a transação", e);
+        } finally {
+            daoHelper.releaseAll(conn, stmt);
+        }
+        return dividas;
+    }
+
 
     public List<Cliente> listaTodosClientes() throws SQLException {
 
