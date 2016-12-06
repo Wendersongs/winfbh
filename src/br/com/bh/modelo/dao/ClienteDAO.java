@@ -204,7 +204,7 @@ public Double buscaDividas(long idCliente) throws SQLException {
             stmt = conn.prepareStatement("select  c.id,sum(p.valor_parcela) as margem,extract(month FROM p.data_parcela)as mes, extract (year FROM p.data_parcela)as ano from cliente c \n" +
                                          "inner join financiamento f on f.cliente_id = c.id\n" +
                                          "inner join parcela p on p.id_financiamento = f.id  where c.id = ? \n" +
-                                         "and (p.data_parcela) > now() and (p.data_parcela) < (now()+interval '30 days')\n" +
+                                         "and (p.data_parcela) > now() and (p.data_parcela) <= (now()+interval '31 days')\n" +
                                          "group by c.id,mes,ano\n" +
                                          "order by mes");
             int index = 0;
