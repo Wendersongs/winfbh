@@ -1,4 +1,3 @@
-
 package br.com.bh.view;
 
 import br.com.bh.modelo.dao.ClienteDAO;
@@ -14,72 +13,69 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 public class JFrameCliente extends javax.swing.JFrame {
-DefaultTableModel dm;
+
+    DefaultTableModel dm;
+
     public JFrameCliente() {
         initComponents();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo( null );
+        setLocationRelativeTo(null);
         atualizaTabela();
     }
-public static void atualizaTabela(){
+
+    public static void atualizaTabela() {
         DefaultTableModel tTabela = (DefaultTableModel) jTable1.getModel();
         tTabela.setNumRows(0);
         ClienteDAO dao = new ClienteDAO();
         try {
             List<Cliente> clientes = dao.listaTodosClientes();
-            for (int linha = 0; linha < clientes.size(); linha++)
-                {
-                    Cliente cliente = clientes.get(linha);
-                    
-                    tTabela.addRow(new Object[]{1});
-                    jTable1.setValueAt(cliente.getId(), linha, 0);
-                    jTable1.setValueAt(cliente.getNome(), linha, 1);
-                    jTable1.setValueAt(cliente.getRg(), linha, 2);
-                    jTable1.setValueAt(cliente.getSexo(), linha, 3);
-                    jTable1.setValueAt(cliente.getTelefone(), linha, 4);
-                    jTable1.setValueAt(cliente.getSalario(), linha, 5);
-                    jTable1.setValueAt(cliente.getMargem(), linha, 6);
-                    
-            
-                }
-            
+            for (int linha = 0; linha < clientes.size(); linha++) {
+                Cliente cliente = clientes.get(linha);
+
+                tTabela.addRow(new Object[]{1});
+                jTable1.setValueAt(cliente.getId(), linha, 0);
+                jTable1.setValueAt(cliente.getNome(), linha, 1);
+                jTable1.setValueAt(cliente.getRg(), linha, 2);
+                jTable1.setValueAt(cliente.getSexo(), linha, 3);
+                jTable1.setValueAt(cliente.getTelefone(), linha, 4);
+                jTable1.setValueAt(cliente.getSalario(), linha, 5);
+                jTable1.setValueAt(cliente.getMargem(), linha, 6);
+
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(JFrameCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
- 
 
+    }
 
-}
-
-public static void atualizaTabelaNome(String nome){
+    public static void atualizaTabelaNome(String nome) {
         DefaultTableModel tTabela = (DefaultTableModel) jTable1.getModel();
         tTabela.setNumRows(0);
+
         ClienteDAO dao = new ClienteDAO();
         try {
             List<Cliente> clientes = dao.listaClienteFiltradoNome(nome);
-            for (int linha = 0; linha < clientes.size(); linha++)
-                {
-                    Cliente cliente = clientes.get(linha);
-                    
-                    tTabela.addRow(new Object[]{1});
-                    jTable1.setValueAt(cliente.getId(), linha, 0);
-                    jTable1.setValueAt(cliente.getNome(), linha, 1);
-                    jTable1.setValueAt(cliente.getRg(), linha, 2);
-                    jTable1.setValueAt(cliente.getSexo(), linha, 3);
-                    jTable1.setValueAt(cliente.getTelefone(), linha, 4);
-                    jTable1.setValueAt(cliente.getSalario(), linha, 5);
-                    jTable1.setValueAt(cliente.getMargem(), linha, 6);
-                    
-            
-                }
-            
+            for (int linha = 0; linha < clientes.size(); linha++) {
+                Cliente cliente = clientes.get(linha);
+
+                tTabela.addRow(new Object[]{1});
+                jTable1.setValueAt(cliente.getId(), linha, 0);
+                jTable1.setValueAt(cliente.getNome(), linha, 1);
+                jTable1.setValueAt(cliente.getRg(), linha, 2);
+                jTable1.setValueAt(cliente.getSexo(), linha, 3);
+                jTable1.setValueAt(cliente.getTelefone(), linha, 4);
+                jTable1.setValueAt(cliente.getSalario(), linha, 5);
+                jTable1.setValueAt(cliente.getMargem(), linha, 6);
+
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(JFrameCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
- 
 
+    }
 
-}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -189,13 +185,13 @@ public static void atualizaTabelaNome(String nome){
                 .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 251, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 261, Short.MAX_VALUE)
                 .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnRemover)
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,13 +205,13 @@ public static void atualizaTabelaNome(String nome){
                         .addComponent(jButton2)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
+                        .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnNovo)
                             .addComponent(btnAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnRemover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
@@ -230,62 +226,57 @@ public static void atualizaTabelaNome(String nome){
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         JFrame clientes = new JFrameCadastroCliente();
-        
-        clientes.setVisible(true);       
+
+        clientes.setVisible(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-            int linhaSelecionada = jTable1.getSelectedRow();
-            ClienteDAO dao = new ClienteDAO();
-    if (linhaSelecionada >= 0){
-        int resposta = JOptionPane.showConfirmDialog(this, "Deseja excluir o cliente selecionado?");
-        if (resposta == JOptionPane.YES_OPTION){
-            Cliente cliente = new Cliente();
-            cliente.setId((long) jTable1.getValueAt(linhaSelecionada, 0));
-            cliente.setNome((String) jTable1.getValueAt(linhaSelecionada, 1));
-            try {
-                dao.deletar(cliente);
+        int linhaSelecionada = jTable1.getSelectedRow();
+        ClienteDAO dao = new ClienteDAO();
+        if (linhaSelecionada >= 0) {
+            int resposta = JOptionPane.showConfirmDialog(this, "Deseja excluir o cliente selecionado?");
+            if (resposta == JOptionPane.YES_OPTION) {
+                Cliente cliente = new Cliente();
+                cliente.setId((long) jTable1.getValueAt(linhaSelecionada, 0));
+                cliente.setNome((String) jTable1.getValueAt(linhaSelecionada, 1));
+                try {
+                    dao.deletar(cliente);
 
-            } catch (SQLException ex) {
-                Logger.getLogger(JFrameCliente.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(JFrameCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
- 
-            
+        } else {
+            JOptionPane.showMessageDialog(this, "É necessário selecionar um Cliente", "Cliente", JOptionPane.INFORMATION_MESSAGE);
         }
-    }
-    else{
-        JOptionPane.showMessageDialog(this, "É necessário selecionar um Cliente", "Cliente", JOptionPane.INFORMATION_MESSAGE);
-    }
-    
-    
-    
-    
+
+
     }//GEN-LAST:event_btnRemoverActionPerformed
-     // Filtro da Tabela   
-    private void filter (String query)
-    {
-        TableRowSorter<DefaultTableModel> tr= new TableRowSorter<>(dm);
+    // Filtro da Tabela   
+
+    private void filter(String query) {
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(dm);
         jTable1.setRowSorter(tr);
-        if (query.length() == 0) {  
-          tr.setRowFilter(null);
-        }
-        else{
-        tr.setRowFilter(RowFilter.regexFilter(query));
+        if (query.length() == 0) {
+            tr.setRowFilter(null);
+        } else {
+            tr.setRowFilter(RowFilter.regexFilter(query));
         }
     }
     private void txtFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFilterActionPerformed
-        
+
     }//GEN-LAST:event_txtFilterActionPerformed
 
     private void txtFilterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFilterKeyReleased
-        
+
     }//GEN-LAST:event_txtFilterKeyReleased
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         TelaPrincipal x = new TelaPrincipal();
         x.setVisible(true);
         dispose();
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -293,33 +284,31 @@ public static void atualizaTabelaNome(String nome){
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-       int linhaSelecionada = jTable1.getSelectedRow();
-            ClienteDAO dao = new ClienteDAO();
-    if (linhaSelecionada >= 0){
-        int resposta = JOptionPane.showConfirmDialog(this, "Deseja Alterar as informações do cliente selecionado?");
-        if (resposta == JOptionPane.YES_OPTION){
-            Cliente cliente = new Cliente();
-            cliente.setId((long) jTable1.getValueAt(linhaSelecionada, 0));
-            cliente.setNome((String) jTable1.getValueAt(linhaSelecionada, 1));
-            try {
-               cliente = dao.buscaCliente(cliente);
-               JFrame clientes = new JFrameCadastroCliente(cliente);
-               clientes.setVisible(true); 
+        int linhaSelecionada = jTable1.getSelectedRow();
+        ClienteDAO dao = new ClienteDAO();
+        if (linhaSelecionada >= 0) {
+            int resposta = JOptionPane.showConfirmDialog(this, "Deseja Alterar as informações do cliente selecionado?");
+            if (resposta == JOptionPane.YES_OPTION) {
+                Cliente cliente = new Cliente();
+                cliente.setId((long) jTable1.getValueAt(linhaSelecionada, 0));
+                cliente.setNome((String) jTable1.getValueAt(linhaSelecionada, 1));
+                try {
+                    cliente = dao.buscaCliente(cliente);
+                    JFrame clientes = new JFrameCadastroCliente(cliente);
+                    clientes.setVisible(true);
 
-            } catch (SQLException ex) {
-                Logger.getLogger(JFrameCliente.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(JFrameCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
- 
-            
-        }
-    }
-    else{
-        JOptionPane.showMessageDialog(this, "É necessário selecionar um Cliente", "Cliente", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "É necessário selecionar um Cliente", "Cliente", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnAlterarActionPerformed
     }
- 
+
     public static void main(String args[]) {
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new JFrameCliente().setVisible(true);
