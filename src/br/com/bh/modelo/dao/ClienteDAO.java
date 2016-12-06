@@ -273,10 +273,7 @@ public class ClienteDAO {
 
             conn = daoHelper.getConnection();
 
-            stmt = conn.prepareStatement("SELECT c.id, c.nome, c.rg, c.sexo, c.endereco, c.cpf, c.telefone, c.celular, c.data_nasc, \n"
-                    + "       (c.margem - p.valor_parcela) as margem, c.salario, c.data_cadastro, c.email, c.cep, c.ocupacao, c.informacoes_adicionais\n"
-                    + "  FROM public.cliente c inner join financiamento f on f.cliente_id = c.id\n"
-                    + "inner join parcela p on p.id_financiamento = f.id  where c.cpf = ? limit 1");
+            stmt = conn.prepareStatement("select * from cliente  where cpf = ? limit 1");
 
             int index = 0;
             stmt.setString(++index, cpf);

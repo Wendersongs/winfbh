@@ -15,6 +15,7 @@ public class FinanciamentoController {
         return margem;
     
     }
+    
     public double calculaJuro( double valor, double taxa){
         taxa = taxa/100;
         
