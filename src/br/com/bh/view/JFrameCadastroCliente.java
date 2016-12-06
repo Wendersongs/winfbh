@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.text.NumberFormat;
+import java.util.List;
 
 /**
  *
@@ -26,56 +27,55 @@ import java.text.NumberFormat;
  */
 public class JFrameCadastroCliente extends javax.swing.JFrame {
 
-   Mascara mask = new Mascara();
+    Mascara mask = new Mascara();
+
     public JFrameCadastroCliente() {
         initComponents();
-        setLocationRelativeTo( null );
+        setLocationRelativeTo(null);
         btnSalvar.setVisible(false);
         mascara();
-        
+
     }
 
-    public JFrameCadastroCliente(Cliente cliente){
+    public JFrameCadastroCliente(Cliente cliente) {
         initComponents();
-        setLocationRelativeTo( null );
+        setLocationRelativeTo(null);
         mascara();
         preencheformulario(cliente);
         btnCadastrar.setVisible(false);
-        
-        
-    
+
     }
-    
-    
-    public void  mascara(){
-         Mascara mask = new Mascara();
-       try {
-       mask.maskData(txtData);
-       } catch (ParseException ex){
-       JOptionPane.showMessageDialog(JFrameCadastroCliente.this, "Data Inválida", "Erro", JOptionPane.ERROR_MESSAGE);
-       
-       }
-          try {
-       mask.maskCep(txtCep);
-       } catch (ParseException ex){
-       JOptionPane.showMessageDialog(JFrameCadastroCliente.this, "Cep Inválido", "Erro", JOptionPane.ERROR_MESSAGE);
-       
-       } 
-               try {
-       mask.maskTel(txtTel);
-       } catch (ParseException ex){
-       JOptionPane.showMessageDialog(JFrameCadastroCliente.this, "Telefone Inválido", "Erro", JOptionPane.ERROR_MESSAGE);
-       
-       }  
-               
-                  try {
-       mask.maskTel(txtCel);
-       } catch (ParseException ex){
-       JOptionPane.showMessageDialog(JFrameCadastroCliente.this, "Celular Inválido", "Erro", JOptionPane.ERROR_MESSAGE);
-       
-       }  
-    
+
+    public void mascara() {
+        Mascara mask = new Mascara();
+        try {
+            mask.maskData(txtData);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(JFrameCadastroCliente.this, "Data Inválida", "Erro", JOptionPane.ERROR_MESSAGE);
+
+        }
+        try {
+            mask.maskCep(txtCep);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(JFrameCadastroCliente.this, "Cep Inválido", "Erro", JOptionPane.ERROR_MESSAGE);
+
+        }
+        try {
+            mask.maskTel(txtTel);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(JFrameCadastroCliente.this, "Telefone Inválido", "Erro", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+        try {
+            mask.maskTel(txtCel);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(JFrameCadastroCliente.this, "Celular Inválido", "Erro", JOptionPane.ERROR_MESSAGE);
+
+        }
+
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -456,57 +456,65 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
- // Validar Campos
+        ClienteDAO dao = new ClienteDAO();
+
+// Validar Campos
         if (txtNome.getText().length() == 0) {
-        JOptionPane.showMessageDialog(null, "O campo Nome está vazio");  
-        txtNome.requestFocus();
-        return;
-        }  
-        if (txtCpf.getText().isEmpty() ) {
-        
-        JOptionPane.showMessageDialog(null, "O campo CPF está vazio");  
-        txtCpf.requestFocus();
-        return;
-        
-        
+            JOptionPane.showMessageDialog(null, "O campo Nome está vazio");
+            txtNome.requestFocus();
+            return;
         }
-        
-        if (txtRg.getText().isEmpty() ) {
-        
-        JOptionPane.showMessageDialog(null, "O campo RG está vazio");  
-        txtRg.requestFocus();
-        return;
-        
-        
+        if (txtCpf.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "O campo CPF está vazio");
+            txtCpf.requestFocus();
+            return;
+
         }
-        
-         if (txtSalario.getText().isEmpty() ) {
-        
-        JOptionPane.showMessageDialog(null, "O campo Salário está vazio");  
-        txtSalario.requestFocus();
-        return;
-        
-        
+
+        if (txtRg.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "O campo RG está vazio");
+            txtRg.requestFocus();
+            return;
+
         }
-        
-         if (txtEndereco.getText().isEmpty() ) {
-        
-        JOptionPane.showMessageDialog(null, "O campo Endereço está vazio");  
-        txtEndereco.requestFocus();
-        return;
-        
-        
+
+        if (txtSalario.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "O campo Salário está vazio");
+            txtSalario.requestFocus();
+            return;
+
         }
-       if (txtTel.getText().isEmpty() ) {
-        
-        JOptionPane.showMessageDialog(null, "O campo Telefone está vazio");  
-        txtTel.requestFocus();
-        return;
-        
-        
+
+        if (txtEndereco.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "O campo Endereço está vazio");
+            txtEndereco.requestFocus();
+            return;
+
         }
-        
-        
+        if (txtTel.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "O campo Telefone está vazio");
+            txtTel.requestFocus();
+            return;
+
+        }
+        try {
+
+            List<Cliente> clientes = dao.listaCliente(txtCpf.getText());
+            if (!clientes.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Já existe um cliente cadastrado com esse cpf");
+                txtCpf.requestFocus();
+                txtCpf.setText("");
+                return;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Cliente cliente = new Cliente();
         cliente.setNome(txtNome.getText());
         cliente.setRg(txtRg.getText());
@@ -515,70 +523,75 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         cliente.setEndereco(txtEndereco.getText());
         cliente.setTelefone(txtTel.getText());
         cliente.setCelular(txtCel.getText());
-        cliente.setSalario(Double.parseDouble(txtSalario.getText()));
-        cliente.setMargem(Double.parseDouble(txtMargem.getText()));
+        cliente.setSalario(mask.moneyToDouble(txtSalario.getText()));
+        cliente.setMargem(mask.moneyToDouble(txtMargem.getText()));
         cliente.setCep(txtCep.getText());
         cliente.setEmail(txtEmail.getText());
         cliente.setInformacoes(txtInfo.getText());
         cliente.setOcupacao(jComboBox1.getSelectedItem().toString());
         //FIZ UMA ALTERAÇÃO NESTE CAMPO COLOQUEI UM COMBOBOX 
-        
+
         //cliente.setOcupacao(txtOcupa.getText());
-        
-        
-        cliente.setData_nascimento(Data.converteCalendar(txtData.getText()) );
-        ClienteDAO dao = new ClienteDAO();
-        dao.inserir(cliente);
+        cliente.setData_nascimento(Data.converteCalendar(txtData.getText()));
+
+        try {
+            dao.atualizar(cliente);
+            JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso");
+
+            dispose();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Não foi possível alterar o cliente", "ERRO", JOptionPane.ERROR_MESSAGE);
+            dispose();
+        }
+
         JFrameCliente.atualizaTabela();
-        
-         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_btnCadastrarActionPerformed
-    
-    
-    
-    public void preencheformulario(Cliente cliente){
-     txtCodigo.setText(String.valueOf(cliente.getId()));
-     txtNome.setText(cliente.getNome());
-     txtCel.setText(cliente.getCelular());
-     txtTel.setText(cliente.getTelefone());
-     txtCep.setText(cliente.getCep());
-     txtCpf.setText(cliente.getCpf());
-     txtData.setText(new SimpleDateFormat("dd/MM/yyyy").format(cliente.getData_nascimento().getTime()));
-     txtEmail.setText(cliente.getEmail());
-     txtEndereco.setText(cliente.getEndereco());
-     txtSalario.setText(NumberFormat.getCurrencyInstance().format(cliente.getSalario()));
-     txtInfo.setText(cliente.getInformacoes());
-     txtMargem.setText(NumberFormat.getCurrencyInstance().format(cliente.getMargem()));
-     txtRg.setText(cliente.getRg());
-     jComboBox1.setSelectedItem(cliente.getOcupacao().toString());
-     btnSalvar.setVisible(true);
-     
-        
-       
+
+    public void preencheformulario(Cliente cliente) {
+        txtCodigo.setText(String.valueOf(cliente.getId()));
+        txtNome.setText(cliente.getNome());
+        txtCel.setText(cliente.getCelular());
+        txtTel.setText(cliente.getTelefone());
+        txtCep.setText(cliente.getCep());
+        txtCpf.setText(cliente.getCpf());
+        txtData.setText(new SimpleDateFormat("dd/MM/yyyy").format(cliente.getData_nascimento().getTime()));
+        txtEmail.setText(cliente.getEmail());
+        txtEndereco.setText(cliente.getEndereco());
+        txtSalario.setText(NumberFormat.getCurrencyInstance().format(cliente.getSalario()));
+        txtInfo.setText(cliente.getInformacoes());
+        txtMargem.setText(NumberFormat.getCurrencyInstance().format(cliente.getMargem()));
+        txtRg.setText(cliente.getRg());
+        jComboBox1.setSelectedItem(cliente.getOcupacao().toString());
+        btnSalvar.setVisible(true);
 
     }
     private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
-       if (ValidaCPF.isCPF(txtCpf.getText())){
-           txtCpf.setText(ValidaCPF.imprimeCPF(txtCpf.getText()));
-           
-          
-    }
-       else {
-           JOptionPane.showMessageDialog(null, "O Cpf passado está inválido, digite novamente");
-           //txtCpf.requestFocus();
-       }
+        ClienteDAO dao = new ClienteDAO();
+        if (ValidaCPF.isCPF(txtCpf.getText())) {
+            txtCpf.setText(ValidaCPF.imprimeCPF(txtCpf.getText()));
+
+        } else {
+            JOptionPane.showMessageDialog(null, "O Cpf passado está inválido, digite novamente");
+            //txtCpf.requestFocus();
+        }
+          try {
+
+            List<Cliente> clientes = dao.listaCliente(txtCpf.getText());
+            if (!clientes.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Já existe um cliente cadastrado com esse cpf");
+                txtCpf.requestFocus();
+                txtCpf.setText("");
+                return;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_txtCpfFocusLost
 
     private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
@@ -586,10 +599,10 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCpfActionPerformed
 
     private void txtCpfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyTyped
-        String caracteres="0987654321";
-        if(!caracteres.contains(evt.getKeyChar()+"")){
-        evt.consume();
-}        // TODO add your handling code here:
+        String caracteres = "0987654321";
+        if (!caracteres.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_txtCpfKeyTyped
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -605,10 +618,10 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDataFocusLost
 
     private void txtSalarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalarioFocusLost
-            FinanciamentoController e = new FinanciamentoController();
-            txtSalario.setText(mask.dobleToMoney(mask.moneyToDouble(txtSalario.getText())));
-            txtMargem.setText(NumberFormat.getCurrencyInstance().format(e.calculaMargem(mask.moneyToDouble(txtSalario.getText()))));
-            txtMargem.setEnabled(false);
+        FinanciamentoController e = new FinanciamentoController();
+        txtSalario.setText(mask.dobleToMoney(mask.moneyToDouble(txtSalario.getText())));
+        txtMargem.setText(NumberFormat.getCurrencyInstance().format(e.calculaMargem(mask.moneyToDouble(txtSalario.getText()))));
+        txtMargem.setEnabled(false);
     }//GEN-LAST:event_txtSalarioFocusLost
 
     private void txtTelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelActionPerformed
@@ -622,57 +635,51 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-         // Validar Campos
+        // Validar Campos
         if (txtNome.getText().length() == 0) {
-        JOptionPane.showMessageDialog(null, "O campo Nome está vazio");  
-        txtNome.requestFocus();
-        return;
-        }  
-        if (txtCpf.getText().isEmpty() ) {
-        
-        JOptionPane.showMessageDialog(null, "O campo CPF está vazio");  
-        txtCpf.requestFocus();
-        return;
-        
-        
+            JOptionPane.showMessageDialog(null, "O campo Nome está vazio");
+            txtNome.requestFocus();
+            return;
         }
-        
-        if (txtRg.getText().isEmpty() ) {
-        
-        JOptionPane.showMessageDialog(null, "O campo RG está vazio");  
-        txtRg.requestFocus();
-        return;
-        
-        
+        if (txtCpf.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "O campo CPF está vazio");
+            txtCpf.requestFocus();
+            return;
+
         }
-        
-         if (txtSalario.getText().isEmpty() ) {
-        
-        JOptionPane.showMessageDialog(null, "O campo Salário está vazio");  
-        txtSalario.requestFocus();
-        return;
-        
-        
+
+        if (txtRg.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "O campo RG está vazio");
+            txtRg.requestFocus();
+            return;
+
         }
-        
-         if (txtEndereco.getText().isEmpty() ) {
-        
-        JOptionPane.showMessageDialog(null, "O campo Endereço está vazio");  
-        txtEndereco.requestFocus();
-        return;
-        
-        
+
+        if (txtSalario.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "O campo Salário está vazio");
+            txtSalario.requestFocus();
+            return;
+
         }
-       if (txtTel.getText().isEmpty() ) {
-        
-        JOptionPane.showMessageDialog(null, "O campo Telefone está vazio");  
-        txtTel.requestFocus();
-        return;
-        
-        
+
+        if (txtEndereco.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "O campo Endereço está vazio");
+            txtEndereco.requestFocus();
+            return;
+
         }
-        
-        
+        if (txtTel.getText().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null, "O campo Telefone está vazio");
+            txtTel.requestFocus();
+            return;
+
+        }
+
         Cliente cliente = new Cliente();
         cliente.setId(Long.parseLong(txtCodigo.getText()));
         cliente.setNome(txtNome.getText());
@@ -689,35 +696,23 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         cliente.setInformacoes(txtInfo.getText());
         cliente.setOcupacao(jComboBox1.getSelectedItem().toString());
         //FIZ UMA ALTERAÇÃO NESTE CAMPO COLOQUEI UM COMBOBOX 
-        
-        
-        
-        
-        cliente.setData_nascimento(Data.converteCalendar(txtData.getText()) );
+
+        cliente.setData_nascimento(Data.converteCalendar(txtData.getText()));
         ClienteDAO dao = new ClienteDAO();
         try {
             dao.atualizar(cliente);
-            JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso"); 
-            
+            JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso");
+
             dispose();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Não foi possível alterar o cliente","ERRO",JOptionPane.ERROR_MESSAGE); 
+            JOptionPane.showMessageDialog(null, "Não foi possível alterar o cliente", "ERRO", JOptionPane.ERROR_MESSAGE);
             dispose();
         }
         JFrameCliente.atualizaTabela();
-        
-         
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void txtCepFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCepFocusLost
