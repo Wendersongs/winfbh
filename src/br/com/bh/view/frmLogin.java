@@ -26,6 +26,7 @@ public class frmLogin extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo( null );
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        getRootPane().setDefaultButton(jButton1);
     }
 
     /**
