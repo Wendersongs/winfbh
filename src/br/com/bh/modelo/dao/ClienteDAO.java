@@ -210,7 +210,7 @@ public Double buscaDividas(long idCliente) throws SQLException {
             int index = 0;
             
             stmt.setLong(++index, idCliente);
-            System.out.println(stmt.toString());
+           
             ResultSet rset = stmt.executeQuery();
             
             
