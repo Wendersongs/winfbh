@@ -38,6 +38,17 @@ inner join parcela p on p.id_financiamento = f.id  where c.id = 14
 group by c.id,mes,ano
 order by mes
 
+
+
+select  c.id,sum(p.valor_parcela),extract(month FROM p.data_parcela)as mes, extract (year FROM p.data_parcela)as ano from cliente c 
+inner join financiamento f on f.cliente_id = c.id
+inner join parcela p on p.id_financiamento = f.id  where c.id = '1' and (p.data_parcela) > now() and (p.data_parcela) < (now()+interval '30 days')
+
+
+
+group by c.id,mes,ano
+order by mes
+
 -------------------------------------------------------- USUÁRIO ---------------------------------------------------------------------------------
 
 -- Table: usuario
