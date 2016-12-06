@@ -120,7 +120,7 @@ public class FinanciamentoDao {
         }
         return cliente;
     }
-       public List<Cliente> listaCliente(Long idCliente) throws SQLException {
+       public List<Financiamento> listaFinanciamento(Long idCliente) throws SQLException {
 
         Connection conn = null;
 
@@ -139,35 +139,37 @@ public class FinanciamentoDao {
 
             ResultSet rset = stmt.executeQuery();
 
-            Cliente cliente;
+            Cliente cliente = new Cliente();
 
             while (rset.next()) {
 
                Financiamento financiamento = new Financiamento();
                
                financiamento.setId(rset.getInt("id"));
+               
+               financiamento.setQtdParcelas(rset.getInt("parcelas"));
+               
+               financiamento.setTipo(rset.getString("tipo"));
+               
+               financiamento.setValor(rset.getDouble("valor"));
 
-                cliente.setId(rset.getInt("id"));
+               cliente.setId(rset.getInt("cliente_id"));
 
                 cliente.setNome(rset.getString("nome"));
 
                 cliente.setRg(rset.getString("rg"));
 
-                cliente.setSexo(rset.getString("sexo"));
-
-                cliente.setEndereco(rset.getString("endereco"));
+                cliente.setSexo(rset.getString("email"));
 
                 cliente.setCpf(rset.getString("cpf"));
-
-                cliente.setTelefone(rset.getString("telefone"));
-
-                cliente.setCelular(rset.getString("celular"));
 
                 cliente.setMargem(rset.getDouble("margem"));
 
                 cliente.setSalario(rset.getDouble("salario"));
 
                 cliente.setOcupacao(rset.getString("ocupacao"));
+                
+                financiamento.setCliente(cliente);
                 
 
           
