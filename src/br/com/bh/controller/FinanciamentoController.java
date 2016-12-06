@@ -1,6 +1,8 @@
 
 package br.com.bh.controller;
 
+import br.com.bh.modelo.dao.ClienteDAO;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 
 
@@ -15,7 +17,17 @@ public class FinanciamentoController {
         return margem;
     
     }
+    public Double calculaMargemAtual(int idCliente) throws SQLException{
+        Double margemAtual = 0.0;
+        Double dividas = 0.0;
+        ClienteDAO c  = new ClienteDAO();
+        dividas = c.buscaDividas(idCliente);
+        
+        
+        return margemAtual;
     
+    
+    }
     public double calculaJuro( double valor, double taxa){
         taxa = taxa/100;
         

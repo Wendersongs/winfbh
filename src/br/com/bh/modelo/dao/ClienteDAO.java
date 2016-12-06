@@ -193,7 +193,7 @@ public class ClienteDAO {
         }
         return cliente;
     }
-public Double buscaDividas(int idCliente) throws SQLException {
+public Double buscaDividas(long idCliente) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
         Double dividas = 0.0;
@@ -201,14 +201,16 @@ public Double buscaDividas(int idCliente) throws SQLException {
         try {
             daoHelper.getConnection();
             conn = daoHelper.getConnection();
-            stmt = conn.prepareStatement("select  c.id,sum(p.valor_parcela),extract(month FROM p.data_parcela)as mes, extract (year FROM p.data_parcela)as ano from cliente c \n" +
+            stmt = conn.prepareStatement("select  c.id,sum(p.valor_parcela) as margem,extract(month FROM p.data_parcela)as mes, extract (year FROM p.data_parcela)as ano from cliente c \n" +
                                          "inner join financiamento f on f.cliente_id = c.id\n" +
-                                         "inner join parcela p on p.id_financiamento = f.id  where c.id = 1 and extract(month FROM p.data_parcela) = (Select Extract('Month' From Now())) and \n" +
-                                         "extract (year FROM p.data_parcela)= (Select Extract('Year' From Now()))\n" +
+                                         "inner join parcela p on p.id_financiamento = f.id  where c.id = ? \n" +
+                                         "and (p.data_parcela) > now() and (p.data_parcela) < (now()+interval '30 days')\n" +
                                          "group by c.id,mes,ano\n" +
-                                         "order by mes id = ?");
+                                         "order by mes");
             int index = 0;
+            
             stmt.setLong(++index, idCliente);
+            System.out.println(stmt.toString());
             ResultSet rset = stmt.executeQuery();
             
             
@@ -217,6 +219,7 @@ public Double buscaDividas(int idCliente) throws SQLException {
             }
             else{
             dividas = rset.getDouble("margem");
+            return dividas;
             }
 
         } catch (SQLException e) {
@@ -224,7 +227,7 @@ public Double buscaDividas(int idCliente) throws SQLException {
         } finally {
             daoHelper.releaseAll(conn, stmt);
         }
-        return dividas;
+        
     }
 
 
@@ -341,6 +344,19 @@ public Double buscaDividas(int idCliente) throws SQLException {
                 cliente.setSalario(rset.getDouble("salario"));
 
                 cliente.setOcupacao(rset.getString("ocupacao"));
+                
+                Double margem = (cliente.getMargem());
+                Double divida = (buscaDividas(cliente.getId()));
+                
+                if (((cliente.getMargem()) - (buscaDividas(cliente.getId())))<0.0){
+                cliente.setMargem(0.0);
+                       
+                
+                }
+                else{
+                cliente.setMargem((cliente.getMargem()) - (buscaDividas(cliente.getId())));
+                
+                }
 
 //                Calendar c = Calendar.getInstance(); 
 //                
