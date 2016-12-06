@@ -337,8 +337,8 @@ public class JFrameCliente extends javax.swing.JFrame {
                 cliente.setNome((String) jTable1.getValueAt(linhaSelecionada, 1));
                 try {
                     cliente = dao.buscaCliente(cliente);
-                    JFrame clientes = new JFrameCadastroCliente(cliente);
-                    clientes.setVisible(true);
+                    JFrame financiamento = new  QuitacaoEmprestimo(cliente);
+                    financiamento.setVisible(true);
 
                 } catch (SQLException ex) {
                     Logger.getLogger(JFrameCliente.class.getName()).log(Level.SEVERE, null, ex);
