@@ -618,7 +618,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             return;
         }
 
-        double valorFinanciamento = Double.parseDouble(txtValorFinan.getText().replaceAll(",", "."));
+        double valorFinanciamento = mask.moneyToDouble((txtValorFinan.getText()));
         int parcelas = Integer.parseInt(txtParcelas.getText());
         double taxa = Double.parseDouble(txtTaxa.getText());
         preenchePrice(valorFinanciamento, parcelas, taxa);
@@ -629,7 +629,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
     private void txtValorFinanFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValorFinanFocusLost
         FinanciamentoController e = new FinanciamentoController();
-        txtValorFinan.setText(e.formataNumero(Double.parseDouble(txtValorFinan.getText())));
+        txtValorFinan.setText(mask.dobleToMoney(Double.parseDouble(txtValorFinan.getText())));
     }//GEN-LAST:event_txtValorFinanFocusLost
 
     private void txtValorFinanKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorFinanKeyTyped
@@ -675,7 +675,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
         }
 
-        if (prestacao1 > Double.parseDouble(txtMargem.getText())) {
+        if (prestacao1 > mask.moneyToDouble(txtMargem.getText())) {
             JOptionPane.showMessageDialog(null, "A margem é insuficiente para o empréstimo solicitado.  Você pode tentar \n aumentar as prestações ou diminuir o valor total do empréstimo");
             return;
         } else {
@@ -684,7 +684,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             financiamento.setQtdParcelas(Integer.parseInt(txtParcelas.getText()));
             financiamento.setTaxa(Double.parseDouble(txtTaxa.getText()));
             financiamento.setTipo(tipo);
-            financiamento.setValor(Double.parseDouble((txtValorFinan.getText().replaceAll(",", "."))));
+            financiamento.setValor(mask.moneyToDouble((txtValorFinan.getText())));
             FinanciamentoDao dao = new FinanciamentoDao();
             ParcelasDAO pdao = new ParcelasDAO();
             financiamento = dao.inserir(financiamento);
@@ -953,7 +953,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             Cliente cliente = new Cliente();
             cliente = clientes.get(0);
             txtNome.setText(cliente.getNome());
-            txtMargem.setText(String.valueOf(cliente.getMargem()));
+            txtMargem.setText(mask.dobleToMoney(cliente.getMargem()));
             txtCodigo.setText(String.valueOf(cliente.getId()));
             txtCpf.setEditable(false);
             txtCpf.setEnabled(false);
