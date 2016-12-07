@@ -34,6 +34,7 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
        initComponents();
        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
        setLocationRelativeTo(null);
+       btnquitar.setVisible(false);
        atualizaTabela(cliente);  
         
         
@@ -52,7 +53,7 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         fechar = new javax.swing.JButton();
-        quitar = new javax.swing.JButton();
+        btnquitar = new javax.swing.JButton();
         voltar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         txtCpf = new javax.swing.JTextField();
@@ -64,6 +65,8 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Cliente");
+
+        txtNome.setEditable(false);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("CPF");
@@ -97,11 +100,16 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
             }
         });
 
-        quitar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/concluir.png"))); // NOI18N
-        quitar.setText("Quitar Empréstimo");
-        quitar.addActionListener(new java.awt.event.ActionListener() {
+        btnquitar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/concluir.png"))); // NOI18N
+        btnquitar.setText("Quitar Empréstimo");
+        btnquitar.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                btnquitarComponentHidden(evt);
+            }
+        });
+        btnquitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quitarActionPerformed(evt);
+                btnquitarActionPerformed(evt);
             }
         });
 
@@ -114,6 +122,9 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/pesquisar.png"))); // NOI18N
 
+        txtCpf.setEditable(false);
+        txtCpf.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -122,9 +133,9 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(fechar)
+                        .addComponent(btnquitar)
                         .addGap(18, 18, 18)
-                        .addComponent(quitar))
+                        .addComponent(fechar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 714, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,10 +180,10 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
                         .addGap(1, 1, 1)))
                 .addGap(47, 47, 47)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fechar)
-                    .addComponent(quitar))
+                    .addComponent(btnquitar))
                 .addGap(40, 40, 40))
         );
 
@@ -180,13 +191,13 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -198,13 +209,17 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_voltarActionPerformed
 
-    private void quitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitarActionPerformed
+    private void btnquitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnquitarActionPerformed
 
-    }//GEN-LAST:event_quitarActionPerformed
+    }//GEN-LAST:event_btnquitarActionPerformed
 
     private void fecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecharActionPerformed
         System.exit(0);
     }//GEN-LAST:event_fecharActionPerformed
+
+    private void btnquitarComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_btnquitarComponentHidden
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnquitarComponentHidden
     public void atualizaTabela(Cliente cliente) {
         DefaultTableModel tTabela = (DefaultTableModel) jTable1.getModel();
         tTabela.setNumRows(0);
@@ -268,6 +283,7 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnquitar;
     private javax.swing.JButton fechar;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -276,7 +292,6 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JButton quitar;
     private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtNome;
     private javax.swing.JButton voltar;
