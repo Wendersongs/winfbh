@@ -152,18 +152,16 @@ public class FinanciamentoDao {
                financiamento.setTipo(rset.getString("tipo"));
                
                financiamento.setValor(rset.getDouble("valor"));
+               
+               financiamento.setTaxa(rset.getDouble("taxa"));
 
                cliente.setId(rset.getInt("cliente_id"));
 
                 cliente.setNome(rset.getString("nome"));
 
-                cliente.setRg(rset.getString("rg"));
-
                 cliente.setSexo(rset.getString("email"));
 
                 cliente.setCpf(rset.getString("cpf"));
-
-                cliente.setMargem(rset.getDouble("margem"));
 
                 cliente.setSalario(rset.getDouble("salario"));
 

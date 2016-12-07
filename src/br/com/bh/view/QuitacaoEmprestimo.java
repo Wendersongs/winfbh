@@ -5,7 +5,17 @@
  */
 package br.com.bh.view;
 
+import br.com.bh.modelo.dao.ClienteDAO;
+import br.com.bh.modelo.dao.FinanciamentoDao;
 import br.com.bh.modelo.entidade.Cliente;
+import br.com.bh.modelo.entidade.Financiamento;
+import static br.com.bh.view.JFrameCliente.atualizaTabela;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,7 +32,9 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
     }
       public QuitacaoEmprestimo(Cliente cliente) {
        initComponents();
-        
+       setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+       setLocationRelativeTo(null);
+       atualizaTabela(cliente);  
         
         
     }
@@ -35,39 +47,26 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        textPesquisar = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         fechar = new javax.swing.JButton();
         quitar = new javax.swing.JButton();
         voltar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        txtCpf = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Lucida Fax", 1, 20)); // NOI18N
         jLabel1.setText("Empréstimos");
 
-        jLabel3.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
-        jLabel3.setText("Nome");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Cliente");
 
-        jLabel4.setFont(new java.awt.Font("Lucida Fax", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("CPF");
-
-        textPesquisar.setEditable(false);
-        try {
-            textPesquisar.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        textPesquisar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        textPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textPesquisarActionPerformed(evt);
-            }
-        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -77,7 +76,7 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Código", "Valor do Empréstimo", "Data", "Valor da Quitação"
+                "Código", "Valor do Empréstimo", "Taxa de Juros", "Quantidade de Parcelas"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -126,27 +125,27 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
                         .addComponent(fechar)
                         .addGap(18, 18, 18)
                         .addComponent(quitar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 714, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(72, 72, 72)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(31, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(200, 200, 200))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(319, 319, 319))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,14 +154,19 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
                 .addComponent(voltar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addComponent(textPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)))
                 .addGap(47, 47, 47)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
@@ -176,7 +180,7 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -188,26 +192,45 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPesquisarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textPesquisarActionPerformed
+    private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
+        TelaPrincipal x = new TelaPrincipal();
+        x.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_voltarActionPerformed
+
+    private void quitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitarActionPerformed
+
+    }//GEN-LAST:event_quitarActionPerformed
 
     private void fecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecharActionPerformed
         System.exit(0);
     }//GEN-LAST:event_fecharActionPerformed
-
-    private void quitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitarActionPerformed
-     
+    public void atualizaTabela(Cliente cliente) {
+        DefaultTableModel tTabela = (DefaultTableModel) jTable1.getModel();
+        tTabela.setNumRows(0);
+        FinanciamentoDao dao = new FinanciamentoDao();
+        txtNome.setText(cliente.getNome());
+        txtCpf.setText(cliente.getCpf());
         
-        
-    }//GEN-LAST:event_quitarActionPerformed
+        try {
+            List<Financiamento> financiamentos = dao.listaFinanciamento(cliente.getId());
+            for (int linha = 0; linha < financiamentos.size(); linha++) {
+                Financiamento financiamento = financiamentos.get(linha);
 
-    private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
-       TelaPrincipal x = new TelaPrincipal();
-       x.setVisible(true);
-       dispose();
-    }//GEN-LAST:event_voltarActionPerformed
+                tTabela.addRow(new Object[]{1});
+                jTable1.setValueAt(financiamento.getId(), linha, 0);
+                jTable1.setValueAt(financiamento.getValor(), linha, 1);
+                jTable1.setValueAt(financiamento.getQtdParcelas(), linha, 2);
+                jTable1.setValueAt(financiamento.getTaxa(), linha, 3);
+              
 
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(JFrameCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
     /**
      * @param args the command line arguments
      */
@@ -252,9 +275,9 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton quitar;
-    private javax.swing.JFormattedTextField textPesquisar;
+    private javax.swing.JTextField txtCpf;
+    private javax.swing.JTextField txtNome;
     private javax.swing.JButton voltar;
     // End of variables declaration//GEN-END:variables
 }
