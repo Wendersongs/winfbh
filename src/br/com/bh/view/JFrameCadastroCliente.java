@@ -540,17 +540,9 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         //cliente.setOcupacao(txtOcupa.getText());
         cliente.setData_nascimento(Data.converteCalendar(txtData.getText()));
 
-        try {
-            dao.atualizar(cliente);
-            JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso");
-            jButton3ActionPerformed(null);
-            
-
-        } catch (SQLException ex) {
-            Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Não foi possível alterar o cliente", "ERRO", JOptionPane.ERROR_MESSAGE);
-            dispose();
-        }
+        dao.inserir(cliente);
+        JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso");
+        jButton3ActionPerformed(null);
 
         JFrameCliente.atualizaTabela();
 
