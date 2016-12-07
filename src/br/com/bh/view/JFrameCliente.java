@@ -245,6 +245,7 @@ public class JFrameCliente extends javax.swing.JFrame {
         JFrame clientes = new JFrameCadastroCliente();
 
         clientes.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
@@ -313,6 +314,7 @@ public class JFrameCliente extends javax.swing.JFrame {
                     cliente = dao.buscaCliente(cliente);
                     JFrame clientes = new JFrameCadastroCliente(cliente);
                     clientes.setVisible(true);
+                    dispose();
 
                 } catch (SQLException ex) {
                     Logger.getLogger(JFrameCliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -339,6 +341,7 @@ public class JFrameCliente extends javax.swing.JFrame {
                     cliente = dao.buscaCliente(cliente);
                     JFrame financiamento = new  QuitacaoEmprestimo(cliente);
                     financiamento.setVisible(true);
+                    dispose();
 
                 } catch (SQLException ex) {
                     Logger.getLogger(JFrameCliente.class.getName()).log(Level.SEVERE, null, ex);

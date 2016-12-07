@@ -543,8 +543,8 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         try {
             dao.atualizar(cliente);
             JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso");
-
-            dispose();
+            jButton3ActionPerformed(null);
+            
 
         } catch (SQLException ex) {
             Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
