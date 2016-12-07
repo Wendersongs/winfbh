@@ -70,17 +70,17 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Código", "Valor do Empréstimo", "Taxa de Juros", "Quantidade de Parcelas"
+                "Código", "Valor do Empréstimo", "Quantidade de Parcelas", "Taxa de Juros", "Tipo de Financiamento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -222,6 +222,7 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
                 jTable1.setValueAt(financiamento.getValor(), linha, 1);
                 jTable1.setValueAt(financiamento.getQtdParcelas(), linha, 2);
                 jTable1.setValueAt(financiamento.getTaxa(), linha, 3);
+                jTable1.setValueAt(financiamento.getTipo(), linha, 4);
               
 
             }
