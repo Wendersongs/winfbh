@@ -334,7 +334,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         jLabel16.setText("R$");
 
         jLabel17.setFont(new java.awt.Font("Lucida Fax", 1, 13)); // NOI18N
-        jLabel17.setText("Total Financiado");
+        jLabel17.setText("Total");
 
         jLabel18.setFont(new java.awt.Font("Lucida Fax", 1, 13)); // NOI18N
         jLabel18.setText("Juros Pagos");
@@ -421,7 +421,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         jScrollPane3.setViewportView(sacTable);
 
         jLabel14.setFont(new java.awt.Font("Lucida Fax", 1, 13)); // NOI18N
-        jLabel14.setText("Total Financiado");
+        jLabel14.setText("Total");
 
         jLabel15.setFont(new java.awt.Font("Lucida Fax", 1, 13)); // NOI18N
         jLabel15.setText("R$");
