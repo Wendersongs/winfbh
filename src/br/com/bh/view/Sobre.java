@@ -147,9 +147,8 @@ public class Sobre extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7)
-                        .addComponent(jLabel10))
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel7)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -187,7 +186,7 @@ public class Sobre extends javax.swing.JFrame {
     }//GEN-LAST:event_voltarActionPerformed
 
     private void fecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecharActionPerformed
-         System.exit(0);
+         voltarActionPerformed(null);
     }//GEN-LAST:event_fecharActionPerformed
 
     /**

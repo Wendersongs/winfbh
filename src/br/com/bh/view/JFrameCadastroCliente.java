@@ -34,6 +34,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         btnSalvar.setVisible(false);
         mascara();
+        
 
     }
 
@@ -604,7 +605,7 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCpfKeyTyped
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
+        jButton3ActionPerformed(null);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtTelFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelFocusLost
@@ -701,12 +702,12 @@ public class JFrameCadastroCliente extends javax.swing.JFrame {
             dao.atualizar(cliente);
             JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso");
 
-            dispose();
+            jButton3ActionPerformed(null);
 
         } catch (SQLException ex) {
             Logger.getLogger(JFrameCadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Não foi possível alterar o cliente", "ERRO", JOptionPane.ERROR_MESSAGE);
-            dispose();
+            jButton3ActionPerformed(null);
         }
         JFrameCliente.atualizaTabela();
 

@@ -1,5 +1,8 @@
-
 package br.com.bh.view;
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 
 public class TelaPrincipal extends javax.swing.JFrame {
 
@@ -8,10 +11,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
-        setLocationRelativeTo( null );
+        setLocationRelativeTo(null);
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,34 +126,55 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void CadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroActionPerformed
         JFrameCliente x = new JFrameCliente();
+        x.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        x.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent event) {
+                exitProcedure(x);
+            }
+        });
         x.setVisible(true);
         dispose();
-        
-    }//GEN-LAST:event_CadastroActionPerformed
 
+    }//GEN-LAST:event_CadastroActionPerformed
+    public void exitProcedure(JFrame x) {
+        x.dispose();
+        TelaPrincipal y = new TelaPrincipal();
+        y.setVisible(true);
+
+    }
     private void SimularEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SimularEmprestimoActionPerformed
-       SimuladorEmprestimo s = new SimuladorEmprestimo();
-        s.setVisible(true);
+        SimuladorEmprestimo s = new SimuladorEmprestimo();
         s.setLocationRelativeTo(null);
-        dispose();  
+          s.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        s.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent event) {
+                exitProcedure(s);
+            }
+        });
+        s.setVisible(true);
+        dispose();
     }//GEN-LAST:event_SimularEmprestimoActionPerformed
 
-   
-    
-    
+
     private void SobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SobreActionPerformed
         Sobre x = new Sobre();
+           x.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        x.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent event) {
+                exitProcedure(x);
+            }
+        });
         x.setVisible(true);
         dispose();
     }//GEN-LAST:event_SobreActionPerformed
 
     private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
-      System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_SairActionPerformed
 
-    
-    
-    
     /**
      * @param args the command line arguments
      */

@@ -191,20 +191,18 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 439, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed
-        TelaPrincipal x = new TelaPrincipal();
+         JFrameCliente x = new JFrameCliente();
         x.setVisible(true);
         dispose();
     }//GEN-LAST:event_voltarActionPerformed
@@ -214,7 +212,7 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnquitarActionPerformed
 
     private void fecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecharActionPerformed
-        System.exit(0);
+        voltarActionPerformed(null);
     }//GEN-LAST:event_fecharActionPerformed
 
     private void btnquitarComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_btnquitarComponentHidden
@@ -291,7 +289,7 @@ public class QuitacaoEmprestimo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private static javax.swing.JTable jTable1;
     private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtNome;
     private javax.swing.JButton voltar;

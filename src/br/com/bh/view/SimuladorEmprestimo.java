@@ -565,7 +565,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtValorFinanActionPerformed
 
     private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
-        System.exit(0);
+        voltar();
     }//GEN-LAST:event_sairActionPerformed
 
     private void voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voltarActionPerformed

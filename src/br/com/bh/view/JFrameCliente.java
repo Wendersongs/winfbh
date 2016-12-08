@@ -2,6 +2,8 @@ package br.com.bh.view;
 
 import br.com.bh.modelo.dao.ClienteDAO;
 import br.com.bh.modelo.entidade.Cliente;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -242,10 +244,17 @@ public class JFrameCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        JFrame clientes = new JFrameCadastroCliente();
-
-        clientes.setVisible(true);
+        JFrame x = new JFrameCadastroCliente();
+        x.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        x.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent event) {
+                exitProcedure(x);
+            }
+        });
+        x.setVisible(true);
         dispose();
+
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
@@ -296,7 +305,27 @@ public class JFrameCliente extends javax.swing.JFrame {
         dispose();
 
     }//GEN-LAST:event_jButton2ActionPerformed
+    public void exitProcedure(JFrame x) {
+        x.dispose();
+        JFrameCliente y = new JFrameCliente();
+        y.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        y.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent event) {
+                RexitProcedure(y);
+            }
+        });
+        y.setVisible(true);
+        dispose();
 
+    }
+    
+     public void RexitProcedure(JFrame x) {
+        x.dispose();
+        TelaPrincipal y = new TelaPrincipal();
+        y.setVisible(true);
+
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         atualizaTabelaNome(txtFilter.getText());
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -313,6 +342,13 @@ public class JFrameCliente extends javax.swing.JFrame {
                 try {
                     cliente = dao.buscaCliente(cliente);
                     JFrame clientes = new JFrameCadastroCliente(cliente);
+                    clientes.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                    clientes.addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowClosing(WindowEvent event) {
+                            exitProcedure(clientes);
+                        }
+                    });
                     clientes.setVisible(true);
                     dispose();
 
@@ -322,41 +358,44 @@ public class JFrameCliente extends javax.swing.JFrame {
 
             }
         } else {
-       
+
             JOptionPane.showMessageDialog(this, "É necessário selecionar um Cliente", "Cliente", JOptionPane.INFORMATION_MESSAGE);
-        
-        
+
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnFinanciamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinanciamentoActionPerformed
-       int linhaSelecionada = jTable1.getSelectedRow();
+        int linhaSelecionada = jTable1.getSelectedRow();
         ClienteDAO dao = new ClienteDAO();
         if (linhaSelecionada >= 0) {
-            
-                Cliente cliente = new Cliente();
-                cliente.setId((long) jTable1.getValueAt(linhaSelecionada, 0));
-                cliente.setNome((String) jTable1.getValueAt(linhaSelecionada, 1));
-                try {
-                    cliente = dao.buscaCliente(cliente);
-                    JFrame financiamento = new  QuitacaoEmprestimo(cliente);
-                    financiamento.setVisible(true);
-                    dispose();
 
-                } catch (SQLException ex) {
-                    Logger.getLogger(JFrameCliente.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            Cliente cliente = new Cliente();
+            cliente.setId((long) jTable1.getValueAt(linhaSelecionada, 0));
+            cliente.setNome((String) jTable1.getValueAt(linhaSelecionada, 1));
+            try {
+                cliente = dao.buscaCliente(cliente);
+                JFrame financiamento = new QuitacaoEmprestimo(cliente);
+                financiamento.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                financiamento.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent event) {
+                        exitProcedure(financiamento);
+                    }
+                });
+                financiamento.setVisible(true);
+                dispose();
 
-            
+            } catch (SQLException ex) {
+                Logger.getLogger(JFrameCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         } else {
-       
+
             JOptionPane.showMessageDialog(this, "É necessário selecionar um Cliente", "Cliente", JOptionPane.INFORMATION_MESSAGE);
-        
-        
+
         }
-        
+
     }//GEN-LAST:event_btnFinanciamentoActionPerformed
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
