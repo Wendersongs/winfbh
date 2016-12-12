@@ -794,8 +794,12 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             sacTable.setValueAt(e.formataNumero(amortiza), linha, 2);
             sacTable.setValueAt(e.formataNumero(prestacao), linha, 3);
             sacTable.setValueAt((new SimpleDateFormat("dd/MM/yyyy").format(c.getTime())), linha, 4);
-            sacTable.setValueAt(e.formataNumero(saldoAtual), linha, 5);
-
+            if (saldoAtual > 0.0) {
+                
+                sacTable.setValueAt(e.formataNumero(saldoAtual), linha, 5);
+            } else {
+                sacTable.setValueAt("0,00", linha, 5);
+            }
             total = total + prestacao;
             totalJuros = totalJuros + juro;
 
@@ -827,7 +831,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                 priceTable.setValueAt((juro), linha, 1);
                 priceTable.setValueAt((amortiza), linha, 2);
                 priceTable.setValueAt((prestacao), linha, 3);
-                priceTable.setValueAt(e.formataNumero(saldoAtual), linha, 4);
+                priceTable.setValueAt(e.formataNumero(saldoAtual), linha, 5);
 
                 linha++;
             }
@@ -844,8 +848,11 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
             priceTable.setValueAt(e.formataNumero(amortiza), linha, 2);
             priceTable.setValueAt(e.formataNumero(prestacao), linha, 3);
             priceTable.setValueAt((new SimpleDateFormat("dd/MM/yyyy").format(c.getTime())), linha, 4);
-            priceTable.setValueAt(e.formataNumero(saldoAtual), linha, 5);
-
+            if (saldoAtual > 0.0) {
+                priceTable.setValueAt(e.formataNumero(saldoAtual), linha, 5);
+            } else {
+                priceTable.setValueAt("0,00" , linha, 5);
+            }
         }
         txtTotal.setText(e.formataNumero(total));
         txtTotalJurosPrice.setText(e.formataNumero(totalJuros));
