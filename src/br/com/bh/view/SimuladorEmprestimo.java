@@ -38,6 +38,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
     public SimuladorEmprestimo() {
         initComponents();
+        cbTipoEmprestimo.setVisible(false);
 
     }
 
@@ -65,7 +66,6 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         txtParcelas = new javax.swing.JTextField();
         txtMargem = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
         cbTipoEmprestimo = new javax.swing.JComboBox();
         btnCalcular = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -166,9 +166,9 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
 
         txtMargem.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
-        jLabel9.setText("Tipo de Empréstimo");
-
         cbTipoEmprestimo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Antecipado", "Postecipado" }));
+        cbTipoEmprestimo.setEnabled(false);
+        cbTipoEmprestimo.setFocusable(false);
 
         btnCalcular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/calcular.png"))); // NOI18N
         btnCalcular.setText(" CALCULAR");
@@ -233,9 +233,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel7)))
                         .addGap(31, 31, 31)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(cbTipoEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbTipoEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -285,9 +283,7 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
                             .addComponent(txtTaxa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel3))
+                        .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbTipoEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -920,7 +916,6 @@ public class SimuladorEmprestimo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
